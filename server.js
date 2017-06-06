@@ -17,8 +17,13 @@ app.listen(8080)
 console.log('server started, listening on port 8080')
 
 
-/*CI/CD set-up
-https://confluence.cdk.com/display/ALM/Cloud+Platform%3A+How+to+configure+a+Bamboo+Build+Plan+to+build+a+Docker+Image
+
+/*
+Public end point: http://api-int.dit.connectcdk.com/api/dm-ping-pong-scheduler/v1/index.html
+
+CI/CD set-up
+Build - https://confluence.cdk.com/display/ALM/Cloud+Platform%3A+How+to+configure+a+Bamboo+Build+Plan+to+build+a+Docker+Image
+Deployment - https://confluence.cdk.com/pages/viewpage.action?pageId=114104809
 https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
 https://confluence.cdk.com/pages/viewpage.action?pageId=127228461
 */
