@@ -3,4 +3,4 @@ WORKDIR /Users/kumarn/Documents/Projects/ping-ping-scheduler
 COPY  . /Users/kumarn/Documents/Projects/ping-ping-scheduler
 EXPOSE 8080
 RUN  npm install
-CMD ["npm","start"]
+ENTRYPOINT ["npm","start"]

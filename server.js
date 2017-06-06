@@ -2,14 +2,14 @@ var express = require('express')
 var app = express()
  
 app.get('/', function (req, res) {
-  res.send(path.join('append /index.html to the url and hit enter'))
+  res.send('append /index.html to the url and hit enter')
 })
  
 app.use(express.static(__dirname))
 
 app.listen(8080)
 
-console.log('listening on port numner 8080')
+console.log('server started, listening on port 8080')
 
 
 /*CI/CD set-up
