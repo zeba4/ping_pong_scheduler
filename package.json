@@ -1,0 +1,19 @@
+{
+  "name": "ping-ping-scheduler",
+  "version": "1.0.0",
+  "description": "Schedule ping-ping matches and bracket helper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "live-server",
+    "start": "node server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
