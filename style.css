@@ -1,0 +1,101 @@
+.hidden{
+    display:hidden;
+    visibility:hidden;
+    opacity:0;
+}
+.visible{
+    display: auto;
+    visibility:visible;
+    opacity:1;
+}
+title{
+  text-align: center;
+}
+ #a{
+  text-align:center;
+  margin-bottom:15px;
+}
+ #b{
+  text-align:center;
+  margin-top:15px;
+}
+#create, #join, #enter, #button{
+  width:245px;
+  padding-top:20px;
+  padding-bottom:20px;
+  border: solid 1px #45ada8;
+  font-family:'Raleway',arial;
+  font-size:20px;
+  font-weight: bold;
+  background-color:#45ada8;
+  color:#9de0ad;
+}
+h1{
+  text-align:center;
+  font-family: 'Raleway',arial;
+  color:#547980
+}
+body{
+  margin:auto;
+  background-color:#594f4f;
+}
+h2{
+  margin:auto;
+  text-align:center;
+}
+#picture{
+  background-image: url('image.png');
+  background-repeat: no-repeat;
+  background-size: 100% 1200%
+
+}
+#create-join{
+  background-image: url('image.png');
+  background-repeat: no-repeat;
+  background-size: 100% 800%
+}
+#joinid{
+  background-image: url('image.png');
+  background-repeat: no-repeat;
+  background-size: 100% 700%
+}
+::selection{
+  background-color:invisible;
+  color: #dd10ee;
+}
+#signedUp, #container, #Name, #startTime{
+  text-align:center;
+  font-family: 'Raleway',arial;
+  color:#547980;
+  font-size:30px;
+  font-weight:bold;
+}
+#name{
+  width:245px;
+  padding-top:20px;
+  padding-bottom:20px;
+  border: solid 1px #45ada8;
+  font-family:'Raleway',arial;
+  font-size:20px;
+  font-weight: bold;
+  color:#45ada8;
+  text-align:center;
+}
+#tournamentName, #dateOf{
+  text-align:center;
+  font-family: 'Raleway',arial;
+  color:#547980;
+  font-size:30px;
+  font-weight:bold;
+  height:50px;
+}
+::placeholder{
+  text-align:center;
+  font-family: 'Raleway',arial;
+  color:#547980;
+  font-size:30px;
+  font-weight:bold;
+}
+#temp{
+  margin-top:30px;
+}
