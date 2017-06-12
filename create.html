@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Create Bracket</title>
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+        <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+        <!--[if lt IE 9]>
+          	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyCkugIWgBALhDDweghTdirBWhKpC59dBrs",
+            authDomain: "ping-pong-scheduler.firebaseapp.com",
+            databaseURL: "https://ping-pong-scheduler.firebaseio.com",
+            projectId: "ping-pong-scheduler",
+            storageBucket: "ping-pong-scheduler.appspot.com",
+            messagingSenderId: "890197500377"
+          };
+          firebase.initializeApp(config);
+        </script>
+    		<script>
+            /*
+            index.js
+            */
+            "use strict";
+            //Creates database object
+            var database = firebase.database();
+            //Points to the tournament
+            var tournamentRef = database.ref('details/tournament/');
+
+            function checkTournamentStatus()
+            {
+              tournamentRef.once('value').then(function(snapshot) {
+                // The Promise was "fulfilled" (it succeeded).
+                pageLoad(snapshot.val());
+              }, function(error) {
+                // The Promise was rejected.
+                console.error(error);
+              });
+            }
+
+            function pageLoad(result)
+            {
+              try {
+                if(result.name != "")
+                {
+                  document.getElementById("state").innerHTML = "Tournament in Progress"
+                  document.getElementById("temp").className = "hidden"
+                }else{
+                  document.getElementById("temp").className = "visible"
+                }
+              }
+              catch(err) {
+                document.getElementById("temp").className = "visible"
+              }
+            }
+
+            function createTournament()
+            {
+              database.ref('details/tournament/').set({
+                name: document.getElementById("tournamentName").value,
+                date: document.getElementById("dateOf").value,
+                started: false
+              })
+              console.log("success")
+            }
+
+        //TODO: If there is a tournament going on, don't even show the button, instead show the tournament name
+
+        </script>
+
+
+	</head>
+	<body id="picture" onload="checkTournamentStatus()">
+      <center><div id="state"></div>
+      <div class="hidden" id="temp">
+          <input type="text" id="tournamentName" placeholder="Name of tournament">
+          <input type="date" id="dateOf" name="bday">
+          <input type="button" id="button" value="Create Tournament" onClick="createTournament()">
+      </div>
+    </center>
+  </body>
+
+</html>
