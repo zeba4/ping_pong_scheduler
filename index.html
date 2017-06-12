@@ -1,11 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="utf-8" />
-	<title>Initial HTML page</title>
-
+<link rel="stylesheet" href="style.css">
+<script src="master.js"></script>
 </head>
 <body>
-	<p>Hello Interns! This is where the application you develop shows up.</p>
+
+  <button onClick="stop()"  id="stop" class="hidden"> Stop Game </button>
+
+<h1>How Many Games Would You Like to Play?</h1>
+<span id="date" ></span>
+<div>
+<button onclick="myFunction()" id="button1" >1 Game</button>
+
+</div>
+<div id='firstbutton' class="hidden">
+<span id='timer1'>10:00</span>
+</div>
+<script>
+var myStop;
+function stop(){
+ clearInterval(countSec);
+ clearTimeout(myStop);
+ document.getElementById('button2').className = "visible";
+ document.getElementById('stop').className='hidden';
+ document.getElementById('button3').className = "visible";
+ document.getElementById('button1').className = "visible";
+ document.getElementById('timer3').className='hidden';
+  document.getElementById('timer2').className='hidden';
+   document.getElementById('timer1').className='hidden';
+   document.getElementById('firstbutton').className='hidden';
+   document.getElementById('secondbutton').className='hidden';
+   document.getElementById('thirdbutton').className='hidden';
+   document.getElementById('timer3').innerHTML='30:00';
+    document.getElementById('timer2').innerHTML='20:00';
+     document.getElementById('timer1').innerHTML='10:00';
+ console.log('hi')
+}
+function myFunction() {
+  start10()
+if(document.getElementById('firstbutton').className=='visible'){
+  document.getElementById('firstbutton').className='hidden';
+console.log('hello')
+
+
+}else{
+  document.getElementById('firstbutton').className='visible';
+  document.getElementById('timer1').className='visible';
+  console.log("bye")
+
+}
+  document.getElementById("date").innerHTML = new Date();
+    document.getElementById('button2').className = "hidden";
+    document.getElementById('button3').className = "hidden";
+    document.getElementById('stop').className = "visible";
+    myStop=setTimeout(function(){document.getElementById('button2').className = "visible";document.getElementById('stop').className='visible';
+    document.getElementById('button3').className = "visible";document.getElementById('firstbutton').className='hidden'; },600000);
+  }
+
+</script>
+
+
+<div>
+<button onclick="myFunction2()" id="button2" >2 Games</button>
+</div>
+<div id="secondbutton" class="hidden">
+  <span id="timer2">20:00</span>
+
+</div>
+
+<script>
+function myFunction2() {
+  start20()
+  if(document.getElementById('secondbutton').className=='visible'){
+    document.getElementById('secondbutton').className='hidden'
+  }else{
+    document.getElementById('secondbutton').className='visible'
+    document.getElementById('timer2').className='visible';
+  }
+    document.getElementById("date").innerHTML = new Date();
+    document.getElementById('button3').className = "hidden";
+    document.getElementById('button1').className = "hidden";
+    document.getElementById('stop').className = "visible";
+    myStop=setTimeout(function(){document.getElementById('button1').className = "visible";
+    document.getElementById('button3').className = "visible";document.getElementById('secondbutton').className='hidden';},1200000);
+
+
+}
+</script>
+
+<div>
+<button onclick="myFunction3()" id="button3" >3 Games</button>
+</div>
+<div id="thirdbutton" class="hidden">
+  <center><span id='timer3'>30:00</span></center>
+</div>
+
+
+<script>
+function myFunction3() {
+  start30();
+  if(document.getElementById('thirdbutton').className=='visible'){
+    document.getElementById('thirdbutton').className='hidden'
+
+
+  }else{
+    document.getElementById('thirdbutton').className='visible'
+    document.getElementById('timer3').className='visible';
+  }
+    document.getElementById("date").innerHTML = new Date();
+    document.getElementById('button2').className = "hidden";
+    document.getElementById('button1').className = "hidden";
+    document.getElementById('stop').className = "visible";
+    myStop = setTimeout(function(){document.getElementById('button2').className = "visible";
+    document.getElementById('button1').className = "visible";document.getElementById('thirdbutton').className='hidden';},1800000);
+
+
+}
+</script>
+
 </body>
 </html>

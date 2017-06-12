@@ -1,0 +1,82 @@
+body{
+  background:#c9ffef;
+}
+h1{
+  font-size:40px;
+  color:blue;
+  text-align:center;
+}
+ #button1, #button2, #button3{
+   color:#060b99;
+   border:none;
+   padding: 40px;
+   margin: 15px;
+  font-size: 35px;
+   background:#d5d1fc;
+   border: solid 2px #ff02bb ;
+   border-radius: 12px;
+}
+
+#button1{
+  padding-right:58px;
+  text-align:center;
+
+}
+
+div{
+  text-align: center;
+}
+h2{
+  font-size:80px;
+  text-align: center;
+  font-weight:bold;
+}
+.visible{
+  display: visible;
+
+}
+.hidden{
+  display:none;
+}
+::selection{
+  background-color:#invisible;
+  color: #dd10ee;
+
+}
+#creater{
+  text-align:center;
+
+}
+#button{
+
+}
+#dateOf #tournamentName{
+  text-align:center;
+
+}
+span#timer1{
+  font-size: 40px;
+  color:#0da30f;
+}
+span#timer2{
+  font-size: 40px;
+  color:#e8dc00;
+}
+span#timer3{
+  font-size: 40px;
+  color:#d80202;
+}
+#stop{
+  color:red;
+  border:none;
+  padding: 20px;
+ font-size: 20px;
+  background:#white;
+  border: solid 2px black;
+  border-radius: 12px;
+
+}
+#date{
+  position:absolute;
+top:0px;
+right:0px;
