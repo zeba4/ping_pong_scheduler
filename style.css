@@ -1,19 +1,22 @@
-body{
-  background:#c9ffef;
+html{
+  background-color:#090091;
+  background:linear-gradient(#090091,#6addbd);
+  background-repeat: no-repeat;
+  height:100%;
 }
 h1{
   font-size:40px;
-  color:blue;
+  color:#e2fff7;
   text-align:center;
 }
  #button1, #button2, #button3{
-   color:#060b99;
+   color:#3656c9;
    border:none;
    padding: 40px;
    margin: 15px;
   font-size: 35px;
-   background:#d5d1fc;
-   border: solid 2px #ff02bb ;
+   background:#b2ffee;
+   border: solid 2px #08602d ;
    border-radius: 12px;
 }
 
