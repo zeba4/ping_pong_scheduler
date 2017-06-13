@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script>
+function addZero(i){
+  if(i<10){
+    i="0"+i;
+  }
+  return i;
+}
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
+    authDomain: "ping-pong-scheduler-1dd4f.firebaseapp.com",
+    databaseURL: "https://ping-pong-scheduler-1dd4f.firebaseio.com",
+    projectId: "ping-pong-scheduler-1dd4f",
+    storageBucket: "ping-pong-scheduler-1dd4f.appspot.com",
+    messagingSenderId: "290287324381"
+  };
+  firebase.initializeApp(config);
+  var database = firebase.database();
+  var timeref =database.ref('details/')
+  function addtodatabase(x){
+    database.ref('details/').set({
+    time:x
+  })
+  }
+</script>
 <link rel="stylesheet" href="style.css">
 <script src="master.js"></script>
 </head>
@@ -22,19 +49,19 @@ var myStop;
 function stop(){
  clearInterval(countSec);
  clearTimeout(myStop);
- document.getElementById('button2').className = "visible";
- document.getElementById('stop').className='hidden';
- document.getElementById('button3').className = "visible";
- document.getElementById('button1').className = "visible";
- document.getElementById('timer3').className='hidden';
+  document.getElementById('button2').className = "visible";
+  document.getElementById('stop').className='hidden';
+  document.getElementById('button3').className = "visible";
+  document.getElementById('button1').className = "visible";
+  document.getElementById('timer3').className='hidden';
   document.getElementById('timer2').className='hidden';
-   document.getElementById('timer1').className='hidden';
-   document.getElementById('firstbutton').className='hidden';
-   document.getElementById('secondbutton').className='hidden';
-   document.getElementById('thirdbutton').className='hidden';
-   document.getElementById('timer3').innerHTML='30:00';
-    document.getElementById('timer2').innerHTML='20:00';
-     document.getElementById('timer1').innerHTML='10:00';
+  document.getElementById('timer1').className='hidden';
+  document.getElementById('firstbutton').className='hidden';
+  document.getElementById('secondbutton').className='hidden';
+  document.getElementById('thirdbutton').className='hidden';
+  document.getElementById('timer3').innerHTML='30:00';
+  document.getElementById('timer2').innerHTML='20:00';
+  document.getElementById('timer1').innerHTML='10:00';
  console.log('hi')
 }
 function myFunction() {
@@ -50,6 +77,14 @@ console.log('hello')
   console.log("bye")
 
 }
+var d= new Date();
+var x =document.getElementById("date");
+var h = addZero(d.getHours());
+var m = addZero(d.getMinutes());
+var s = addZero(d.getSeconds());
+x.innerHTML = h + ":" + m + ":" + s;
+var timing1 = h + ":" + m + ":" + s;
+addtodatabase(timing1);
   document.getElementById("date").innerHTML = new Date();
     document.getElementById('button2').className = "hidden";
     document.getElementById('button3').className = "hidden";
@@ -78,6 +113,14 @@ function myFunction2() {
     document.getElementById('secondbutton').className='visible'
     document.getElementById('timer2').className='visible';
   }
+  var d= new Date();
+  var x =document.getElementById("date");
+  var h = addZero(d.getHours());
+var m = addZero(d.getMinutes());
+ var s = addZero(d.getSeconds());
+ x.innerHTML = h + ":" + m + ":" + s;
+ var timing2 = h + ":" + m + ":" + s;
+  addtodatabase(timing2);
     document.getElementById("date").innerHTML = new Date();
     document.getElementById('button3').className = "hidden";
     document.getElementById('button1').className = "hidden";
@@ -108,15 +151,23 @@ function myFunction3() {
     document.getElementById('thirdbutton').className='visible'
     document.getElementById('timer3').className='visible';
   }
-    document.getElementById("date").innerHTML = new Date();
+
+
+     var d= new Date();
+     var x =document.getElementById("date");
+     var h = addZero(d.getHours());
+   var m = addZero(d.getMinutes());
+    var s = addZero(d.getSeconds());
+    x.innerHTML = h + ":" + m + ":" + s;
+    var timing3 = h + ":" + m + ":" + s;
+     addtodatabase(timing3);
     document.getElementById('button2').className = "hidden";
     document.getElementById('button1').className = "hidden";
     document.getElementById('stop').className = "visible";
     myStop = setTimeout(function(){document.getElementById('button2').className = "visible";
     document.getElementById('button1').className = "visible";document.getElementById('thirdbutton').className='hidden';},1800000);
-
-
 }
+
 </script>
 
 </body>
