@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Challenger Home</title>
+        <style>
+          .hidden{
+              display:hidden;
+              visibility:hidden;
+              opacity:0;
+              position: absolute;
+              margin-top: -100px;
+              margin-left: -100px;
+          }
+          .visible{
+              display: auto;
+              visibility:visible;
+              opacity:1;
+          }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+        <link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+        <script>
+          $(function() {
+            $( "#datepicker" ).datepicker({ minDate: 0});
+          });
+        </script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyCkugIWgBALhDDweghTdirBWhKpC59dBrs",
+            authDomain: "ping-pong-scheduler.firebaseapp.com",
+            databaseURL: "https://ping-pong-scheduler.firebaseio.com",
+            projectId: "ping-pong-scheduler",
+            storageBucket: "ping-pong-scheduler.appspot.com",
+            messagingSenderId: "890197500377"
+          };
+          firebase.initializeApp(config);
+        </script>
+    		<script>
+          /*
+          index.js
+          */
+          "use strict";
+          var database = firebase.database();
+          var overallRef = database.ref("details/")
+          var tournamentRef = database.ref('details/tournament/open');
+          var openRef = database.ref("details/tournament/open");
+          var closedRef = database.ref("details/tournament/closed");
+          var openQuery = openRef.orderByChild('date');
+          var playerRef = database.ref("details/players");
+          var closedQuery = closedRef.orderByChild('date').limitToFirst(5);
+
+          var openKeys  = [];
+          var openNames = [];
+          var openDates = [];
+
+          var closedKeys  = [];
+          var closedNames = [];
+          var closedDates = [];
+
+          var screenState = 1;
+          var countDownDate;
+          //Add number of people in tournament next to dynamic list tags
+          //
+
+          function createTournament()
+          {
+            var tName = document.getElementById("tourName").value
+            var tDate = document.getElementById("datepicker").value
+            var tStart = document.getElementById("runMax").checked
+            var tMax = document.getElementById("numPlayers").value
+
+            if(tMax && tDate && tName != "" || null || undefined )
+            {
+              var newPostRef = tournamentRef.push()
+              newPostRef.set({
+                name: tName,
+                date: tDate,
+                maxPlayers: tMax,
+                startOnMax: tStart,
+                started: false
+              });
+              console.log("success")
+            }else {
+              console.log("failure")
+            }
+          }
+
+          openQuery.once('value', function(snapshot) {
+              snapshot.forEach(function(data){
+                openKeys.push(data.key);
+                openNames.push(data.val().name);
+                openDates.push(data.val().date);
+              });
+              updateOpenTour();
+            });
+
+          closedQuery.once('value', function(snapshot){
+            snapshot.forEach(function(data){
+              closedKeys.push(data.key);
+              closedNames.push(data.val().name);
+              closedDates.push(data.val().date);
+            });
+            updateClosedTour();
+          });
+
+          tournamentRef.on('child_changed', function(snapshot){
+            console.log(snapshot.val());
+          });
+
+          function updateOpenTour()
+          {
+            for(var i = 0;i<openKeys.length;i++)
+            {
+                $("#listOpen").append('<li>' + openNames[i] + " | Start Dates: " + openDates[i] + '</li>')
+                $("#listOpen").eq(i).on('click', 'li', function () {
+                    joinTour(i)
+                });
+            }
+          }
+
+          function updateClosedTour()
+          {
+            for(var i = 0;i<closedKeys.length;i++)
+            {
+                $("#listClosed").append('<li>' + closedNames[i] + '</li>')
+                $("#listClosed").eq(i).on('click', 'li', function () {
+                    joinTour(closedKeys[i])
+                });
+            }
+          }
+
+          function joinTour(indexK)
+          {
+            var keys = openKeys[indexK-1]
+            console.log(keys)
+            screenState = 2;
+            transition(screenState);
+            loadTournament(keys);
+          }
+
+          function loadTournament(key)
+          {
+            overallRef.once('value').then(function(snapshot) {
+              // The Promise was "fulfilled" (it succeeded).
+              try{
+                displayTournament(snapshot.val(),key);
+              }catch(err){
+                console.log(err)
+              }
+            }, function(error) {
+              // The Promise was rejected.
+              console.error(error);
+            });
+          }
+
+          function displayTournament(data, objKey)
+          {
+              document.getElementById("tNamePlace").innerHTML = "Tournament Name: " + data.tournament.open[objKey].name;
+              //updateList(objKey);
+              countDownDate = new Date(data.tournament.open[objKey].date).getTime();
+              startTimer();
+          }
+          /*
+          playersRef.on('child_added', function(snapshot) {
+            var duplicate = false;
+            for(var x=0;x<nameStore.length;x++)
+            {
+              if(nameStore[x] == snapshot.val().name)
+              {
+                  duplicate = true;
+                  return;
+              }
+            }
+            if(duplicate == false)
+            {
+              nameStore.push(snapshot.val().name)
+            }
+            updateList();
+          });
+
+          function updateList()
+          {
+              var tempString = "";
+              for(var u = 0;u<nameStore.length;u++)
+              {
+                  tempString += nameStore[u] + "<br>"
+              }
+              document.getElementById("signedUp").innerHTML = tempString;
+          }
+          */
+
+          function startTimer()
+          {
+              var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("startTime").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                if (distance < 0) {
+                  clearInterval(x);
+                  startTournament();
+                }
+            }, 1000);
+          }
+
+          // 1 is home page
+          // 2 is join screen
+          function transition(screen)
+          {
+            if(screen == 1)
+            {
+              document.getElementById("screen1").className = "visile"
+              document.getElementById("screen2").className = "hidden"
+            }else if(screen == 2){
+              document.getElementById("screen2").className = "visible"
+              document.getElementById("screen1").className = "hidden"
+            }
+          }
+
+          function homePage()
+          {
+            screenState = 1
+            transition(screenState)
+          }
+    		</script>
+
+    </head>
+
+
+	<body style="overflow:hidden" onload="">
+    <header>
+      <nav>
+        <h1>Ping Pong Tournament</h1>
+        <a onClick="homePage()">Home</a>
+      </nav>
+    </header>
+      <div id="screen1" class="visible">
+        <div>
+          <h2>Create new tournament<h2>
+            Tournament Name:
+            <input type="text" id="tourName" placeholder="Tourney Name"><br>
+            Start Tourney When Max Players Hit?
+            <input type="checkbox" id="runMax"><br>
+            Number of Players needed to start:
+            <select id="numPlayers">
+              <option value=""></option>
+              <option value="4">4</option>
+              <option value="8">8</option>
+              <option value="16">16</option>
+              <option value="32">32</option>
+            </select><br>
+            Tourney Start Date:
+            <input type="text" id="datepicker"><br>
+            <input type="button" onClick="createTournament()" value="Generate it!">
+        </div>
+
+        <div>
+          <h2 style="margin-bottom:0px;">Open Tournaments</h2>
+          <div style="overflow:auto;height: 100px;display:inline-block;">
+            <ul id="listOpen">
+
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h2 style="margin-bottom:0px;">In Progress Tournaments</h2>
+          <div style="overflow:auto;height: 100px;display:inline-block;">
+            <ul id="listClosed">
+
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="screen2" class="hidden">
+          <div id="tNamePlace"></div>
+          <div id="playerList">Participants:</div>
+          <div id="signedUp"></div>
+          <div id="startTime">00d 00h 00m 00s</div>
+          <input type="text" placeholder="Put Name Here" id="name">
+          <input type="button" id="enter" value="Enter the tournament" onClick="enterName()">
+      </div>
+    <footer>
+    </footer>
+	</body>
+</html>
