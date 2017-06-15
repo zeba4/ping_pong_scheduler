@@ -10,6 +10,10 @@ function addZero(i){
   return i;
 }
 
+
+
+
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
@@ -22,9 +26,13 @@ function addZero(i){
   firebase.initializeApp(config);
   var database = firebase.database();
   var timeref =database.ref('details/')
-  function addtodatabase(x){
+  function addtodatabase(h,m,s,b){
     database.ref('details/').set({
-    time:x
+    hour:h,
+    min:m,
+    sec:s,
+    tint:b
+
   })
   }
 </script>
@@ -49,6 +57,8 @@ var myStop;
 function stop(){
  clearInterval(countSec);
  clearTimeout(myStop);
+ var timing1 = null;
+ addtodatabase(h,m,s, null);
   document.getElementById('button2').className = "visible";
   document.getElementById('stop').className='hidden';
   document.getElementById('button3').className = "visible";
@@ -83,14 +93,14 @@ var h = addZero(d.getHours());
 var m = addZero(d.getMinutes());
 var s = addZero(d.getSeconds());
 x.innerHTML = h + ":" + m + ":" + s;
-var timing1 = h + ":" + m + ":" + s;
-addtodatabase(timing1);
-  document.getElementById("date").innerHTML = new Date();
+addtodatabase(h,m,s,"10");
     document.getElementById('button2').className = "hidden";
     document.getElementById('button3').className = "hidden";
     document.getElementById('stop').className = "visible";
-    myStop=setTimeout(function(){document.getElementById('button2').className = "visible";document.getElementById('stop').className='visible';
-    document.getElementById('button3').className = "visible";document.getElementById('firstbutton').className='hidden'; },600000);
+    myStop=setTimeout(function(){document.getElementById('button2').className = "visible";
+    // document.getElementById('stop').className='visible';
+    document.getElementById('button3').className = "visible";
+    document.getElementById('firstbutton').className='hidden'; },600000);
   }
 
 </script>
@@ -119,14 +129,14 @@ function myFunction2() {
 var m = addZero(d.getMinutes());
  var s = addZero(d.getSeconds());
  x.innerHTML = h + ":" + m + ":" + s;
- var timing2 = h + ":" + m + ":" + s;
-  addtodatabase(timing2);
-    document.getElementById("date").innerHTML = new Date();
+
+  addtodatabase(h,m,s,"20");
     document.getElementById('button3').className = "hidden";
     document.getElementById('button1').className = "hidden";
     document.getElementById('stop').className = "visible";
     myStop=setTimeout(function(){document.getElementById('button1').className = "visible";
-    document.getElementById('button3').className = "visible";document.getElementById('secondbutton').className='hidden';},1200000);
+    document.getElementById('button3').className = "visible";
+    document.getElementById('secondbutton').className='hidden';},1200000);
 
 
 }
@@ -159,13 +169,14 @@ function myFunction3() {
    var m = addZero(d.getMinutes());
     var s = addZero(d.getSeconds());
     x.innerHTML = h + ":" + m + ":" + s;
-    var timing3 = h + ":" + m + ":" + s;
-     addtodatabase(timing3);
+     addtodatabase(h,m,s,"30");
+     console.log(h)
     document.getElementById('button2').className = "hidden";
     document.getElementById('button1').className = "hidden";
     document.getElementById('stop').className = "visible";
     myStop = setTimeout(function(){document.getElementById('button2').className = "visible";
-    document.getElementById('button1').className = "visible";document.getElementById('thirdbutton').className='hidden';},1800000);
+    document.getElementById('button1').className = "visible";
+    document.getElementById('thirdbutton').className='hidden';},1800000);
 }
 
 </script>
