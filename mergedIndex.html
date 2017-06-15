@@ -46,12 +46,10 @@
           "use strict";
           var database = firebase.database();
           var overallRef = database.ref("details/")
-          var tournamentRef = database.ref('details/tournament/open');
-          var openRef = database.ref("details/tournament/open");
-          var closedRef = database.ref("details/tournament/closed");
-          var openQuery = openRef.orderByChild('date');
-          var playerRef = database.ref("details/players");
-          var closedQuery = closedRef.orderByChild('date').limitToFirst(5);
+          var tournamentRef = database.ref("details/tournament/");
+          var loadQuery = tournamentRef.orderByChild('date');
+          var playersRef = database.ref("details/players");
+          var updatePlayersRef = playersRef.limitToLast(1);
 
           var openKeys  = [];
           var openNames = [];
@@ -63,8 +61,11 @@
 
           var screenState = 1;
           var countDownDate;
+          var currentJoinKey;
+          var timerVariable;
+          //TODO:
           //Add number of people in tournament next to dynamic list tags
-          //
+          //Check to see if internet connection is lost
 
           function createTournament()
           {
@@ -89,26 +90,49 @@
             }
           }
 
-          openQuery.once('value', function(snapshot) {
+          loadQuery.once('value', function(snapshot) {
               snapshot.forEach(function(data){
-                openKeys.push(data.key);
-                openNames.push(data.val().name);
-                openDates.push(data.val().date);
+                if(data.val().started == false){
+                  if(hasStarted(data.val().date) == false)
+                  {
+                    openKeys.push(data.key);
+                    openNames.push(data.val().name);
+                    openDates.push(data.val().date);
+                  }else{
+                    closedKeys.push(data.key);
+                    closedNames.push(data.val().name);
+                    closedDates.push(data.key);
+                  }
+                }else{
+                  closedKeys.push(data.key);
+                  closedNames.push(data.val().name);
+                  closedDates.push(data.key);
+                }
               });
               updateOpenTour();
+              updateClosedTour();
             });
 
-          closedQuery.once('value', function(snapshot){
-            snapshot.forEach(function(data){
-              closedKeys.push(data.key);
-              closedNames.push(data.val().name);
-              closedDates.push(data.val().date);
-            });
-            updateClosedTour();
-          });
+            function hasStarted(data)
+            {
+              for(var i=0;i<openKeys.length;i++)
+              {
+                if(timeDiff(openDates[i]) != false)
+                {
+                  startTournament(true, i)
+                }
+              }
+            }
 
           tournamentRef.on('child_changed', function(snapshot){
             console.log(snapshot.val());
+          });
+
+          updatePlayersRef.on('child_added', function(snapshot) {
+            if(snapshot.val()[currentJoinKey] != undefined)
+            {
+              updateList(snapshot.val()[currentJoinKey])
+            }
           });
 
           function updateOpenTour()
@@ -116,9 +140,15 @@
             for(var i = 0;i<openKeys.length;i++)
             {
                 $("#listOpen").append('<li>' + openNames[i] + " | Start Dates: " + openDates[i] + '</li>')
-                $("#listOpen").eq(i).on('click', 'li', function () {
-                    joinTour(i)
+                var $button = $('<button/>', {
+                  type: 'button',
+                  id: openKeys[i],
+                  text: 'Join',
+                  click: function() {
+                    viewTour(this.id)
+                  }
                 });
+                $button.appendTo('#listOpen');
             }
           }
 
@@ -127,19 +157,23 @@
             for(var i = 0;i<closedKeys.length;i++)
             {
                 $("#listClosed").append('<li>' + closedNames[i] + '</li>')
-                $("#listClosed").eq(i).on('click', 'li', function () {
-                    joinTour(closedKeys[i])
+                var $button = $('<button/>', {
+                  type: 'button',
+                  id: closedKeys[i],
+                  text: 'View',
+                  click: function() {
+                    //viewTour(this.id)
+                  }
                 });
+                $button.appendTo('#listClosed');
             }
           }
 
-          function joinTour(indexK)
+          function viewTour(indexK)
           {
-            var keys = openKeys[indexK-1]
-            console.log(keys)
             screenState = 2;
             transition(screenState);
-            loadTournament(keys);
+            loadTournament(indexK);
           }
 
           function loadTournament(key)
@@ -159,43 +193,46 @@
 
           function displayTournament(data, objKey)
           {
-              document.getElementById("tNamePlace").innerHTML = "Tournament Name: " + data.tournament.open[objKey].name;
-              //updateList(objKey);
-              countDownDate = new Date(data.tournament.open[objKey].date).getTime();
+              countDownDate = new Date(data.tournament[objKey].date).getTime();
               startTimer();
-          }
-          /*
-          playersRef.on('child_added', function(snapshot) {
-            var duplicate = false;
-            for(var x=0;x<nameStore.length;x++)
-            {
-              if(nameStore[x] == snapshot.val().name)
+              document.getElementById("tNamePlace").innerHTML = "Tournament Name: " + data.tournament[objKey].name;
+              currentJoinKey = objKey
+              var objArray = Object.keys(data.players.playerId)
+              for(var i=0;i<objArray.length;i++)
               {
-                  duplicate = true;
-                  return;
+                if(data.players.playerId[objArray[i]].tid == currentJoinKey){
+                  updateList(objArray[i], data);
+                }
               }
-            }
-            if(duplicate == false)
-            {
-              nameStore.push(snapshot.val().name)
-            }
-            updateList();
-          });
 
-          function updateList()
-          {
-              var tempString = "";
-              for(var u = 0;u<nameStore.length;u++)
-              {
-                  tempString += nameStore[u] + "<br>"
-              }
-              document.getElementById("signedUp").innerHTML = tempString;
           }
-          */
+
+          function updateList(keyOrName, data)
+          {
+              if(arguments.length == 2)
+              {
+                document.getElementById("signedUp").innerHTML += data.players.playerId[keyOrName].name + "<br>"
+              }else{
+                document.getElementById("signedUp").innerHTML += keyOrName + "<br>"
+              }
+          }
+
+          function joinTournament()
+          {
+              if(document.getElementById("name").value != null || undefined || "")
+              {
+                var newPostRef = database.ref('details/players/playerId').push()
+                newPostRef.set({
+                  name: document.getElementById("name").value,
+                  tid: currentJoinKey
+                });
+                updateList(document.getElementById("name").value)
+              }
+          }
 
           function startTimer()
           {
-              var x = setInterval(function() {
+              timerVariable = setInterval(function() {
                 var now = new Date().getTime();
                 var distance = countDownDate - now;
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -204,12 +241,16 @@
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                 document.getElementById("startTime").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
                 if (distance < 0) {
-                  clearInterval(x);
+                  clearInterval(timerVariable);
                   startTournament();
                 }
             }, 1000);
           }
 
+          function killTimer()
+          {
+            clearTimeout(timerVariable)
+          }
           // 1 is home page
           // 2 is join screen
           function transition(screen)
@@ -218,8 +259,12 @@
             {
               document.getElementById("screen1").className = "visile"
               document.getElementById("screen2").className = "hidden"
+              document.getElementById("signedUp").innerHTML = ""
             }else if(screen == 2){
               document.getElementById("screen2").className = "visible"
+              document.getElementById("screen1").className = "hidden"
+            }else if(screen == 3){
+              document.getElementById("screen2").className = "hidden"
               document.getElementById("screen1").className = "hidden"
             }
           }
@@ -227,7 +272,47 @@
           function homePage()
           {
             screenState = 1
+            killTimer()
             transition(screenState)
+          }
+
+          //In Progress
+          function hasStarted(data)
+          {
+            for(var i=0;i<openKeys.length;i++)
+            {
+              if(timeDiff(openDates[i]) != false)
+              {
+                startTournament(true, i)
+                return true;
+              }
+            }
+            return false;
+          }
+
+          function timeDiff(data)
+          {
+            var selectedDate = new Date(data);
+            var now = new Date();
+            now.setHours(0,0,0,0);
+            console.log(now)
+            if (selectedDate < now) {
+              // selected date is in the past
+              return true
+            }else{
+              return false
+            }
+          }
+
+          function startTournament(data, pos)
+          {
+              if(data == true)
+              {
+                var updateStartRef = database.ref('details/tournament/open/'+openKeys[pos]);
+                var updates = {};
+                updates['/started'] = true;
+                updateStartRef.update(updates)
+              }
           }
     		</script>
 
@@ -235,13 +320,13 @@
 
 
 	<body style="overflow:hidden" onload="">
-    <header>
-      <nav>
-        <h1>Ping Pong Tournament</h1>
-        <a onClick="homePage()">Home</a>
-      </nav>
-    </header>
-      <div id="screen1" class="visible">
+      <header>
+        <nav>
+          <h1>Ping Pong Tournament</h1>
+          <a onClick="homePage()">Home</a>
+        </nav>
+      </header>
+      <section id="screen1" class="visible">
         <div>
           <h2>Create new tournament<h2>
             Tournament Name:
@@ -263,7 +348,7 @@
 
         <div>
           <h2 style="margin-bottom:0px;">Open Tournaments</h2>
-          <div style="overflow:auto;height: 100px;display:inline-block;">
+          <div style="overflow:auto;height: 100px;display:inline-block; width: 30%;">
             <ul id="listOpen">
 
             </ul>
@@ -271,21 +356,24 @@
         </div>
         <div>
           <h2 style="margin-bottom:0px;">In Progress Tournaments</h2>
-          <div style="overflow:auto;height: 100px;display:inline-block;">
+          <div style="overflow:auto;height: 100px;display:inline-block;width: 30%;">
             <ul id="listClosed">
 
             </ul>
           </div>
         </div>
-      </div>
-      <div id="screen2" class="hidden">
+      </section>
+      <section id="screen2" class="hidden">
           <div id="tNamePlace"></div>
           <div id="playerList">Participants:</div>
           <div id="signedUp"></div>
           <div id="startTime">00d 00h 00m 00s</div>
           <input type="text" placeholder="Put Name Here" id="name">
-          <input type="button" id="enter" value="Enter the tournament" onClick="enterName()">
-      </div>
+          <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()">
+      </section>
+      <section id="screen3" class="hidden">
+
+      </section>
     <footer>
     </footer>
 	</body>
