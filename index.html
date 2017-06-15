@@ -9,6 +9,7 @@
 <script src="master.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script>
+//initializeFir
 var config = {
   apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
   authDomain: "ping-pong-scheduler-1dd4f.firebaseapp.com",
@@ -27,15 +28,16 @@ function addZero(i){
   return i;
 }
 
-  // Initialize Firebase
+
   var database = firebase.database();
   var timeref =database.ref('details/');
   var hour,minutes,secs
-  function addtodatabase(h,m,s){
+  function addtodatabase(h,m,s,t){
     database.ref('details/').set({
     hour: h,
     min: m,
     sec:s,
+    time:t
   })
   }
 
@@ -58,7 +60,7 @@ function addZero(i){
     $("#button2").bind("click", startTwentyMinuteTimer);
     $("#button3").bind("click", startThirtyMinuteTimer);
      hideTimerWarning();
-     addtodatabase(0,0,0);
+     addtodatabase(0,0,0,0);
 
   }
 
@@ -69,7 +71,7 @@ function addZero(i){
     var s = addZero(d.getSeconds());
     hour = h;
     minutes = m;
-    secs= s;
+    secs=s
  }
 
 
@@ -79,11 +81,12 @@ function addZero(i){
     hideTimerSections(["set2", "set3"]);
     showTimerSections(["stop","firstTimer"]);
     var currentTime=getCurrentTime();
-    addtodatabase(hour,minutes,secs);
+    addtodatabase(hour,minutes,secs,10);
 
     myStop= setTimeout(function(){
-          hideTimerSections(["stop", "firstTimer"]);
-          showTimerSections(["button2","button3"]);
+      hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
+      showTimerSections(["set1","set2","set3"]);
+      addtodatabase(hour,minutes,secs,0);
         },600000);
   };
 
@@ -92,11 +95,12 @@ function addZero(i){
     hideTimerSections(["set1", "set3"]);
     showTimerSections(["stop","secondTimer"]);
     var currentTime=getCurrentTime();
-    addtodatabase(hour,minutes,secs);
+    addtodatabase(hour,minutes,secs,20);
 
         myStop=setTimeout(function(){
-          hideTimerSections(["stop", "secondTimer"]);
-          showTimerSections(["button1","button3"])
+          hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
+          showTimerSections(["set1","set2","set3"]);
+          addtodatabase(hour,minutes,secs,0);
         },1200000);
   };
 
@@ -107,11 +111,12 @@ function addZero(i){
     hideTimerSections(["set1", "set2"]);
     showTimerSections(["stop","thirdTimer"]);
     var currentTime=getCurrentTime();
-    addtodatabase(hour,minutes,secs);
+    addtodatabase(hour,minutes,secs,30);
 
     myStop = setTimeout(function(){
-      hideTimerSections(["stop", "thirdTimer"]);
-      showTimerSections(["button2","button1"]);
+      hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
+      showTimerSections(["set1","set2","set3"]);
+      addtodatabase(hour,minutes,secs,0);
     },1800000);
   }
 

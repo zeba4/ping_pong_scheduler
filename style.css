@@ -83,3 +83,8 @@ h2{
   position:absolute;
 top:0px;
 right:0px;
+}
+#endTime{
+  font-size: 40px;
+  color:#fff;
+}
