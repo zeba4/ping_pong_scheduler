@@ -57,15 +57,15 @@ h2{
   text-align:center;
 
 }
-span#timer1{
+#timer1{
   font-size: 40px;
   color:#0da30f;
 }
-span#timer2{
+#timer2{
   font-size: 40px;
   color:#e8dc00;
 }
-span#timer3{
+#timer3{
   font-size: 40px;
   color:#d80202;
 }

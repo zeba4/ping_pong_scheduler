@@ -21,9 +21,14 @@ function start30()
   totalTime = 1800;
 countSec=setInterval(function(){minuteTimer(totalTime,"3")}, 1000);
 }
-
+var flag=true;
 function minuteTimer(time, uid) //decreses the seconds value
 {
+  $("#button1").unbind("click", startTenMinuteTimer);
+  $("#button2").unbind("click", startTwentyMinuteTimer);
+  $("#button3").unbind("click", startThirtyMinuteTimer);
+
+
     var minutes=Math.floor(time/60);
     var seconds=Math.floor(time%60);
     if(seconds<10)
@@ -31,13 +36,38 @@ function minuteTimer(time, uid) //decreses the seconds value
       seconds="0"+ seconds
 
     }
+
+    if (minutes==9 && seconds<58)
+
+    {
+      if(flag)
+      {
+
+        showTimerWarning();
+
+        document.getElementById('audio').play();
+        flag=false;
+      }
+
+    }
+
+
 document.getElementById("timer" + uid).innerHTML=minutes +":" +seconds;
 
-    if (time <= 0)
-      {
-         clearInterval(countSec);
-         return;
-      }
+
+      if ((time < 0))
+        {
+           clearInterval(countSec);
+    hideTimerWarning();
+
+    $("#button1").bind("click", startTenMinuteTimer);
+    $("#button2").bind("click", startTwentyMinuteTimer);
+    $("#button3").bind("click", startThirtyMinuteTimer);
+             document.getElementById('audio2').play();
+           return;
+
+        }
+
 totalTime=totalTime-1;
 
 }
