@@ -37,7 +37,7 @@ function minuteTimer(time, uid) //decreses the seconds value
 
     }
 
-    if (minutes==9 && seconds<58)
+    if (minutes==1 && seconds<59)
 
     {
       if(flag)

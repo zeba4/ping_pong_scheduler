@@ -61,20 +61,16 @@ function addZero(i){
     $("#button3").bind("click", startThirtyMinuteTimer);
      hideTimerWarning();
      addtodatabase(0,0,0,0);
-
   }
-
    var getCurrentTime= function(){
    var d= new Date();
     var h = addZero(d.getHours());
-    var m = addZero(d.getMinutes());
+    var m = (d.getMinutes());
     var s = addZero(d.getSeconds());
     hour = h;
     minutes = m;
     secs=s
  }
-
-
   var startTenMinuteTimer= function() {
 
     start10()
