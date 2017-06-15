@@ -1,7 +1,24 @@
 <!DOCTYPE html>
+
 <html>
 <head>
+<script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+<audio id="audio" src="http://soundbible.com/mp3/Buzzer-SoundBible.com-188422102.mp3"></audio>
+<audio id="audio2" src="http://soundbible.com/mp3/old-fashioned-door-bell-daniel_simon.mp3"></audio>
+<link rel="stylesheet" href="style.css">
+<script src="master.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+<script>
+var config = {
+  apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
+  authDomain: "ping-pong-scheduler-1dd4f.firebaseapp.com",
+  databaseURL: "https://ping-pong-scheduler-1dd4f.firebaseio.com",
+  projectId: "ping-pong-scheduler-1dd4f",
+  storageBucket: "ping-pong-scheduler-1dd4f.appspot.com",
+  messagingSenderId: "290287324381"
+};
+firebase.initializeApp(config);
+</script>
 <script>
 function addZero(i){
   if(i<10){
@@ -10,176 +27,148 @@ function addZero(i){
   return i;
 }
 
-
-
-
-
   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
-    authDomain: "ping-pong-scheduler-1dd4f.firebaseapp.com",
-    databaseURL: "https://ping-pong-scheduler-1dd4f.firebaseio.com",
-    projectId: "ping-pong-scheduler-1dd4f",
-    storageBucket: "ping-pong-scheduler-1dd4f.appspot.com",
-    messagingSenderId: "290287324381"
-  };
-  firebase.initializeApp(config);
   var database = firebase.database();
-  var timeref =database.ref('details/')
-  function addtodatabase(h,m,s,b){
+  var timeref =database.ref('details/');
+  var hour,minutes,secs
+  function addtodatabase(h,m,s){
     database.ref('details/').set({
-    hour:h,
-    min:m,
+    hour: h,
+    min: m,
     sec:s,
-    tint:b
-
   })
   }
-</script>
-<link rel="stylesheet" href="style.css">
-<script src="master.js"></script>
+
+
+  function resetTimer()
+  {
+    document.getElementById('timer3').innerHTML='30:00';
+    document.getElementById('timer2').innerHTML='20:00';
+    document.getElementById('timer1').innerHTML='10:00';
+  }
+
+  var myStop;
+  function stop(){
+   clearInterval(countSec);
+   clearTimeout(myStop);
+   hideTimerSections(["firstTimer", "secondTimer","thirdTimer","stop"]);
+   showTimerSections(["set1","set2","set3"])
+   resetTimer();
+    $("#button1").bind("click", startTenMinuteTimer);
+    $("#button2").bind("click", startTwentyMinuteTimer);
+    $("#button3").bind("click", startThirtyMinuteTimer);
+     hideTimerWarning();
+     addtodatabase(0,0,0);
+
+  }
+
+   var getCurrentTime= function(){
+   var d= new Date();
+    var h = addZero(d.getHours());
+    var m = addZero(d.getMinutes());
+    var s = addZero(d.getSeconds());
+    hour = h;
+    minutes = m;
+    secs= s;
+ }
+
+
+  var startTenMinuteTimer= function() {
+
+    start10()
+    hideTimerSections(["set2", "set3"]);
+    showTimerSections(["stop","firstTimer"]);
+    var currentTime=getCurrentTime();
+    addtodatabase(hour,minutes,secs);
+
+    myStop= setTimeout(function(){
+          hideTimerSections(["stop", "firstTimer"]);
+          showTimerSections(["button2","button3"]);
+        },600000);
+  };
+
+  var startTwentyMinuteTimer=function() {
+    start20()
+    hideTimerSections(["set1", "set3"]);
+    showTimerSections(["stop","secondTimer"]);
+    var currentTime=getCurrentTime();
+    addtodatabase(hour,minutes,secs);
+
+        myStop=setTimeout(function(){
+          hideTimerSections(["stop", "secondTimer"]);
+          showTimerSections(["button1","button3"])
+        },1200000);
+  };
+
+
+  var startThirtyMinuteTimer=function()
+  {
+    start30();
+    hideTimerSections(["set1", "set2"]);
+    showTimerSections(["stop","thirdTimer"]);
+    var currentTime=getCurrentTime();
+    addtodatabase(hour,minutes,secs);
+
+    myStop = setTimeout(function(){
+      hideTimerSections(["stop", "thirdTimer"]);
+      showTimerSections(["button2","button1"]);
+    },1800000);
+  }
+
+  $("document").ready(function(){
+    $("#button3").bind("click", startThirtyMinuteTimer);
+  });
+  $("document").ready(function(){
+    $("#button2").bind("click", startTwentyMinuteTimer);
+  });
+  $("document").ready(function(){
+    $("#button1").bind("click", startTenMinuteTimer);
+  });
+
+  function showTimerWarning(){
+    $("#timerWarningMessage").show();
+  }
+
+  function hideTimerWarning(){
+    $("#timerWarningMessage").hide();
+  }
+  function hideTimerSections(idList){
+    idList.forEach(function(eachId){
+      $("#" + eachId).hide();
+    });
+  }
+  function showTimerSections(idList){
+    idList.forEach(function(eachId){
+      $("#" + eachId).show();
+    });
+  }
+  </script>
 </head>
 <body>
 
-  <button onClick="stop()"  id="stop" class="hidden"> Stop Game </button>
-
+<button onClick="stop()" id="stop" class="hidden"> Stop Game </button>
 <h1>How Many Games Would You Like to Play?</h1>
-<span id="date" ></span>
-<div>
-<button onclick="myFunction()" id="button1" >1 Game</button>
+    <div id="set1">
+        <button  id="button1" >1 Game</button>
+        <div id='firstTimer' class="hidden">
+          <div id='timer1'></div>
+        </div>
+    </div>
 
-</div>
-<div id='firstbutton' class="hidden">
-<span id='timer1'>10:00</span>
-</div>
-<script>
-var myStop;
-function stop(){
- clearInterval(countSec);
- clearTimeout(myStop);
- var timing1 = null;
- addtodatabase(h,m,s, null);
-  document.getElementById('button2').className = "visible";
-  document.getElementById('stop').className='hidden';
-  document.getElementById('button3').className = "visible";
-  document.getElementById('button1').className = "visible";
-  document.getElementById('timer3').className='hidden';
-  document.getElementById('timer2').className='hidden';
-  document.getElementById('timer1').className='hidden';
-  document.getElementById('firstbutton').className='hidden';
-  document.getElementById('secondbutton').className='hidden';
-  document.getElementById('thirdbutton').className='hidden';
-  document.getElementById('timer3').innerHTML='30:00';
-  document.getElementById('timer2').innerHTML='20:00';
-  document.getElementById('timer1').innerHTML='10:00';
- console.log('hi')
-}
-function myFunction() {
-  start10()
-if(document.getElementById('firstbutton').className=='visible'){
-  document.getElementById('firstbutton').className='hidden';
-console.log('hello')
+    <div id="set2">
+        <button  id="button2" >2 Games</button>
+        <div id='secondTimer' class="hidden">
+          <div id='timer2'></div>
+        </div>
+    </div>
 
+    <div id="set3">
+      <button  id="button3" >3 Games</button>
+      <div id='thirdTimer' class="hidden">
+        <div id='timer3'></div>
+      </div>
+    </div>
 
-}else{
-  document.getElementById('firstbutton').className='visible';
-  document.getElementById('timer1').className='visible';
-  console.log("bye")
-
-}
-var d= new Date();
-var x =document.getElementById("date");
-var h = addZero(d.getHours());
-var m = addZero(d.getMinutes());
-var s = addZero(d.getSeconds());
-x.innerHTML = h + ":" + m + ":" + s;
-addtodatabase(h,m,s,"10");
-    document.getElementById('button2').className = "hidden";
-    document.getElementById('button3').className = "hidden";
-    document.getElementById('stop').className = "visible";
-    myStop=setTimeout(function(){document.getElementById('button2').className = "visible";
-    // document.getElementById('stop').className='visible';
-    document.getElementById('button3').className = "visible";
-    document.getElementById('firstbutton').className='hidden'; },600000);
-  }
-
-</script>
-
-
-<div>
-<button onclick="myFunction2()" id="button2" >2 Games</button>
-</div>
-<div id="secondbutton" class="hidden">
-  <span id="timer2">20:00</span>
-
-</div>
-
-<script>
-function myFunction2() {
-  start20()
-  if(document.getElementById('secondbutton').className=='visible'){
-    document.getElementById('secondbutton').className='hidden'
-  }else{
-    document.getElementById('secondbutton').className='visible'
-    document.getElementById('timer2').className='visible';
-  }
-  var d= new Date();
-  var x =document.getElementById("date");
-  var h = addZero(d.getHours());
-var m = addZero(d.getMinutes());
- var s = addZero(d.getSeconds());
- x.innerHTML = h + ":" + m + ":" + s;
-
-  addtodatabase(h,m,s,"20");
-    document.getElementById('button3').className = "hidden";
-    document.getElementById('button1').className = "hidden";
-    document.getElementById('stop').className = "visible";
-    myStop=setTimeout(function(){document.getElementById('button1').className = "visible";
-    document.getElementById('button3').className = "visible";
-    document.getElementById('secondbutton').className='hidden';},1200000);
-
-
-}
-</script>
-
-<div>
-<button onclick="myFunction3()" id="button3" >3 Games</button>
-</div>
-<div id="thirdbutton" class="hidden">
-  <center><span id='timer3'>30:00</span></center>
-</div>
-
-
-<script>
-function myFunction3() {
-  start30();
-  if(document.getElementById('thirdbutton').className=='visible'){
-    document.getElementById('thirdbutton').className='hidden'
-
-
-  }else{
-    document.getElementById('thirdbutton').className='visible'
-    document.getElementById('timer3').className='visible';
-  }
-
-
-     var d= new Date();
-     var x =document.getElementById("date");
-     var h = addZero(d.getHours());
-   var m = addZero(d.getMinutes());
-    var s = addZero(d.getSeconds());
-    x.innerHTML = h + ":" + m + ":" + s;
-     addtodatabase(h,m,s,"30");
-     console.log(h)
-    document.getElementById('button2').className = "hidden";
-    document.getElementById('button1').className = "hidden";
-    document.getElementById('stop').className = "visible";
-    myStop = setTimeout(function(){document.getElementById('button2').className = "visible";
-    document.getElementById('button1').className = "visible";
-    document.getElementById('thirdbutton').className='hidden';},1800000);
-}
-
-</script>
-
+  <div id = 'timerWarningMessage' class="hidden" > Game is Almost Over! </div>
 </body>
 </html>
