@@ -21,14 +21,6 @@ var config = {
 firebase.initializeApp(config);
 </script>
 <script>
-function addZero(i){
-  if(i<10){
-    i="0"+i;
-  }
-  return i;
-}
-
-
   var database = firebase.database();
   var timeref =database.ref('details/');
   var hour,minutes,secs
@@ -40,15 +32,12 @@ function addZero(i){
     time:t
   })
   }
-
-
   function resetTimer()
   {
     document.getElementById('timer3').innerHTML='30:00';
     document.getElementById('timer2').innerHTML='20:00';
     document.getElementById('timer1').innerHTML='10:00';
   }
-
   var myStop;
   function stop(){
    clearInterval(countSec);
@@ -64,21 +53,19 @@ function addZero(i){
   }
    var getCurrentTime= function(){
    var d= new Date();
-    var h = addZero(d.getHours());
+    var h = (d.getHours());
     var m = (d.getMinutes());
-    var s = addZero(d.getSeconds());
+    var s = (d.getSeconds());
     hour = h;
     minutes = m;
     secs=s
  }
   var startTenMinuteTimer= function() {
-
     start10()
     hideTimerSections(["set2", "set3"]);
     showTimerSections(["stop","firstTimer"]);
     var currentTime=getCurrentTime();
     addtodatabase(hour,minutes,secs,10);
-
     myStop= setTimeout(function(){
       hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
       showTimerSections(["set1","set2","set3"]);
@@ -92,23 +79,18 @@ function addZero(i){
     showTimerSections(["stop","secondTimer"]);
     var currentTime=getCurrentTime();
     addtodatabase(hour,minutes,secs,20);
-
-        myStop=setTimeout(function(){
-          hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
-          showTimerSections(["set1","set2","set3"]);
-          addtodatabase(hour,minutes,secs,0);
+    myStop=setTimeout(function(){
+      hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
+      showTimerSections(["set1","set2","set3"]);
+      addtodatabase(hour,minutes,secs,0);
         },1200000);
   };
-
-
-  var startThirtyMinuteTimer=function()
-  {
+  var startThirtyMinuteTimer=function()  {
     start30();
     hideTimerSections(["set1", "set2"]);
     showTimerSections(["stop","thirdTimer"]);
     var currentTime=getCurrentTime();
     addtodatabase(hour,minutes,secs,30);
-
     myStop = setTimeout(function(){
       hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
       showTimerSections(["set1","set2","set3"]);
