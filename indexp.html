@@ -33,12 +33,13 @@
       var m = data.details.min;
       var wt = data.details.time;
       var av =false;
+m = m +wt
  if(m >= 60){
   h++;
   m = m % 60;
 }else if(m<60){
   m= m;
-}if(m==0){
+}if(wt==0){
   av=true;
 }
       if(av==false){
