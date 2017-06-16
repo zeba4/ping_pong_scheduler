@@ -33,37 +33,14 @@
       var m = data.details.min;
       var wt = data.details.time;
       var av =false;
-      if (wt==30){
-      if (m+30>=60){
-        h=h+1
-        m=m-30
-      }else(
-        m=m+30
-      )}
-      else if(wt==20){
-        if (m+20>=60){
-          h=h+1
-          m=m-40
-        }else(
-          m=m+20
-        )}
-      else if(wt==10){
-        if (m+10>=60){
-          h=h+1
-          m=m-50
-        }else(
-          m=m+10
-)}
-
-//with the modified verision I can only get it to work if the mins go over 60 or if I fix that I can never have the table be open
- // m = m + wt;
-// if(m >= 60){
-//   h++;
-//   m = m % 60;
-// }
-        else{
-         av=true
-        }
+ if(m >= 60){
+  h++;
+  m = m % 60;
+}else if(m<60){
+  m= m;
+}if(m==0){
+  av=true;
+}
       if(av==false){
         if (h>12){
           h=h-12;
