@@ -2,6 +2,7 @@
 <!-- index of webpage -->
 <html>
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="master.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
@@ -30,7 +31,6 @@
       console.log(data);
       var h = data.details.hour;
       var m = data.details.min;
-      var s = data.details.sec;
       var wt = data.details.time;
       var av =false;
       if (wt==30){
@@ -53,13 +53,24 @@
           m=m-50
         }else(
           m=m+10
-        )}
+)}
+
+//with the modified verision I can only get it to work if the mins go over 60 or if I fix that I can never have the table be open  
+ // m = m + wt;
+// if(m >= 60){
+//   h++;
+//   m = m % 60;
+// }
         else{
          av=true
         }
       if(av==false){
-        var newTime= h+":"+m+":"+s;
-        document.getElementById("endTime").innerHTML=newTime
+        if(m<10){
+          var newTime =h+":0"+m
+          document.getElementById("endTime").innerHTML=newTime
+        }else{
+        var newTime= h+":"+m;
+        document.getElementById("endTime").innerHTML=newTime}
       }else(
           document.getElementById("endTime").innerHTML="Table Is Open"
       )

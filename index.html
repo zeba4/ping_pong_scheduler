@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
 <html>
-<head>
+<head >
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
 <audio id="audio" src="http://soundbible.com/mp3/Buzzer-SoundBible.com-188422102.mp3"></audio>
 <audio id="audio2" src="http://soundbible.com/mp3/old-fashioned-door-bell-daniel_simon.mp3"></audio>
@@ -21,14 +22,18 @@ var config = {
 firebase.initializeApp(config);
 </script>
 <script>
+
+function onLoad(){
+   addtodatabase(0,0,0);
+}
+
   var database = firebase.database();
   var timeref =database.ref('details/');
   var hour,minutes,secs
-  function addtodatabase(h,m,s,t){
+  function addtodatabase(h,m,t){
     database.ref('details/').set({
     hour: h,
     min: m,
-    sec:s,
     time:t
   })
   }
@@ -42,59 +47,58 @@ firebase.initializeApp(config);
   function stop(){
    clearInterval(countSec);
    clearTimeout(myStop);
-   hideTimerSections(["firstTimer", "secondTimer","thirdTimer","stop"]);
-   showTimerSections(["set1","set2","set3"])
+   hideTimerSections(["set1","set2","set3","stop"]);
+   showTimerSections(["button1","button2","button3","para","select"])
    resetTimer();
     $("#button1").bind("click", startTenMinuteTimer);
     $("#button2").bind("click", startTwentyMinuteTimer);
     $("#button3").bind("click", startThirtyMinuteTimer);
      hideTimerWarning();
-     addtodatabase(0,0,0,0);
+     addtodatabase(0,0,0);
   }
    var getCurrentTime= function(){
    var d= new Date();
     var h = (d.getHours());
     var m = (d.getMinutes());
-    var s = (d.getSeconds());
     hour = h;
     minutes = m;
-    secs=s
+
  }
   var startTenMinuteTimer= function() {
     start10()
-    hideTimerSections(["set2", "set3"]);
-    showTimerSections(["stop","firstTimer"]);
+    hideTimerSections(["button1", "button2","button3","para","select"]);
+    showTimerSections(["stop","firstTimer","set1"]);
     var currentTime=getCurrentTime();
-    addtodatabase(hour,minutes,secs,10);
+    addtodatabase(hour,minutes,10);
     myStop= setTimeout(function(){
-      hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
-      showTimerSections(["set1","set2","set3"]);
-      addtodatabase(hour,minutes,secs,0);
+      hideTimerSections(["stop", "set1"]);
+      showTimerSections(["button1","button2","button3","para","select"]);
+      addtodatabase(hour,minutes,0);
         },600000);
   };
 
   var startTwentyMinuteTimer=function() {
     start20()
-    hideTimerSections(["set1", "set3"]);
-    showTimerSections(["stop","secondTimer"]);
+    hideTimerSections(["button1","button2", "button3","para","select"]);
+    showTimerSections(["stop","set2","secondTimer"]);
     var currentTime=getCurrentTime();
-    addtodatabase(hour,minutes,secs,20);
+    addtodatabase(hour,minutes,20);
     myStop=setTimeout(function(){
-      hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
-      showTimerSections(["set1","set2","set3"]);
-      addtodatabase(hour,minutes,secs,0);
+      hideTimerSections(["stop", "set2"]);
+      showTimerSections(["button1","button2","button3","para","select"]);
+      addtodatabase(hour,minutes,0);
         },1200000);
   };
   var startThirtyMinuteTimer=function()  {
     start30();
-    hideTimerSections(["set1", "set2"]);
-    showTimerSections(["stop","thirdTimer"]);
+    hideTimerSections(["button1", "button2","button3","para","select"]);
+    showTimerSections(["stop","set3","thirdTimer"]);
     var currentTime=getCurrentTime();
-    addtodatabase(hour,minutes,secs,30);
+    addtodatabase(hour,minutes,30);
     myStop = setTimeout(function(){
-      hideTimerSections(["stop", "firstTimer","secondTimer","thirdTimer"]);
-      showTimerSections(["set1","set2","set3"]);
-      addtodatabase(hour,minutes,secs,0);
+      hideTimerSections(["stop", "set3"]);
+      showTimerSections(["button1","button2","button3","para","select"]);
+      addtodatabase(hour,minutes,0);
     },1800000);
   }
 
@@ -127,31 +131,45 @@ firebase.initializeApp(config);
   }
   </script>
 </head>
-<body>
-
-<button onClick="stop()" id="stop" class="hidden"> Stop Game </button>
-<h1>How Many Games Would You Like to Play?</h1>
-    <div id="set1">
-        <button  id="button1" >1 Game</button>
-        <div id='firstTimer' class="hidden">
-          <div id='timer1'></div>
-        </div>
-    </div>
-
-    <div id="set2">
+<body onload="onLoad()">
+<h1>Hoffman Ping Pong</h1>
+<h2 id="select">Select Number of Games</h2>
+<div class=column>
+<section class="game">
+      <button  id="button1" >1 Game</button>
         <button  id="button2" >2 Games</button>
-        <div id='secondTimer' class="hidden">
-          <div id='timer2'></div>
-        </div>
+    <button  id="button3" >3 Games</button>
+</section>
+<section id="para">
+<p> In an effort to allow all playes reasonable time at the table, please use this
+  tool to reserve the table.  This is a first come, first serve application to help
+  others know when the table might be avalible.</p>
+<p>
+  Select the number of games you wish to play.  If you wish to play more than 3
+    games (standard match set), you may select again at the end of the match if the table is still
+    avalible.
+  </p>
+</section>
+</div>
+<div id="set1">
+    <div id='firstTimer' class="hidden">
+      <div  id="gametitle">1 Game Selected</div>
+      <div id='timer1'></div>
     </div>
-
-    <div id="set3">
-      <button  id="button3" >3 Games</button>
-      <div id='thirdTimer' class="hidden">
-        <div id='timer3'></div>
-      </div>
+</div>
+<div id="set2">
+    <div id='secondTimer' class="hidden">
+      <div id="gametitle2">2 Games Selected</div>
+      <div id='timer2'></div>
     </div>
-
+</div>
+<div id="set3">
+  <div id='thirdTimer' class="hidden">
+    <div id="gametitle3">3 Games Selected</div>
+    <div id='timer3'></div>
+  </div>
+</div>
+<div id="center"><button onClick="stop()" id="stop" class="hidden"> End Current Game </button></div>
   <div id = 'timerWarningMessage' class="hidden" > Game is Almost Over! </div>
 </body>
 </html>
