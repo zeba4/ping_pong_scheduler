@@ -55,7 +55,7 @@
           m=m+10
 )}
 
-//with the modified verision I can only get it to work if the mins go over 60 or if I fix that I can never have the table be open  
+//with the modified verision I can only get it to work if the mins go over 60 or if I fix that I can never have the table be open
  // m = m + wt;
 // if(m >= 60){
 //   h++;
@@ -65,6 +65,11 @@
          av=true
         }
       if(av==false){
+        if (h>12){
+          h=h-12;
+        }else{
+          h=h;
+        }
         if(m<10){
           var newTime =h+":0"+m
           document.getElementById("endTime").innerHTML=newTime
