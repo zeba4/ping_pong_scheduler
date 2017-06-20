@@ -1,6 +1,8 @@
 body{
+  
+  font-family:'Tahoma';
   overflow:hidden;
-  font-family: "Comic Sans MS";
+
 }
 
 .hidden{
@@ -18,19 +20,44 @@ body{
 }
 
 .listDiv{
-    overflow:auto;
+    overflow:scroll;
     height: 130px;
     display:inline-block;
     width: 30%;
+    width: 300px;
+    height: 300px;
 }
 
 .h2List{
     margin-bottom:0px;
 }
 
-.bracketFrame{
-    border: solid 1px black;
-    background: #4D4D4D;
-    width:700px;
-    height:600px;
+
+.newTournament{
+  margin-left:100px;
+    float:left;
+    border: double;
+    width:300px;
+}
+
+
+.openTournament{
+    margin-left:380px;
+    float:left;
+     border:double;
+    width:300px;
+}
+  .inProgress{
+    margin-left:350px;
+    float:left;
+     border: double;
+    width:350px;
+
+}
+
+
+
+#home{
+cursor:pointer;
+
 }

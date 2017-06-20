@@ -7,13 +7,15 @@
     <header>
       <nav>
         <h1>Ping Pong Tournament</h1>
-        <a onClick="homePage()">Home</a>
+        <div id="home">
+        <a  onClick="homePage()">Home</a>
+        </div>
       </nav>
     </header>
     <section id="screen1" class="visible">
       <div>
-        <h2>Create new tournament<h2>
-        Tournament Name:
+        <h2 class ="newTournament">Create new tournament 
+Tournament Name:
         <input type="text" id="tourName" placeholder="Tourney Name"><br>
         Start Tourney When Max Players Hit?
         <input type="checkbox" id="runMax"><br>
@@ -30,18 +32,24 @@
         <input type="button" onClick="createTournament()" value="Generate it!">
       </div>
       <div>
-        <h2>Open Tournaments</h2>
+      </h2>
+        
+        <h2 class = "openTournament">Open Tournaments
         <div class="listDiv">
           <ul id="listOpen">
           </ul>
         </div>
+        </h2>
+        
       </div>
       <div>
-        <h2>In Progress Tournaments</h2>
-        <div class="listdiv">
+        <h2 class ="inProgress">In Progress Tournaments
+          <div class="listdiv">
           <ul id="listClosed">
           </ul>
         </div>
+        </h2>
+      
       </div>
     </section>
     <section id="screen2" class="hidden">
@@ -53,9 +61,9 @@
       <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()">
     </section>
     <section id="screen3" class="hidden">
-	  <div id="myDiagramDiv" class="bracketFrame">
+   <div id="myDiagramDiv" class="bracketFrame">
 
-	</div>
+ </div>
     </section>
     <footer>
     </footer>
