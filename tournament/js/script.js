@@ -121,7 +121,7 @@ function createTournament(){
       date: tDate,
       maxPlayers: tMax,
       startOnMax: tStart,
-      tourString: ":)"
+      tourString: ""
 
     });
     console.log("success");
@@ -255,7 +255,7 @@ function saveTournamentState(){
 function hasStarted(data, key,override){
     if(timeDiff(data.date) != false)
     {
-      if(data.tourString == ":)")
+      if(data.tourString == "")
       {
         generateBracket(data,key);
       }
