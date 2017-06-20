@@ -50,9 +50,9 @@ loadQuery.once('value', function(snapshot){
     snapshot.forEach(function(data){
       if(hasStarted(data.val(),keysOfTournaments[pos]) == false)
       {
-        updateOpenTour(data.val().name, data.val().date, keysOfTournaments[pos])
+        updateOpenTour(data.val().name, data.val().date, keysOfTournaments[pos]);
       }else{
-        updateClosedTour(data.val().name, keysOfTournaments[pos])
+        updateClosedTour(data.val().name, keysOfTournaments[pos]);
       }
       pos++;
     });
@@ -62,16 +62,14 @@ loadQuery.once('value', function(snapshot){
 
 function startUpdate(){
   updateTournamentRef.on('child_added', function(snapshot){
-    checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key)
+    checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key);
   });
 }
 
 function checkForDuplicates(name, date, key){
-  console.log(document.getElementById(key) == null)
   if(document.getElementById(key) == null)
   {
     updateOpenTour(name, date,key);
-    console.log('gets here')
   }
 }
 
@@ -90,7 +88,7 @@ function loadTournament(key){
     try{
       displayTournament(snapshot.val(),key);
     }catch(err){
-      console.log(err)
+      console.log(err);
     }
   }, function(error) {
     // The Promise was rejected.
@@ -106,18 +104,18 @@ function displayTournament(data, objKey){
 
 function updateList(name){
   
-  document.getElementById("signedUp").innerHTML +=  name + "<br>"
+  document.getElementById("signedUp").innerHTML +=  name + "<br>";
 }
 
 function createTournament(){
-  var tName = document.getElementById("tourName").value
-  var tDate = document.getElementById("datepicker").value
-  var tStart = document.getElementById("runMax").checked
-  var tMax = document.getElementById("numPlayers").value
+  var tName = document.getElementById("tourName").value;
+  var tDate = document.getElementById("datepicker").value;
+  var tStart = document.getElementById("runMax").checked;
+  var tMax = document.getElementById("numPlayers").value;
 
   if(tMax && tDate && tName != "" || null || undefined )
   {
-    var newPostRef = tournamentRef.push()
+    var newPostRef = tournamentRef.push();
     newPostRef.set({
       name: tName,
       date: tDate,
@@ -126,12 +124,12 @@ function createTournament(){
       tourString: ":)"
 
     });
-    console.log("success")
+    console.log("success");
   }else {
-    console.log("failure")
+    console.log("failure");
   }
-  document.getElementById("tourName").value = ""
-  document.getElementById("datepicker").value = ""
+  document.getElementById("tourName").value = "";
+  document.getElementById("datepicker").value = "";
 }
 
 function joinTournament(){
@@ -141,7 +139,7 @@ function joinTournament(){
       newPostRef.set({
         name: document.getElementById("name").value
       });
-      document.getElementById("name").value = ""
+      document.getElementById("name").value = "";
     }
 }
 
@@ -151,34 +149,34 @@ function transition(screen){
   // 1 is home page, 2 is join screen, 3 is the Bracket screen
   if(screen == 1)
   {
-    document.getElementById("screen1").className = "visible"
-    document.getElementById("screen2").className = "hidden"
-    document.getElementById("screen3").className = 'hidden'
-    document.getElementById("signedUp").innerHTML = ""
-    document.getElementById("startTime").innerHTML = "00d 00h 00m 00s"
+    document.getElementById("screen1").className = "visible";
+    document.getElementById("screen2").className = "hidden";
+    document.getElementById("screen3").className = 'hidden';
+    document.getElementById("signedUp").innerHTML = "";
+    document.getElementById("startTime").innerHTML = "00d 00h 00m 00s";
   }else if(screen == 2){
-    document.getElementById("screen1").className = "hidden"
-    document.getElementById("screen2").className = "visible"
-    document.getElementById("screen3").className = 'hidden'
+    document.getElementById("screen1").className = "hidden";
+    document.getElementById("screen2").className = "visible";
+    document.getElementById("screen3").className = 'hidden';
   }else if(screen == 3){
-    document.getElementById("screen1").className = "hidden"
-    document.getElementById("screen2").className = "hidden"
-    document.getElementById("screen3").className = "visible"
+    document.getElementById("screen1").className = "hidden";
+    document.getElementById("screen2").className = "hidden";
+    document.getElementById("screen3").className = "visible";
   }
 }
 
 function homePage(){
   if(screenState == 2)
   {
-    killCheckForNewPlayers()
+    killCheckForNewPlayers();
   }
   if(screenState == 3)
   {
     saveTournamentState();
   }
-  killTimer()
-  screenState = 1
-  transition(screenState)
+  killTimer();
+  screenState = 1;
+  transition(screenState);
 }
 
 function killCheckForNewPlayers(){
@@ -196,7 +194,7 @@ function viewTour(key){
 }
 
 function viewBracket(key){
-  currentBracketKey = key
+  currentBracketKey = key;
   screenState = 3;
   transition(screenState);
   loadBracket(key);
@@ -227,7 +225,7 @@ function startTimer(){
 
 function killTimer(){
 
-  clearTimeout(timerVariable)
+  clearTimeout(timerVariable);
 }
 
 function timeDiff(data){
@@ -236,11 +234,11 @@ function timeDiff(data){
   now.setHours(0,0,0,0);
   if (selectedDate < now) {
     // selected date is in the past
-    return true
+    return true;
   }else{
-    return false
+    return false;
   }
-}
+};
 
 // Saving the State of the tournament
 
@@ -249,7 +247,7 @@ function saveTournamentState(){
     var updateStartRef = database.ref('details/tournament/' + currentBracketKey);
     var updates = {};
     updates['/tourString'] = dataT;
-    updateStartRef.update(updates)
+    updateStartRef.update(updates);
 }
 
 // Tournament has started code
@@ -259,7 +257,7 @@ function hasStarted(data, key,override){
     {
       if(data.tourString == ":)")
       {
-        generateBracket(data,key)
+        generateBracket(data,key);
       }
       return true;
     }
@@ -272,10 +270,10 @@ function generateBracket(data,key){
   var tempRef = database.ref("details/tournament/" + key + "/players")
   tempRef.once('value').then(function(snapshot) {
     snapshot.forEach(function(data1){
-        playerArray.push(data1.val().name)
+        playerArray.push(data1.val().name);
     });
-      makeModel(playerArray)
-      startTournament(myDiagram.model.toJSON(),data,key)
+      makeModel(playerArray);
+      startTournament(myDiagram.model.toJSON(),data,key);
       }, function(error) {
     // The Promise was rejected.
     console.error(error);
@@ -286,7 +284,7 @@ function startTournament(tString,data, key){
       var updateStartRef = database.ref('details/tournament/' + key);
       var updates = {};
       updates['/tourString'] = tString;
-      updateStartRef.update(updates)
+      updateStartRef.update(updates);
 }
 
 function loadBracket(key){
@@ -304,8 +302,8 @@ function loadBracket(key){
 }
 
 function displayBracket(dataString){
-  var bracketString = JSON.parse(dataString)
-  updateModel(bracketString.nodeDataArray)
+  var bracketString = JSON.parse(dataString);
+  updateModel(bracketString.nodeDataArray);
 }
 
 function updateOpenTour(name,date,key){

@@ -101,7 +101,6 @@
     }
     function makeModel(players) {
       var model = new go.TreeModel(createPairs(players));
-      console.log(createPairs(players))
       checkWinner(model)
       myDiagram.model = model;
     }
