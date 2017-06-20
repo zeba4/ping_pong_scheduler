@@ -18,6 +18,7 @@
   firebase.initializeApp(config);
   </script>
   <script>
+  
       var detailsRef = firebase.database().ref("details/")
       var ref = firebase.database().ref();
 
@@ -50,14 +51,17 @@ m = m +wt
         }
         if(m<10){
           var newTime =h+":0"+m
-          document.getElementById("endTime").innerHTML=newTime
+          document.getElementById("endTime").innerHTML=newTime;
+           document.getElementById("table").style.display="";
+         
         }else{
         var newTime= h+":"+m;
-        document.getElementById("endTime").innerHTML=newTime}
-      }else(
-          document.getElementById("endTime").innerHTML="Table Is Open"
-      )
-
+        document.getElementById("endTime").innerHTML=newTime;
+         document.getElementById("table").style.display="";}
+      }else{
+          document.getElementById("endTime").innerHTML="Table Is Open";
+          document.getElementById("table").style.display="none";
+      }
     }
     var updateDivTagContent= function(id,content){
     var x =document.getElementById(id);
@@ -69,13 +73,9 @@ m = m +wt
   }
   </script>
 </head>
-
 <body >
-
-<h1> Table Will Be Open At</h1>
+<h1 id="table"> Table Will Be Open At</h1>
 <div id="endTime">
 </div>
-
-
 </body>
 <html>
