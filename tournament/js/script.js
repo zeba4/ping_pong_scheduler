@@ -14,13 +14,17 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var database = firebase.database();
-var overallRef = database.ref("details/")
-var tournamentRef = database.ref("details/tournament");
-var loadQuery = tournamentRef.orderByChild('date');
-var playersRef = database.ref("details/tournament");
+const database = firebase.database();
+const details = "details/";
+const tournament = "tournament/";
+const players = "players/";
+const overallRef = database.ref(details);
+const tournamentRef = database.ref(details + tournament);
+const loadQuery = tournamentRef.orderByChild('date');
+const updateTournamentRef = database.ref(details+tournament).limitToLast(1);
+
 var updatePlayersRef;
-var updateTournamentRef = database.ref("details/tournament").limitToLast(1);
+
 
 var screenState = 1;
 var countDownDate;
@@ -74,7 +78,7 @@ function checkForDuplicates(name, date, key){
 }
 
 function checkForNewPlayers(key){
-  updatePlayersRef = database.ref("details/tournament/" + key + "/players");
+  updatePlayersRef = database.ref(details+tournament + key +"/"+players);
   updatePlayersRef.on('child_added', function(snapshot) {
     updateList(snapshot.val().name);
   });
@@ -125,14 +129,13 @@ function createTournament(){
   }else {
     console.log("failure");
   }
-  document.getElementById("tourName").value = "";
-  document.getElementById("datepicker").value = "";
+  clearDocument(["tourName","datepicker"])
 }
 
 function joinTournament(){
     if(document.getElementById("name").value != "")
     {
-      var newPostRef = database.ref('details/tournament/' + currentJoinKey + '/players').push();
+      var newPostRef = database.ref(details+tournament+ currentJoinKey + '/' + players).push();
       newPostRef.set({
         name: document.getElementById("name").value
       });
@@ -147,8 +150,7 @@ function transition(screen){
   if(screen == 1)
   {
     changeClassName(["visible","hidden","hidden"]);
-    document.getElementById("signedUp").innerHTML = "";
-    document.getElementById("startTime").innerHTML = "00d 00h 00m 00s";
+    clearDocument(["signedUp","startTime"]);
   }else if(screen == 2){
     changeClassName(["hidden","visible","hidden"]);
   }else if(screen == 3){
@@ -159,6 +161,18 @@ function transition(screen){
 function changeClassName(state){
   for(var i = 1; i<state.length+1;i++){
     document.getElementById("screen"+i).className = state[i-1]
+  }
+}
+
+function clearDocument(ids){
+  for(var i = 0; i<ids.length;i++){
+    if(ids[i] == "startTime")
+    {
+      document.getElementById(ids[i]).innerHTML = "00d 00h 00m 00s";
+    }else{
+      document.getElementById(ids[i]).innerHTML = "";
+    }
+    
   }
 }
 
@@ -241,7 +255,7 @@ function timeDiff(data){
 
 function saveTournamentState(){
     var dataT = myDiagram.model.toJSON();
-    var updateStartRef = database.ref('details/tournament/' + currentBracketKey);
+    var updateStartRef = database.ref(details+tournament+ currentBracketKey);
     var updates = {};
     updates['/tourString'] = dataT;
     updateStartRef.update(updates);
@@ -264,7 +278,7 @@ function hasStarted(data, key,override){
 function generateBracket(data,key){
   currentBracketKey = key;
   var playerArray = [];
-  var tempRef = database.ref("details/tournament/" + key + "/players")
+  var tempRef = database.ref("details/tournament/" + key + "/" + players)
   tempRef.once('value').then(function(snapshot) {
     snapshot.forEach(function(data1){
         playerArray.push(data1.val().name);
@@ -279,7 +293,7 @@ function generateBracket(data,key){
 }
 
 function startTournament(tString,data, key){
-      var updateStartRef = database.ref('details/tournament/' + key);
+      var updateStartRef = database.ref(details+tournament + key);
       var updates = {};
       updates['/tourString'] = tString;
       updateStartRef.update(updates);
