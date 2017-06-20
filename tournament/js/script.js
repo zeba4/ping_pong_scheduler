@@ -149,18 +149,18 @@ function transition(screen){
   // 1 is home page, 2 is join screen, 3 is the Bracket screen
   if(screen == 1)
   {
-    changeClassName(["visible","hidden","hidden"]);
+    changeClassName(["homeScreen","joinTournamentScreen","tournamentBracketScreen"],["visible","hidden","hidden"]);
     clearDocument(["signedUp","startTime"]);
   }else if(screen == 2){
-    changeClassName(["hidden","visible","hidden"]);
+    changeClassName(["homeScreen","joinTournamentScreen","tournamentBracketScreen"],["hidden","visible","hidden"]);
   }else if(screen == 3){
-    changeClassName(["hidden","hidden","visible"]);
+    changeClassName(["homeScreen","joinTournamentScreen","tournamentBracketScreen"],["hidden","hidden","visible"]);
   }
 }
 
-function changeClassName(state){
-  for(var i = 1; i<state.length+1;i++){
-    document.getElementById("screen"+i).className = state[i-1]
+function changeClassName(ids,state){
+  for(var i = 0; i<state.length;i++){
+    document.getElementById(ids[i]).className = state[i]
   }
 }
 
