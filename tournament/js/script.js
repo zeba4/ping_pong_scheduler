@@ -30,12 +30,18 @@ var timerVariable;
 
 
 //TODO:
+// Timeout finish tournaments
+// Create a Winner Screen once bracket is over?
 //Add number of people in tournament next to dynamic list tags
 //Update to firebase on value entered(Tournament State) *Need to verify fix
 //Instant feedback on entering score, creating tournament, joining tournament
 //Add Start on max players
 //Check to see if internet connection is lost
 //Ask for full name of 1st-3rd place winners at end for storage purposes
+
+
+
+// Homepage Load Code
 
 loadQuery.once('value', function(snapshot){
   if(snapshot.val() != null){
@@ -53,8 +59,8 @@ loadQuery.once('value', function(snapshot){
   }
 });
 
-
 updateTournamentRef.on('child_added', function(snapshot){
+
   checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key)
 });
 
@@ -68,10 +74,6 @@ function checkForNewPlayers(key){
   updatePlayersRef.on('child_added', function(snapshot) {
     updateList(snapshot.val().name);
   });
-}
-
-function killCheckForNewPlayers(){
-  updatePlayersRef.off();
 }
 
 //Open Tournament Code
@@ -97,6 +99,7 @@ function displayTournament(data, objKey){
 }
 
 function updateList(name){
+  
   document.getElementById("signedUp").innerHTML +=  name + "<br>"
 }
 
@@ -168,6 +171,12 @@ function homePage(){
   screenState = 1
   transition(screenState)
 }
+
+function killCheckForNewPlayers(){
+
+  updatePlayersRef.off();
+}
+
 
 function viewTour(key){
   screenState = 2;
@@ -289,7 +298,6 @@ function displayBracket(dataString){
   var bracketString = JSON.parse(dataString)
   updateModel(bracketString.nodeDataArray)
 }
-
 
 function updateOpenTour(name,date,key){
   $("#listOpen").append('<li>' + name + " | Start Dates: " + date+ '</li>')
