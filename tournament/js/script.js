@@ -56,17 +56,23 @@ loadQuery.once('value', function(snapshot){
       }
       pos++;
     });
+    startUpdate();
   }
 });
 
-updateTournamentRef.on('child_added', function(snapshot){
-
-  checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key)
-});
+function startUpdate(){
+  updateTournamentRef.on('child_added', function(snapshot){
+    checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key)
+  });
+}
 
 function checkForDuplicates(name, date, key){
-  if(document.getElementById(key) != null || undefined)
+  console.log(document.getElementById(key) == null)
+  if(document.getElementById(key) == null)
+  {
     updateOpenTour(name, date,key);
+    console.log('gets here')
+  }
 }
 
 function checkForNewPlayers(key){
@@ -124,6 +130,8 @@ function createTournament(){
   }else {
     console.log("failure")
   }
+  document.getElementById("tourName").value = ""
+  document.getElementById("datepicker").value = ""
 }
 
 function joinTournament(){
@@ -133,6 +141,7 @@ function joinTournament(){
       newPostRef.set({
         name: document.getElementById("name").value
       });
+      document.getElementById("name").value = ""
     }
 }
 
