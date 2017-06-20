@@ -84,15 +84,12 @@ function checkForNewPlayers(key){
 
 function loadTournament(key){
   overallRef.once('value').then(function(snapshot) {
-    // The Promise was "fulfilled" (it succeeded).
-    try{
+    // The Promise was "fulfilled" (it succeeded)
       displayTournament(snapshot.val(),key);
-    }catch(err){
-      console.log(err);
-    }
   }, function(error) {
     // The Promise was rejected.
     console.error(error);
+    console.log("Failed to load tournament data")
   });
 }
 
@@ -277,6 +274,7 @@ function generateBracket(data,key){
       }, function(error) {
     // The Promise was rejected.
     console.error(error);
+    console.log("Failed to load list of players")
   });
 }
 
@@ -298,6 +296,7 @@ function loadBracket(key){
   }, function(error) {
     // The Promise was rejected.
     console.error(error);
+    console.log("Tournament failed to initialize")
   });
 }
 
