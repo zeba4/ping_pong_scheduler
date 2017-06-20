@@ -22,6 +22,8 @@ const overallRef = database.ref(details);
 const tournamentRef = database.ref(details + tournament);
 const loadQuery = tournamentRef.orderByChild('date');
 const updateTournamentRef = database.ref(details+tournament).limitToLast(1);
+const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
+
 
 var updatePlayersRef;
 
@@ -149,12 +151,12 @@ function transition(screen){
   // 1 is home page, 2 is join screen, 3 is the Bracket screen
   if(screen == 1)
   {
-    changeClassName(["homeScreen","joinTournamentScreen","tournamentBracketScreen"],["visible","hidden","hidden"]);
+    changeClassName(screenSections,["visible","hidden","hidden"]);
     clearDocument(["signedUp","startTime"]);
   }else if(screen == 2){
-    changeClassName(["homeScreen","joinTournamentScreen","tournamentBracketScreen"],["hidden","visible","hidden"]);
+    changeClassName(screenSections,["hidden","visible","hidden"]);
   }else if(screen == 3){
-    changeClassName(["homeScreen","joinTournamentScreen","tournamentBracketScreen"],["hidden","hidden","visible"]);
+    changeClassName(screenSections,["hidden","hidden","visible"]);
   }
 }
 
