@@ -149,19 +149,19 @@ function transition(screen){
   // 1 is home page, 2 is join screen, 3 is the Bracket screen
   if(screen == 1)
   {
-    document.getElementById("screen1").className = "visible";
-    document.getElementById("screen2").className = "hidden";
-    document.getElementById("screen3").className = 'hidden';
+    changeClassName(["visible","hidden","hidden"]);
     document.getElementById("signedUp").innerHTML = "";
     document.getElementById("startTime").innerHTML = "00d 00h 00m 00s";
   }else if(screen == 2){
-    document.getElementById("screen1").className = "hidden";
-    document.getElementById("screen2").className = "visible";
-    document.getElementById("screen3").className = 'hidden';
+    changeClassName(["hidden","visible","hidden"]);
   }else if(screen == 3){
-    document.getElementById("screen1").className = "hidden";
-    document.getElementById("screen2").className = "hidden";
-    document.getElementById("screen3").className = "visible";
+    changeClassName(["hidden","hidden","visible"]);
+  }
+}
+
+function changeClassName(state){
+  for(var i = 1; i<state.length+1;i++){
+    document.getElementById("screen"+i).className = state[i-1]
   }
 }
 
