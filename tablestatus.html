@@ -4,7 +4,6 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="master.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
   <script>
   var config = {
@@ -38,8 +37,6 @@ m = m +wt
  if(m >= 60){
   h++;
   m = m % 60;
-}else if(m<60){
-  m= m;
 }if(wt==0){
   av=true;
 }
