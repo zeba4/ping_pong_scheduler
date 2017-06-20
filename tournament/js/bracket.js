@@ -101,7 +101,20 @@
     }
     function makeModel(players) {
       var model = new go.TreeModel(createPairs(players));
-      model.addChangedListener(function(e) {
+      console.log(createPairs(players))
+      checkWinner(model)
+      myDiagram.model = model;
+    }
+     function updateModel(tournamentJSON) {
+      var model = new go.TreeModel(tournamentJSON);
+      checkWinner(model)
+      myDiagram.model = model;
+    }
+
+    function checkWinner(model)
+    {
+        model.addChangedListener(function(e) {
+        saveTournamentState()
         if (e.propertyName !== 'score1' && e.propertyName !== 'score2') return;
         var data = e.object;
         if (isNaN(data.score1) || isNaN(data.score2)) return;
@@ -111,5 +124,4 @@
         if (parseInt(data.score1) === parseInt(data.score2)) playerName = "";
         myDiagram.model.setDataProperty(parent.data, (data.parentNumber === 0 ? "player1" : "player2"), playerName);
       });
-      myDiagram.model = model;
     }
