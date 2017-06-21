@@ -18,7 +18,7 @@ const database = firebase.database();
 const details_firebase_route = "details/";
 const tournament_firebase_route = "tournament/";
 const players_firebase_route = "players/";
-const overallRef = database.ref(details_firebase_route);
+const detailsRef = database.ref(details_firebase_route);
 const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
 const loadQuery = tournamentRef.orderByChild('date');
 const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
@@ -89,7 +89,7 @@ function checkForNewPlayers(key){
 //Open Tournament Code
 
 function loadTournament(key){
-  overallRef.once('value').then(function(snapshot) {
+  detailsRef.once('value').then(function(snapshot) {
     // The Promise was "fulfilled" (it succeeded)
       displayTournament(snapshot.val(),key);
   }, function(error) {
@@ -111,8 +111,7 @@ function updateList(name){
 }
 
 function createTournament(){
-  var tourValues = [document.getElementById("tourName").value,document.getElementById("datepicker").value,document.getElementById("numPlayers").value,document.getElementById("runMax").checked];
-
+  var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax'])
   if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
   {
     var newPostRef = tournamentRef.push();
@@ -129,6 +128,16 @@ function createTournament(){
     console.log("failure");
   }
 }
+
+function getDivValue(ids){
+  var listOfValues = [];
+  for(let i = 0;i<ids.length;i++)
+  {
+    listOfValues.push(document.getElementById(ids[i]).value);
+  }
+  return listOfValues;
+}
+
 
 
 
@@ -161,6 +170,7 @@ function transition(screen){
     changeClassName(screenSections,["hidden","hidden","visible"]);
   }
 }
+
 
 function changeClassName(ids,state){
   for(var i = 0; i<state.length;i++){
@@ -243,7 +253,7 @@ function killTimer(){
   clearTimeout(timerVariable);
 }
 
-function timeDiff(data){
+function checkPastStartDate(data){
   var selectedDate = new Date(data);
   var now = new Date();
   now.setHours(0,0,0,0);
@@ -268,7 +278,7 @@ function saveTournamentState(){
 // Tournament has started code
 
 function hasStarted(data, key,override){
-    if(timeDiff(data.date) != false)
+    if(checkPastStartDate(data.date))
     {
       if(data.tourString == "")
       {
