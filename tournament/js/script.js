@@ -111,28 +111,26 @@ function updateList(name){
 }
 
 function createTournament(){
-  var tName = document.getElementById("tourName").value;
-  var tDate = document.getElementById("datepicker").value;
-  var tStart = document.getElementById("runMax").checked;
-  var tMax = document.getElementById("numPlayers").value;
+  var tourValues = [document.getElementById("tourName").value,document.getElementById("datepicker").value,document.getElementById("numPlayers").value,document.getElementById("runMax").checked]
 
-  if(tMax && tDate && tName != "" || null || undefined )
+  if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
   {
     var newPostRef = tournamentRef.push();
     newPostRef.set({
-      name: tName,
-      date: tDate,
-      maxPlayers: tMax,
-      startOnMax: tStart,
+      name: tourValues[0],
+      date: tourValues[1],
+      maxPlayers: tourValues[2],
+      startOnMax: tourValues[3],
       tourString: ""
-
     });
+    clearDocument(["tourName","datepicker"])
     console.log("success");
   }else {
     console.log("failure");
   }
-  clearDocument(["tourName","datepicker"])
 }
+
+
 
 function joinTournament(){
   try{
