@@ -1,11 +1,11 @@
-           var anActualVariableName = go.GraphObject.make;  // for conciseness in defining templates
+           var bracket = go.GraphObject.make;  // for conciseness in defining templates
     myDiagram =
-      anActualVariableName(go.Diagram, "bracketDiv",  // create a Diagram for the DIV HTML element
+      bracket(go.Diagram, "bracketDiv",  // create a Diagram for the DIV HTML element
         {
           initialContentAlignment: go.Spot.Center,  // center the content
           "textEditingTool.starting": go.TextEditingTool.SingleClick,
           "textEditingTool.textValidation": isValidScore,
-          layout: anActualVariableName(go.TreeLayout, { angle: 180 }),
+          layout: bracket(go.TreeLayout, { angle: 180 }),
           "undoManager.isEnabled": true
         });
     // validation function for editing text
@@ -16,36 +16,36 @@
     }
     // define a simple Node template
     myDiagram.nodeTemplate =
-      anActualVariableName(go.Node, "Auto",
+      bracket(go.Node, "Auto",
         { selectable: false },
-        anActualVariableName(go.Shape, "Rectangle",
+        bracket(go.Shape, "Rectangle",
           { fill: '#8C8C8C', stroke: null },
           // Shape.fill is bound to Node.data.color
           new go.Binding("fill", "color")),
-        anActualVariableName(go.Panel, "Table",
-          anActualVariableName(go.RowColumnDefinition, { column: 0, separatorStroke: "black" }),
-          anActualVariableName(go.RowColumnDefinition, { column: 1, separatorStroke: "black", background: "#BABABA" }),
-          anActualVariableName(go.RowColumnDefinition, { row: 0, separatorStroke: "black" }),
-          anActualVariableName(go.RowColumnDefinition, { row: 1, separatorStroke: "black" }),
-          anActualVariableName(go.TextBlock, "",
+        bracket(go.Panel, "Table",
+          bracket(go.RowColumnDefinition, { column: 0, separatorStroke: "black" }),
+          bracket(go.RowColumnDefinition, { column: 1, separatorStroke: "black", background: "#BABABA" }),
+          bracket(go.RowColumnDefinition, { row: 0, separatorStroke: "black" }),
+          bracket(go.RowColumnDefinition, { row: 1, separatorStroke: "black" }),
+          bracket(go.TextBlock, "",
             { row: 0,
               wrap: go.TextBlock.None, margin: 5, width: 90,
               isMultiline: false, textAlign: 'left',
               font: '10pt  Segoe UI,sans-serif', stroke: 'white' },
             new go.Binding("text", "player1").makeTwoWay()),
-          anActualVariableName(go.TextBlock, "",
+          bracket(go.TextBlock, "",
             { row: 1,
               wrap: go.TextBlock.None, margin: 5, width: 90,
               isMultiline: false, textAlign: 'left',
               font: '10pt  Segoe UI,sans-serif', stroke: 'white' },
             new go.Binding("text", "player2").makeTwoWay()),
-          anActualVariableName(go.TextBlock, "",
+          bracket(go.TextBlock, "",
             { column: 1, row: 0,
               wrap: go.TextBlock.None, margin: 2, width: 25,
               isMultiline: false, editable: true, textAlign: 'center',
               font: '10pt  Segoe UI,sans-serif', stroke: 'black' },
             new go.Binding("text", "score1").makeTwoWay()),
-          anActualVariableName(go.TextBlock, "",
+          bracket(go.TextBlock, "",
             { column: 1, row: 1,
               wrap: go.TextBlock.None, margin: 2, width: 25,
               isMultiline: false, editable: true, textAlign: 'center',
@@ -55,10 +55,10 @@
       );
     // define the Link template
     myDiagram.linkTemplate =
-      anActualVariableName(go.Link,
+      bracket(go.Link,
         { routing: go.Link.Orthogonal,
           selectable: false },
-        anActualVariableName(go.Shape, { strokeWidth: 2, stroke: 'white' }));
+        bracket(go.Shape, { strokeWidth: 2, stroke: 'white' }));
     // Generates the original graph from an array of player names
     function createPairs(players) {
       if (players.length % 2 !== 0) players.push('(empty)');
