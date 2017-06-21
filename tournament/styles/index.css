@@ -1,27 +1,24 @@
 body {
-    overflow: hidden;
+   
 }
 
 .hidden {
-    display: hidden;
-    visibility: hidden;
-    opacity: 0;
+    display: none;
     position: absolute;
     margin-top: -100px;
     margin-left: -100px;
 }
 
 .visible {
-    display: auto;
-    visibility: visible;
-    opacity: 1;
+    display: block;
 }
 
 .listDiv {
-    overflow: auto;
-    height: 300px;
-    display: inline-block;
-    width: 100%;
+    overflow-y: auto;
+    height:  calc(50vh - 40px - 80px);
+    width:  50%;
+    margin-left:  auto;
+    margin-right:  auto;
 }
 
 .h2List {
@@ -34,37 +31,67 @@ body {
     width: 700px;
     height: 600px;
 }
-
-#cursor {
+/* .cursor, */
+a {
     cursor: pointer;
-    text-align: center;
 }
 
+h1{
+  border-bottom:  1px solid black;
+  padding-bottom:  10px;
+  margin-bottom:  0;
+}
+
+h1, h2, h3{
+  text-align:  center;
+}
+#tNamePlace{
+  color:  red;
+}
+h3{
+  display:  inline-block;
+  margin:  2px;
+}
+
+h2{
+  margin-bottom:  5px;
+}
 .newTournament {
     float: left;
-    width: 49.9%;
+    width: calc(50% - 1px);
     height: 1000px;
+    height: calc(100vh - 78px);
     text-align: center;
-    display: block;
-    padding-top: 15%;
+    /* padding-top: 15%; */
 }
 
+.newTournament h2{
+  margin-top:  200px;
+}
+
+.right-col{
+  float: left;
+  width: 50%;
+  height: calc(50vh - 40px);
+  /* height: 450px; */
+  border-bottom: 1px solid black;
+/*   display: flex;
+  align-items: center;
+  justify-content: center; */
+}
 #openTournaments {
-    float: left;
-    width: 50%;
-    height: 450px;
-    border-bottom: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    
+    
+    
+    
 }
 
 #inProgress {
-    float: left;
+    /* float: left;
     width: 50%;
     height: 450px;
     text-align: center;
-    position: relative;
+    position: relative; */
 }
 
 .vborder {
@@ -88,4 +115,3 @@ body {
     font-size: 50px;
 }
 
-h3 {}

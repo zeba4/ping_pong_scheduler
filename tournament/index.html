@@ -12,11 +12,10 @@
 
             <nav>
 
-                <div id="cursor">
+                <div class="cursor">
 
                     <h1>
                         <a onClick="homePage()">Ping Pong Tournament Home</a>
-                        <hr>
 
                     </h1>
                 </div>
@@ -26,8 +25,7 @@
 
         <section id="homeScreen" class="visible">
             <div class="newTournament vborder">
-                <h2>Create new tournament
-                    <h2>
+                <h2>Create new tournament</h2>
                         <h3>Tournament Name:</h3>
                         <input type="text" id="tourName" placeholder="Tourney Name">
                         <br>
@@ -44,7 +42,7 @@
                             <option value="8">8</option>
                             <option value="16">16</option>
                             <option value="32">32</option>
-                            <div id="cursor">
+                            <div class="cursor">
                         </select>
                         <br>
                         <label for="datepicker">Tourney Start Date:</label>
@@ -56,7 +54,7 @@
                         </div>
 
 
-                        <div id="openTournaments">
+                        <div id="openTournaments" class="right-col">
                             <div>
 
                                 <h2 class="nameOpen">Open Tournaments</h2>
@@ -68,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div id="inProgress">
+                        <div id="inProgress" class="right-col">
                             <h2>In Progress Tournaments</h2>
                             <div class="listdiv">
                                 <ul id="listClosed">
@@ -89,7 +87,7 @@
                 <div id="startTime">
                     <p>00d 00h 00m 00s</p>
                 </div>
-                <div id="cursor">
+                <div class="cursor">
                     <input type="text" placeholder="Put Name Here" id="playerName">
                     <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()">
                 </div>
