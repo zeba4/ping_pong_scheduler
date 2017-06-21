@@ -21,7 +21,7 @@ body{
     overflow:auto;
     height: 130px;
     display:inline-block;
-    width: 30%;
+    width: 50%;
 }
 
 .h2List{
@@ -33,4 +33,28 @@ body{
     background: #4D4D4D;
     width:700px;
     height:600px;
+}
+#cursor{
+    cursor:pointer;
+
+
+}
+#newTournament{
+ float:left; 
+
+  
+}
+#openTournaments{
+   margin-left:430px;
+   
+   float:left;
+ 
+}
+
+#verticalLine{
+   border: solid 1px black;
+   width:1px;
+   height:200px;
+   margin-left:850px;
+ 
 }
