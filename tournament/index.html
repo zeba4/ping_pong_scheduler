@@ -1,22 +1,35 @@
 <!DOCTYPE HTML>
 <html>
+      
   <head>
     <title>Challenger Home</title>
   </head>
   <body>
     <header>
+
       <nav>
-        <h1>Ping Pong Tournament</h1>
-        <a onClick="homePage()">Home</a>
+      
+        <div id="cursor">
+            
+          <h1>
+        <a onClick="homePage()">Ping Pong Tournament Home</a>
+        <hr></hr>
+        </div>
+        </h1>
       </nav>
     </header>
+
     <section id="homeScreen" class="visible">
-      <div>
+      <div id ="line">
         <h2>Create new tournament<h2>
         Tournament Name:
         <input type="text" id="tourName" placeholder="Tourney Name"><br>
         Start Tourney When Max Players Hit?
+      
         <input type="checkbox" id="runMax"><br>
+        
+      
+        
         Number of Players needed to start:
         <select id="numPlayers">
           <option value=""></option>
@@ -24,11 +37,18 @@
           <option value="8">8</option>
           <option value="16">16</option>
           <option value="32">32</option>
+          <div id="cursor">
         </select><br>
         Tourney Start Date:
+        
         <input type="text" id="datepicker"><br>
+        
         <input type="button" onClick="createTournament()" value="Generate it!">
-      </div>
+        </div>
+
+        
+      
+      <div id="openTournaments">
       <div>
         <h2>Open Tournaments</h2>
         <div class="listDiv">
@@ -36,6 +56,8 @@
           </ul>
         </div>
       </div>
+    
+   <hr width="1000%"> </hr>
       <div>
         <h2>In Progress Tournaments</h2>
         <div class="listdiv">
@@ -43,14 +65,24 @@
           </ul>
         </div>
       </div>
+    </div>
+    </div>
+     <div class="verticalLine"></div>
+<style>.verticalLine{
+  height:2000px; width:1px; background:#000; margin-left:900px;
+}
+</style>
     </section>
     <section id="joinTournamentScreen" class="hidden">
       <div id="tNamePlace"></div>
       <div id="playerList">Participants:</div>
       <div id="signedUp"></div>
       <div id="startTime">00d 00h 00m 00s</div>
+      <div id="cursor">
+
       <input type="text" placeholder="Put Name Here" id="playerName">
       <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()">
+      </div>
     </section>
     <section id="tournamentBracketScreen" class="hidden">
     <div id="myDiagramDiv" class="bracketFrame">
@@ -68,6 +100,6 @@
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <script src="js/bracket.js"></script>
     <script src="js/script.js"></script>
-
+   
   </body>
 </html>
