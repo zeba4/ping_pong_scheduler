@@ -1,6 +1,6 @@
            var anActualVariableName = go.GraphObject.make;  // for conciseness in defining templates
     myDiagram =
-      anActualVariableName(go.Diagram, "myDiagramDiv",  // create a Diagram for the DIV HTML element
+      anActualVariableName(go.Diagram, "bracketDiv",  // create a Diagram for the DIV HTML element
         {
           initialContentAlignment: go.Spot.Center,  // center the content
           "textEditingTool.starting": go.TextEditingTool.SingleClick,
