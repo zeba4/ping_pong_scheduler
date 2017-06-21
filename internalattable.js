@@ -3,10 +3,10 @@ var onLoad=function(){
 }
 
   var database = firebase.database();
-  var timeref =database.ref('details/');
+  var timeref =database.ref('timerInfo/');
   var hour,minutes,secs
   function addtodatabase(h,m,t){
-    database.ref('details/').set({
+    database.ref('timerInfo/').set({
     hour: h,
     min: m,
     time:t
