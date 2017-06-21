@@ -2,6 +2,7 @@
 <html>
       
   <head>
+    <meta charset="utf-8">
     <title>Challenger Home</title>
   </head>
   <body>
@@ -13,26 +14,27 @@
             
           <h1>
         <a onClick="homePage()">Ping Pong Tournament Home</a>
-        <hr></hr>
-        </div>
+        <hr>
         </h1>
+        </div>
+        
       </nav>
     </header>
 
     <section id="homeScreen" class="visible">
       <div id ="line">
         <h2>Create new tournament<h2>
-        Tournament Name:
+        <h3>Tournament Name:</h3>
         <input type="text" id="tourName" placeholder="Tourney Name"><br>
-        Start Tourney When Max Players Hit?
+        <label for = "runMax">Start Tourney When Max Players Hit?</label>
       
-        <input type="checkbox" id="runMax"><br>
+        <input type="checkbox" id="runMax" name="runMax"><br>
         
       
         
-        Number of Players needed to start:
+       <label> Number of Players needed to start:</label>
         <select id="numPlayers">
-          <option value=""></option>
+          <option value="">Select</option>
           <option value="4">4</option>
           <option value="8">8</option>
           <option value="16">16</option>
@@ -57,7 +59,7 @@
         </div>
       </div>
     
-   <hr width="1000%"> </hr>
+   <hr> 
       <div>
         <h2>In Progress Tournaments</h2>
         <div class="listdiv">
@@ -66,12 +68,9 @@
         </div>
       </div>
     </div>
-    </div>
+   
      <div class="verticalLine"></div>
-<style>.verticalLine{
-  height:2000px; width:1px; background:#000; margin-left:900px;
-}
-</style>
+
     </section>
     <section id="joinTournamentScreen" class="hidden">
       <div id="tNamePlace"></div>
