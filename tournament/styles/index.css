@@ -58,3 +58,6 @@ body{
    margin-left:850px;
  
 }
+.verticalLine{
+  height:2000px; width:1px; background:#000; margin-left:900px;
+}
