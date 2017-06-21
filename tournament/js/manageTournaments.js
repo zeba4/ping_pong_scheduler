@@ -229,7 +229,7 @@ function viewBracket(key){
 
 $(function() {
 
-  $( "#datepicker" ).datepicker({ minDate: 0});
+  $( "#datepicker" ).datepicker({ minDate: 1});
 });
 
 function startTimer(){
