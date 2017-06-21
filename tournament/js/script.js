@@ -135,14 +135,18 @@ function createTournament(){
 }
 
 function joinTournament(){
-    if(document.getElementById("name").value != "")
+  try{
+    if(document.getElementById("playerName").value != "")
     {
       var newPostRef = database.ref(details+tournament+ currentJoinKey + '/' + players).push();
       newPostRef.set({
-        name: document.getElementById("name").value
+        name: document.getElementById("playerName").value
       });
-      document.getElementById("name").value = "";
+      document.getElementById("playerName").value = "";
     }
+  }catch(err){
+    console.log(err)
+  }
 }
 
 // Transition Code
