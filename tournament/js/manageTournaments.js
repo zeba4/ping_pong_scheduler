@@ -28,7 +28,7 @@ const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketSc
 var updatePlayersRef;
 
 
-var screenState = 1;
+var screenState = "home";
 var countDownDate;
 var currentJoinKey;
 var currentBracketKey;
@@ -159,14 +159,14 @@ function joinTournament(){
 // Transition Code
 
 function transition(screen){
-  // 1 is home page, 2 is join screen, 3 is the Bracket screen
-  if(screen == 1)
+  // home is home page, join is join screen, bracket is the Bracket screen
+  if(screen == "home")
   {
     changeClassName(screenSections,["visible","hidden","hidden"]);
     clearDocument(["signedUp","startTime"]);
-  }else if(screen == 2){
+  }else if(screen == "join"){
     changeClassName(screenSections,["hidden","visible","hidden"]);
-  }else if(screen == 3){
+  }else if(screen == "bracket"){
     changeClassName(screenSections,["hidden","hidden","visible"]);
   }
 }
@@ -191,16 +191,16 @@ function clearDocument(ids){
 }
 
 function homePage(){
-  if(screenState == 2)
+  if(screenState == "join")
   {
     killCheckForNewPlayers();
   }
-  if(screenState == 3)
+  if(screenState == "bracket")
   {
     saveTournamentState();
   }
   killTimer();
-  screenState = 1;
+  screenState = "home";
   transition(screenState);
 }
 
@@ -211,7 +211,7 @@ function killCheckForNewPlayers(){
 
 
 function viewTour(key){
-  screenState = 2;
+  screenState = "join";
   currentJoinKey = key;
   transition(screenState);
   loadTournament(key);
@@ -220,7 +220,7 @@ function viewTour(key){
 
 function viewBracket(key){
   currentBracketKey = key;
-  screenState = 3;
+  screenState = "bracket";
   transition(screenState);
   loadBracket(key);
 }
