@@ -1,111 +1,121 @@
 <!DOCTYPE HTML>
 <html>
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">    
-  <head>
-    <meta charset="utf-8">
-    <title>Challenger Home</title>
-  </head>
-  <body>
-    <header>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-      <nav>
-      
-        <div id="cursor">
-            
-          <h1>
-        <a  onClick="homePage()">Ping Pong Tournament Home</a>
-        <hr>
-      
-        </h1>
-        </div>
-        
-      </nav>
-    </header>
+    <head>
+        <meta charset="utf-8">
+        <title>Challenger Home</title>
+    </head>
 
-    <section id="homeScreen" class="visible">
-      <div class ="newTournament vborder" >
-        <h2>Create new tournament<h2>
-        <h3>Tournament Name:</h3>
-        <input type="text" id="tourName" placeholder="Tourney Name"><br>
-        <label for = "runMax">Start Tourney When Max Players Hit?</label>
-      
-        <input type="checkbox" id="runMax" name="runMax"><br>
-        
-      
-        
-       <label for ="numPlayers"> Number of Players needed to start:</label>
-        <select id="numPlayers" name ="numPlayers">
-          <option value="">Select</option>
-          <option value="4">4</option>
-          <option value="8">8</option>
-          <option value="16">16</option>
-          <option value="32">32</option>
-          <div id="cursor">
-        </select><br>
-        <label for ="datepicker">Tourney Start Date:</label>
-        
-        <input type="text" id="datepicker" name = "datepicker"> <br>
-        
-        <input type="button" onClick="createTournament()" value="Generate it!">
-        </div>
+    <body>
+        <header>
 
-        
-      
-      <div id="openTournaments">
-      <div>
-        
-        <h2 class = "nameOpen">Open Tournaments</h2>
-        <div class="listDiv">
-          <ul id="listOpen">
-          </ul>
-          
-        </div>
-      </div>
-    </div>
-   
-      <div id ="inProgress">
-        <h2 >In Progress Tournaments</h2>
-        <div class="listdiv">
-          <ul id="listClosed">
-          </ul>
-        </div>
-      </div>
-    
+            <nav>
 
-    </section>
-    
-    <section id="joinTournamentScreen" class="hidden">
-      <div id="joinScreen">
-      <div id="tNamePlace"></div>
-      <div id="playerList"> <p> Participants: </p> </div>
-      <div id="signedUp"></div>
-      <div id="startTime"> <p>00d 00h 00m 00s</p></div>
-      <div id="cursor">
-      <input type="text" placeholder="Put Name Here" id="playerName">
-      <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()">
-      </div>
-    </section>
-    <section id="tournamentBracketScreen" class="hidden">
+                <div id="cursor">
 
-    <div id="bracketDiv" class="bracketFrame">
+                    <h1>
+                        <a onClick="homePage()">Ping Pong Tournament Home</a>
+                        <hr>
+
+                    </h1>
+                </div>
+
+            </nav>
+        </header>
+
+        <section id="homeScreen" class="visible">
+            <div class="newTournament vborder">
+                <h2>Create new tournament
+                    <h2>
+                        <h3>Tournament Name:</h3>
+                        <input type="text" id="tourName" placeholder="Tourney Name">
+                        <br>
+                        <label for="runMax">Start Tourney When Max Players Hit?</label>
+
+                        <input type="checkbox" id="runMax" name="runMax">
+                        <br>
 
 
-  </div>
-    </div>
-    </section>
-    
-    
-    <footer>
-    </footer>
-    <link rel="stylesheet" type="text/css" href="styles/index.css">
-    <link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.12/go.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-    <script src="js/goJSIntegration.js"></script>
-    <script src="js/manageTournaments.js"></script>
-   
-  </body>
+                        <label for="numPlayers"> Number of Players needed to start:</label>
+                        <select id="numPlayers" name="numPlayers">
+                            <option value="">Select</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="16">16</option>
+                            <option value="32">32</option>
+                            <div id="cursor">
+                        </select>
+                        <br>
+                        <label for="datepicker">Tourney Start Date:</label>
+
+                        <input type="text" id="datepicker" name="datepicker">
+                        <br>
+
+                        <input type="button" onClick="createTournament()" value="Generate it!">
+                        </div>
+
+
+                        <div id="openTournaments">
+                            <div>
+
+                                <h2 class="nameOpen">Open Tournaments</h2>
+                                <div class="listDiv">
+                                    <ul id="listOpen">
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="inProgress">
+                            <h2>In Progress Tournaments</h2>
+                            <div class="listdiv">
+                                <ul id="listClosed">
+                                </ul>
+                            </div>
+                        </div>
+
+
+        </section>
+
+        <section id="joinTournamentScreen" class="hidden">
+            <div id="joinScreen">
+                <div id="tNamePlace"></div>
+                <div id="playerList">
+                    <p> Participants: </p>
+                </div>
+                <div id="signedUp"></div>
+                <div id="startTime">
+                    <p>00d 00h 00m 00s</p>
+                </div>
+                <div id="cursor">
+                    <input type="text" placeholder="Put Name Here" id="playerName">
+                    <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()">
+                </div>
+        </section>
+        <section id="tournamentBracketScreen" class="hidden">
+
+            <div id="bracketDiv" class="bracketFrame">
+
+
+            </div>
+            </div>
+        </section>
+
+
+        <footer>
+        </footer>
+        <link rel="stylesheet" type="text/css" href="styles/index.css">
+        <link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.12/go.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+        <script src="js/goJSIntegration.js"></script>
+        <script src="js/manageTournaments.js"></script>
+
+    </body>
+
 </html>

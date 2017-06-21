@@ -1,103 +1,91 @@
-body{
-  overflow:hidden;
-  
- 
+body {
+    overflow: hidden;
 }
 
-.hidden{
-    display:hidden;
-    visibility:hidden;
-    opacity:0;
+.hidden {
+    display: hidden;
+    visibility: hidden;
+    opacity: 0;
     position: absolute;
     margin-top: -100px;
     margin-left: -100px;
 }
-.visible{
+
+.visible {
     display: auto;
-    visibility:visible;
-    opacity:1;
+    visibility: visible;
+    opacity: 1;
 }
 
-.listDiv{
-    overflow:auto;
+.listDiv {
+    overflow: auto;
     height: 300px;
-    display:inline-block;
+    display: inline-block;
     width: 100%;
-     
 }
 
-.h2List{
-    margin-bottom:0px;
+.h2List {
+    margin-bottom: 0px;
 }
 
-.bracketFrame{
+.bracketFrame {
     border: solid 1px black;
     background: #4D4D4D;
-    width:700px;
-    height:600px;
+    width: 700px;
+    height: 600px;
 }
-#cursor{
-    cursor:pointer;
+
+#cursor {
+    cursor: pointer;
     text-align: center;
 }
 
-.newTournament{
- float:left; 
- width:49.9%;
-  height:1000px;
- 
-  text-align: center;
-    display:block;
+.newTournament {
+    float: left;
+    width: 49.9%;
+    height: 1000px;
+    text-align: center;
+    display: block;
     padding-top: 15%;
-
-
 }
-#openTournaments{
-  
-   
-   float:left;
-width:50%;
-  height:450px;
-  border-bottom: 1px solid black;
-   display:flex;
+
+#openTournaments {
+    float: left;
+    width: 50%;
+    height: 450px;
+    border-bottom: 1px solid black;
+    display: flex;
     align-items: center;
     justify-content: center;
-    
-
 }
 
-#inProgress{
-
-    float:left;
-  width:50%;
-  height:450px;
-  
-  text-align: center;
-    position:relative;
-
-
+#inProgress {
+    float: left;
+    width: 50%;
+    height: 450px;
+    text-align: center;
+    position: relative;
 }
+
 .vborder {
-    border-right:1px solid black;
-   
+    border-right: 1px solid black;
 }
-#listClosed
-{
-    text-align:center;
-     position: absolute;
+
+#listClosed {
+    text-align: center;
+    position: absolute;
     margin-left: 33%;
 }
 
-#joinScreen{
+#joinScreen {
     overflow: auto;
-    position:fixed;
-    border: double; 
-    margin-left:37%;
-    margin-top:10%; 
-    width:500px;
+    position: fixed;
+    border: double;
+    margin-left: 37%;
+    margin-top: 10%;
+    width: 500px;
     text-align: center;
-    font-size:50px;
+    font-size: 50px;
 }
- h3{
-     
- }
+
+h3 {}
