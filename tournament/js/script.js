@@ -51,7 +51,7 @@ var timerVariable;
 
 loadQuery.once('value', function(snapshot){
   if(snapshot.val() != null){
-    var keysOfTournaments = Object.keys(snapshot.val())
+    var keysOfTournaments = Object.keys(snapshot.val());
     var pos = 0;
     snapshot.forEach(function(data){
       if(hasStarted(data.val(),keysOfTournaments[pos]) == false)
@@ -111,7 +111,7 @@ function updateList(name){
 }
 
 function createTournament(){
-  var tourValues = [document.getElementById("tourName").value,document.getElementById("datepicker").value,document.getElementById("numPlayers").value,document.getElementById("runMax").checked]
+  var tourValues = [document.getElementById("tourName").value,document.getElementById("datepicker").value,document.getElementById("numPlayers").value,document.getElementById("runMax").checked];
 
   if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
   {
