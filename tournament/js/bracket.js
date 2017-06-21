@@ -1,4 +1,4 @@
-    var anActualVariableName = go.GraphObject.make;  // for conciseness in defining templates
+           var anActualVariableName = go.GraphObject.make;  // for conciseness in defining templates
     myDiagram =
       anActualVariableName(go.Diagram, "myDiagramDiv",  // create a Diagram for the DIV HTML element
         {
@@ -101,6 +101,7 @@
     }
     function makeModel(players) {
       var model = new go.TreeModel(createPairs(players));
+      console.log("Below is the creation of  Tournament JSON object with list of signed up players")
       console.log(createPairs(players))
       checkWinner(model)
       myDiagram.model = model;

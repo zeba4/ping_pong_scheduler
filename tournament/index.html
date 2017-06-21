@@ -19,11 +19,8 @@
       </nav>
     </header>
 
-    <section id="screen1" class="visible">
-
-     <div id="line">
- 
-        <div id="newTournament">
+    <section id="homeScreen" class="visible">
+      <div id ="line">
         <h2>Create new tournament<h2>
         Tournament Name:
         <input type="text" id="tourName" placeholder="Tourney Name"><br>
@@ -76,20 +73,21 @@
 }
 </style>
     </section>
-    <section id="screen2" class="hidden">
+    <section id="joinTournamentScreen" class="hidden">
       <div id="tNamePlace"></div>
       <div id="playerList">Participants:</div>
       <div id="signedUp"></div>
       <div id="startTime">00d 00h 00m 00s</div>
-      <input type="text" placeholder="Put Name Here" id="name">
       <div id="cursor">
+
+      <input type="text" placeholder="Put Name Here" id="playerName">
       <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()">
       </div>
     </section>
-    <section id="screen3" class="hidden">
-	  <div id="myDiagramDiv" class="bracketFrame">
+    <section id="tournamentBracketScreen" class="hidden">
+    <div id="myDiagramDiv" class="bracketFrame">
 
-	</div>
+  </div>
     </section>
     <footer>
     </footer>

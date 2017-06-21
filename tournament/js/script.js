@@ -14,13 +14,19 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var database = firebase.database();
-var overallRef = database.ref("details/")
-var tournamentRef = database.ref("details/tournament");
-var loadQuery = tournamentRef.orderByChild('date');
-var playersRef = database.ref("details/tournament");
+const database = firebase.database();
+const details = "details/";
+const tournament = "tournament/";
+const players = "players/";
+const overallRef = database.ref(details);
+const tournamentRef = database.ref(details + tournament);
+const loadQuery = tournamentRef.orderByChild('date');
+const updateTournamentRef = database.ref(details+tournament).limitToLast(1);
+const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
+
+
 var updatePlayersRef;
-var updateTournamentRef = database.ref("details/tournament").limitToLast(1);
+
 
 var screenState = 1;
 var countDownDate;
@@ -50,27 +56,31 @@ loadQuery.once('value', function(snapshot){
     snapshot.forEach(function(data){
       if(hasStarted(data.val(),keysOfTournaments[pos]) == false)
       {
-        updateOpenTour(data.val().name, data.val().date, keysOfTournaments[pos])
+        updateOpenTour(data.val().name, data.val().date, keysOfTournaments[pos]);
       }else{
-        updateClosedTour(data.val().name, keysOfTournaments[pos])
+        updateClosedTour(data.val().name, keysOfTournaments[pos]);
       }
       pos++;
     });
+    startUpdate();
   }
 });
 
-updateTournamentRef.on('child_added', function(snapshot){
-
-  checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key)
-});
+function startUpdate(){
+  updateTournamentRef.on('child_added', function(snapshot){
+    checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key);
+  });
+}
 
 function checkForDuplicates(name, date, key){
-  if(document.getElementById(key) != null || undefined)
+  if(document.getElementById(key) == null)
+  {
     updateOpenTour(name, date,key);
+  }
 }
 
 function checkForNewPlayers(key){
-  updatePlayersRef = database.ref("details/tournament/" + key + "/players");
+  updatePlayersRef = database.ref(details+tournament + key +"/"+players);
   updatePlayersRef.on('child_added', function(snapshot) {
     updateList(snapshot.val().name);
   });
@@ -80,15 +90,12 @@ function checkForNewPlayers(key){
 
 function loadTournament(key){
   overallRef.once('value').then(function(snapshot) {
-    // The Promise was "fulfilled" (it succeeded).
-    try{
+    // The Promise was "fulfilled" (it succeeded)
       displayTournament(snapshot.val(),key);
-    }catch(err){
-      console.log(err)
-    }
   }, function(error) {
     // The Promise was rejected.
     console.error(error);
+    console.log("Failed to load tournament data")
   });
 }
 
@@ -100,40 +107,44 @@ function displayTournament(data, objKey){
 
 function updateList(name){
   
-  document.getElementById("signedUp").innerHTML +=  name + "<br>"
+  document.getElementById("signedUp").innerHTML +=  name + "<br>";
 }
 
 function createTournament(){
-  var tName = document.getElementById("tourName").value
-  var tDate = document.getElementById("datepicker").value
-  var tStart = document.getElementById("runMax").checked
-  var tMax = document.getElementById("numPlayers").value
+  var tourValues = [document.getElementById("tourName").value,document.getElementById("datepicker").value,document.getElementById("numPlayers").value,document.getElementById("runMax").checked]
 
-  if(tMax && tDate && tName != "" || null || undefined )
+  if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
   {
-    var newPostRef = tournamentRef.push()
+    var newPostRef = tournamentRef.push();
     newPostRef.set({
-      name: tName,
-      date: tDate,
-      maxPlayers: tMax,
-      startOnMax: tStart,
-      tourString: ":)"
-
+      name: tourValues[0],
+      date: tourValues[1],
+      maxPlayers: tourValues[2],
+      startOnMax: tourValues[3],
+      tourString: ""
     });
-    console.log("success")
+    clearDocument(["tourName","datepicker"])
+    console.log("success");
   }else {
-    console.log("failure")
+    console.log("failure");
   }
 }
 
+
+
 function joinTournament(){
-    if(document.getElementById("name").value != "")
+  try{
+    if(document.getElementById("playerName").value != "")
     {
-      var newPostRef = database.ref('details/tournament/' + currentJoinKey + '/players').push();
+      var newPostRef = database.ref(details+tournament+ currentJoinKey + '/' + players).push();
       newPostRef.set({
-        name: document.getElementById("name").value
+        name: document.getElementById("playerName").value
       });
+      document.getElementById("playerName").value = "";
     }
+  }catch(err){
+    console.log(err)
+  }
 }
 
 // Transition Code
@@ -142,34 +153,45 @@ function transition(screen){
   // 1 is home page, 2 is join screen, 3 is the Bracket screen
   if(screen == 1)
   {
-    document.getElementById("screen1").className = "visible"
-    document.getElementById("screen2").className = "hidden"
-    document.getElementById("screen3").className = 'hidden'
-    document.getElementById("signedUp").innerHTML = ""
-    document.getElementById("startTime").innerHTML = "00d 00h 00m 00s"
+    changeClassName(screenSections,["visible","hidden","hidden"]);
+    clearDocument(["signedUp","startTime"]);
   }else if(screen == 2){
-    document.getElementById("screen1").className = "hidden"
-    document.getElementById("screen2").className = "visible"
-    document.getElementById("screen3").className = 'hidden'
+    changeClassName(screenSections,["hidden","visible","hidden"]);
   }else if(screen == 3){
-    document.getElementById("screen1").className = "hidden"
-    document.getElementById("screen2").className = "hidden"
-    document.getElementById("screen3").className = "visible"
+    changeClassName(screenSections,["hidden","hidden","visible"]);
+  }
+}
+
+function changeClassName(ids,state){
+  for(var i = 0; i<state.length;i++){
+    document.getElementById(ids[i]).className = state[i]
+  }
+}
+
+function clearDocument(ids){
+  for(var i = 0; i<ids.length;i++){
+    if(ids[i] == "startTime")
+    {
+      document.getElementById(ids[i]).innerHTML = "00d 00h 00m 00s";
+    }else{
+      document.getElementById(ids[i]).innerHTML = "";
+    }
+    
   }
 }
 
 function homePage(){
   if(screenState == 2)
   {
-    killCheckForNewPlayers()
+    killCheckForNewPlayers();
   }
   if(screenState == 3)
   {
     saveTournamentState();
   }
-  killTimer()
-  screenState = 1
-  transition(screenState)
+  killTimer();
+  screenState = 1;
+  transition(screenState);
 }
 
 function killCheckForNewPlayers(){
@@ -187,7 +209,7 @@ function viewTour(key){
 }
 
 function viewBracket(key){
-  currentBracketKey = key
+  currentBracketKey = key;
   screenState = 3;
   transition(screenState);
   loadBracket(key);
@@ -218,7 +240,7 @@ function startTimer(){
 
 function killTimer(){
 
-  clearTimeout(timerVariable)
+  clearTimeout(timerVariable);
 }
 
 function timeDiff(data){
@@ -227,20 +249,20 @@ function timeDiff(data){
   now.setHours(0,0,0,0);
   if (selectedDate < now) {
     // selected date is in the past
-    return true
+    return true;
   }else{
-    return false
+    return false;
   }
-}
+};
 
 // Saving the State of the tournament
 
 function saveTournamentState(){
     var dataT = myDiagram.model.toJSON();
-    var updateStartRef = database.ref('details/tournament/' + currentBracketKey);
+    var updateStartRef = database.ref(details+tournament+ currentBracketKey);
     var updates = {};
     updates['/tourString'] = dataT;
-    updateStartRef.update(updates)
+    updateStartRef.update(updates);
 }
 
 // Tournament has started code
@@ -248,9 +270,9 @@ function saveTournamentState(){
 function hasStarted(data, key,override){
     if(timeDiff(data.date) != false)
     {
-      if(data.tourString == ":)")
+      if(data.tourString == "")
       {
-        generateBracket(data,key)
+        generateBracket(data,key);
       }
       return true;
     }
@@ -260,24 +282,25 @@ function hasStarted(data, key,override){
 function generateBracket(data,key){
   currentBracketKey = key;
   var playerArray = [];
-  var tempRef = database.ref("details/tournament/" + key + "/players")
+  var tempRef = database.ref("details/tournament/" + key + "/" + players)
   tempRef.once('value').then(function(snapshot) {
     snapshot.forEach(function(data1){
-        playerArray.push(data1.val().name)
+        playerArray.push(data1.val().name);
     });
-      makeModel(playerArray)
-      startTournament(myDiagram.model.toJSON(),data,key)
+      makeModel(playerArray);
+      startTournament(myDiagram.model.toJSON(),data,key);
       }, function(error) {
     // The Promise was rejected.
     console.error(error);
+    console.log("Failed to load list of players")
   });
 }
 
 function startTournament(tString,data, key){
-      var updateStartRef = database.ref('details/tournament/' + key);
+      var updateStartRef = database.ref(details+tournament + key);
       var updates = {};
       updates['/tourString'] = tString;
-      updateStartRef.update(updates)
+      updateStartRef.update(updates);
 }
 
 function loadBracket(key){
@@ -291,12 +314,13 @@ function loadBracket(key){
   }, function(error) {
     // The Promise was rejected.
     console.error(error);
+    console.log("Tournament failed to initialize")
   });
 }
 
 function displayBracket(dataString){
-  var bracketString = JSON.parse(dataString)
-  updateModel(bracketString.nodeDataArray)
+  var bracketString = JSON.parse(dataString);
+  updateModel(bracketString.nodeDataArray);
 }
 
 function updateOpenTour(name,date,key){
