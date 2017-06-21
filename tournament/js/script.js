@@ -62,11 +62,11 @@ loadQuery.once('value', function(snapshot){
       }
       pos++;
     });
-    startUpdate();
+    listenForNewTournaments();
   }
 });
 
-function startUpdate(){
+function listenForNewTournaments(){
   updateTournamentRef.on('child_added', function(snapshot){
     checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key);
   });
