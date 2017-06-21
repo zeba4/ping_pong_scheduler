@@ -15,13 +15,13 @@ var config = {
 firebase.initializeApp(config);
 
 const database = firebase.database();
-const details = "details/";
-const tournament = "tournament/";
-const players = "players/";
-const overallRef = database.ref(details);
-const tournamentRef = database.ref(details + tournament);
+const details_firebase_route = "details/";
+const tournament_firebase_route = "tournament/";
+const players_firebase_route = "players/";
+const overallRef = database.ref(details_firebase_route);
+const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
 const loadQuery = tournamentRef.orderByChild('date');
-const updateTournamentRef = database.ref(details+tournament).limitToLast(1);
+const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
 const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
 
 
@@ -80,7 +80,7 @@ function checkForDuplicates(name, date, key){
 }
 
 function checkForNewPlayers(key){
-  updatePlayersRef = database.ref(details+tournament + key +"/"+players);
+  updatePlayersRef = database.ref(details_firebase_route+tournament_firebase_route + key +"/"+players_firebase_route);
   updatePlayersRef.on('child_added', function(snapshot) {
     updateList(snapshot.val().name);
   });
@@ -136,7 +136,7 @@ function joinTournament(){
   try{
     if(document.getElementById("playerName").value != "")
     {
-      var newPostRef = database.ref(details+tournament+ currentJoinKey + '/' + players).push();
+      var newPostRef = database.ref(details_firebase_route+tournament_firebase_route+ currentJoinKey + '/' + players_firebase_route).push();
       newPostRef.set({
         name: document.getElementById("playerName").value
       });
@@ -259,7 +259,7 @@ function timeDiff(data){
 
 function saveTournamentState(){
     var dataT = myDiagram.model.toJSON();
-    var updateStartRef = database.ref(details+tournament+ currentBracketKey);
+    var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route+ currentBracketKey);
     var updates = {};
     updates['/tourString'] = dataT;
     updateStartRef.update(updates);
@@ -282,7 +282,7 @@ function hasStarted(data, key,override){
 function generateBracket(data,key){
   currentBracketKey = key;
   var playerArray = [];
-  var tempRef = database.ref("details/tournament/" + key + "/" + players)
+  var tempRef = database.ref(details_firebase_route + tournament_firebase_route + key + "/" + players_firebase_route)
   tempRef.once('value').then(function(snapshot) {
     snapshot.forEach(function(data1){
         playerArray.push(data1.val().name);
@@ -297,7 +297,7 @@ function generateBracket(data,key){
 }
 
 function startTournament(tString,data, key){
-      var updateStartRef = database.ref(details+tournament + key);
+      var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route + key);
       var updates = {};
       updates['/tourString'] = tString;
       updateStartRef.update(updates);
