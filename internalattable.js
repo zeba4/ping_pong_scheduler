@@ -1,10 +1,20 @@
+var config = {
+  apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
+  authDomain: "ping-pong-scheduler-1dd4f.firebaseapp.com",
+  databaseURL: "https://ping-pong-scheduler-1dd4f.firebaseio.com",
+  projectId: "ping-pong-scheduler-1dd4f",
+  storageBucket: "ping-pong-scheduler-1dd4f.appspot.com",
+  messagingSenderId: "290287324381"
+};
+firebase.initializeApp(config);
+
 var onLoad=function(){
    addtodatabase(0,0,0);
 }
 
   var database = firebase.database();
   var timeref =database.ref('timerInfo/');
-  var hour,minutes,secs
+  var hour,minutes
   function addtodatabase(h,m,t){
     database.ref('timerInfo/').set({
     hour: h,
@@ -43,7 +53,7 @@ var onLoad=function(){
     start10()
     hideTimerSections(["button1", "button2","button3","para","select"]);
     showTimerSections(["stop","firstTimer","set1"]);
-    var currentTime=getCurrentTime();
+    getCurrentTime();
     addtodatabase(hour,minutes,10);
     myStop= setTimeout(function(){
       hideTimerSections(["stop", "set1"]);
@@ -56,7 +66,7 @@ var onLoad=function(){
     start20()
     hideTimerSections(["button1","button2", "button3","para","select"]);
     showTimerSections(["stop","set2","secondTimer"]);
-    var currentTime=getCurrentTime();
+    getCurrentTime();
     addtodatabase(hour,minutes,20);
     myStop=setTimeout(function(){
       hideTimerSections(["stop", "set2"]);
@@ -68,7 +78,7 @@ var onLoad=function(){
     start30();
     hideTimerSections(["button1", "button2","button3","para","select"]);
     showTimerSections(["stop","set3","thirdTimer"]);
-    var currentTime=getCurrentTime();
+    getCurrentTime();
     addtodatabase(hour,minutes,30);
     myStop = setTimeout(function(){
       hideTimerSections(["stop", "set3"]);
