@@ -79,7 +79,7 @@ function checkForDuplicates(name, date, key){
   }
 }
 
-function checkForNewPlayers(key){
+function listenForNewPlayers(key){
   updatePlayersRef = database.ref(details_firebase_route+tournament_firebase_route + key +"/"+players_firebase_route);
   updatePlayersRef.on('child_added', function(snapshot) {
     updateList(snapshot.val().name);
@@ -215,7 +215,7 @@ function viewTour(key){
   currentJoinKey = key;
   transition(screenState);
   loadTournament(key);
-  checkForNewPlayers(key);
+  listenForNewPlayers(key);
 }
 
 function viewBracket(key){
