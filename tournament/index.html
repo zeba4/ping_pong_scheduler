@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-      
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">    
   <head>
     <meta charset="utf-8">
     <title>Challenger Home</title>
@@ -13,8 +13,9 @@
         <div id="cursor">
             
           <h1>
-        <a onClick="homePage()">Ping Pong Tournament Home</a>
+        <a  onClick="homePage()">Ping Pong Tournament Home</a>
         <hr>
+      
         </h1>
         </div>
         
@@ -22,7 +23,7 @@
     </header>
 
     <section id="homeScreen" class="visible">
-      <div id ="line">
+      <div class ="newTournament vborder" >
         <h2>Create new tournament<h2>
         <h3>Tournament Name:</h3>
         <input type="text" id="tourName" placeholder="Tourney Name"><br>
@@ -32,8 +33,8 @@
         
       
         
-       <label> Number of Players needed to start:</label>
-        <select id="numPlayers">
+       <label for ="numPlayers"> Number of Players needed to start:</label>
+        <select id="numPlayers" name ="numPlayers">
           <option value="">Select</option>
           <option value="4">4</option>
           <option value="8">8</option>
@@ -41,9 +42,9 @@
           <option value="32">32</option>
           <div id="cursor">
         </select><br>
-        Tourney Start Date:
+        <label for ="datepicker">Tourney Start Date:</label>
         
-        <input type="text" id="datepicker"><br>
+        <input type="text" id="datepicker" name = "datepicker"> <br>
         
         <input type="button" onClick="createTournament()" value="Generate it!">
         </div>
@@ -52,42 +53,45 @@
       
       <div id="openTournaments">
       <div>
-        <h2>Open Tournaments</h2>
+        
+        <h2 class = "nameOpen">Open Tournaments</h2>
         <div class="listDiv">
           <ul id="listOpen">
           </ul>
+          
         </div>
       </div>
-    
-   <hr> 
-      <div>
-        <h2>In Progress Tournaments</h2>
+    </div>
+   
+      <div id ="inProgress">
+        <h2 >In Progress Tournaments</h2>
         <div class="listdiv">
           <ul id="listClosed">
           </ul>
         </div>
       </div>
-    </div>
-   
-     <div class="verticalLine"></div>
+    
 
     </section>
+    
     <section id="joinTournamentScreen" class="hidden">
+      <div id="joinScreen">
       <div id="tNamePlace"></div>
-      <div id="playerList">Participants:</div>
+      <div id="playerList"> <p> Participants: </p> </div>
       <div id="signedUp"></div>
-      <div id="startTime">00d 00h 00m 00s</div>
+      <div id="startTime"> <p>00d 00h 00m 00s</p></div>
       <div id="cursor">
-
       <input type="text" placeholder="Put Name Here" id="playerName">
       <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()">
       </div>
     </section>
     <section id="tournamentBracketScreen" class="hidden">
     <div id="myDiagramDiv" class="bracketFrame">
-
   </div>
+    </div>
     </section>
+    
+    
     <footer>
     </footer>
     <link rel="stylesheet" type="text/css" href="styles/index.css">
