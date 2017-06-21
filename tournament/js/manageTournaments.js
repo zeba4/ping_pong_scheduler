@@ -15,13 +15,13 @@ var config = {
 firebase.initializeApp(config);
 
 const database = firebase.database();
-const details = "details/";
-const tournament = "tournament/";
-const players = "players/";
-const overallRef = database.ref(details);
-const tournamentRef = database.ref(details + tournament);
+const details_firebase_route = "details/";
+const tournament_firebase_route = "tournament/";
+const players_firebase_route = "players/";
+const detailsRef = database.ref(details_firebase_route);
+const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
 const loadQuery = tournamentRef.orderByChild('date');
-const updateTournamentRef = database.ref(details+tournament).limitToLast(1);
+const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
 const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
 
 
@@ -51,7 +51,7 @@ var timerVariable;
 
 loadQuery.once('value', function(snapshot){
   if(snapshot.val() != null){
-    var keysOfTournaments = Object.keys(snapshot.val())
+    var keysOfTournaments = Object.keys(snapshot.val());
     var pos = 0;
     snapshot.forEach(function(data){
       if(hasStarted(data.val(),keysOfTournaments[pos]) == false)
@@ -62,11 +62,11 @@ loadQuery.once('value', function(snapshot){
       }
       pos++;
     });
-    startUpdate();
+    listenForNewTournaments();
   }
 });
 
-function startUpdate(){
+function listenForNewTournaments(){
   updateTournamentRef.on('child_added', function(snapshot){
     checkForDuplicates(snapshot.val().name,snapshot.val().date,snapshot.key);
   });
@@ -79,8 +79,8 @@ function checkForDuplicates(name, date, key){
   }
 }
 
-function checkForNewPlayers(key){
-  updatePlayersRef = database.ref(details+tournament + key +"/"+players);
+function listenForNewPlayers(key){
+  updatePlayersRef = database.ref(details_firebase_route+tournament_firebase_route + key +"/"+players_firebase_route);
   updatePlayersRef.on('child_added', function(snapshot) {
     updateList(snapshot.val().name);
   });
@@ -89,7 +89,7 @@ function checkForNewPlayers(key){
 //Open Tournament Code
 
 function loadTournament(key){
-  overallRef.once('value').then(function(snapshot) {
+  detailsRef.once('value').then(function(snapshot) {
     // The Promise was "fulfilled" (it succeeded)
       displayTournament(snapshot.val(),key);
   }, function(error) {
@@ -111,8 +111,7 @@ function updateList(name){
 }
 
 function createTournament(){
-  var tourValues = [document.getElementById("tourName").value,document.getElementById("datepicker").value,document.getElementById("numPlayers").value,document.getElementById("runMax").checked]
-
+  var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax'])
   if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
   {
     var newPostRef = tournamentRef.push();
@@ -130,13 +129,23 @@ function createTournament(){
   }
 }
 
+function getDivValue(ids){
+  var listOfValues = [];
+  for(let i = 0;i<ids.length;i++)
+  {
+    listOfValues.push(document.getElementById(ids[i]).value);
+  }
+  return listOfValues;
+}
+
+
 
 
 function joinTournament(){
   try{
     if(document.getElementById("playerName").value != "")
     {
-      var newPostRef = database.ref(details+tournament+ currentJoinKey + '/' + players).push();
+      var newPostRef = database.ref(details_firebase_route+tournament_firebase_route+ currentJoinKey + '/' + players_firebase_route).push();
       newPostRef.set({
         name: document.getElementById("playerName").value
       });
@@ -161,6 +170,7 @@ function transition(screen){
     changeClassName(screenSections,["hidden","hidden","visible"]);
   }
 }
+
 
 function changeClassName(ids,state){
   for(var i = 0; i<state.length;i++){
@@ -205,7 +215,7 @@ function viewTour(key){
   currentJoinKey = key;
   transition(screenState);
   loadTournament(key);
-  checkForNewPlayers(key);
+  listenForNewPlayers(key);
 }
 
 function viewBracket(key){
@@ -219,7 +229,7 @@ function viewBracket(key){
 
 $(function() {
 
-  $( "#datepicker" ).datepicker({ minDate: 0});
+  $( "#datepicker" ).datepicker({ minDate: 1});
 });
 
 function startTimer(){
@@ -243,7 +253,7 @@ function killTimer(){
   clearTimeout(timerVariable);
 }
 
-function timeDiff(data){
+function checkPastStartDate(data){
   var selectedDate = new Date(data);
   var now = new Date();
   now.setHours(0,0,0,0);
@@ -259,7 +269,7 @@ function timeDiff(data){
 
 function saveTournamentState(){
     var dataT = myDiagram.model.toJSON();
-    var updateStartRef = database.ref(details+tournament+ currentBracketKey);
+    var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route+ currentBracketKey);
     var updates = {};
     updates['/tourString'] = dataT;
     updateStartRef.update(updates);
@@ -268,7 +278,7 @@ function saveTournamentState(){
 // Tournament has started code
 
 function hasStarted(data, key,override){
-    if(timeDiff(data.date) != false)
+    if(checkPastStartDate(data.date))
     {
       if(data.tourString == "")
       {
@@ -282,7 +292,7 @@ function hasStarted(data, key,override){
 function generateBracket(data,key){
   currentBracketKey = key;
   var playerArray = [];
-  var tempRef = database.ref("details/tournament/" + key + "/" + players)
+  var tempRef = database.ref(details_firebase_route + tournament_firebase_route + key + "/" + players_firebase_route)
   tempRef.once('value').then(function(snapshot) {
     snapshot.forEach(function(data1){
         playerArray.push(data1.val().name);
@@ -297,7 +307,7 @@ function generateBracket(data,key){
 }
 
 function startTournament(tString,data, key){
-      var updateStartRef = database.ref(details+tournament + key);
+      var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route + key);
       var updates = {};
       updates['/tourString'] = tString;
       updateStartRef.update(updates);
