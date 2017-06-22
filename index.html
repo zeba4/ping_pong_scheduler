@@ -22,18 +22,18 @@ var config = {
 firebase.initializeApp(config);
 </script>
 <script>
+  var database = firebase.database();
+  var timeref =database.ref('details/');
+  var hour,minutes,secs
 
 function onLoad(){
    addtodatabase(0,0,0);
 }
 
-  var database = firebase.database();
-  var timeref =database.ref('details/');
-  var hour,minutes,secs
   function addtodatabase(h,m,t){
     database.ref('details/').set({
-    hour: h,
-    min: m,
+    hour: (d.getHours()),
+    min: (d.getMinutes()),
     time:t
   })
   }
