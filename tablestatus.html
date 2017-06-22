@@ -4,78 +4,12 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="master.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-  <script>
-  var config = {
-    apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
-    authDomain: "ping-pong-scheduler-1dd4f.firebaseapp.com",
-    databaseURL: "https://ping-pong-scheduler-1dd4f.firebaseio.com",
-    projectId: "ping-pong-scheduler-1dd4f",
-    storageBucket: "ping-pong-scheduler-1dd4f.appspot.com",
-    messagingSenderId: "290287324381"
-  };
-  firebase.initializeApp(config);
-  </script>
-  <script>
-  
-      var detailsRef = firebase.database().ref("details/")
-      var ref = firebase.database().ref();
-
-      ref.on("value", function(snapshot) {
-         displayNewTime(snapshot.val());
-      }, function (error) {
-         console.log("Error: " + error.code);
-      });
-
-    var displayNewTime= function(data){
-      console.log(data);
-      var h = data.details.hour;
-      var m = data.details.min;
-      var wt = data.details.time;
-      var av =false;
-m = m +wt
- if(m >= 60){
-  h++;
-  m = m % 60;
-}else if(m<60){
-  m= m;
-}if(wt==0){
-  av=true;
-}
-      if(av==false){
-        if (h>12){
-          h=h-12;
-        }else{
-          h=h;
-        }
-        if(m<10){
-          var newTime =h+":0"+m
-          document.getElementById("endTime").innerHTML=newTime;
-           document.getElementById("table").style.display="";
-         
-        }else{
-        var newTime= h+":"+m;
-        document.getElementById("endTime").innerHTML=newTime;
-         document.getElementById("table").style.display="";}
-      }else{
-          document.getElementById("endTime").innerHTML="Table Is Open";
-          document.getElementById("table").style.display="none";
-      }
-    }
-    var updateDivTagContent= function(id,content){
-    var x =document.getElementById(id);
-     x.innerHTML = content;
-  };
-  var createTag= function(){
-    var startTime=displayNewTime();
-    updateDivTagContent("endTime", startTime);
-  }
-  </script>
 </head>
 <body >
-<h1 id="table"> Table Will Be Open At</h1>
-<div id="endTime">
-</div>
+  <h1 id="table"> Table Will Be Open At</h1>
+  <div id="endTime">
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+  <script src="tablestatus.js"></script>
 </body>
 <html>
