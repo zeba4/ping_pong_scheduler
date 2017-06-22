@@ -1,103 +1,143 @@
-body{
-  overflow:hidden;
-  
- 
-}
 
-.hidden{
-    display:hidden;
-    visibility:hidden;
-    opacity:0;
+body{
+    font-size:20px;
+    background: linear-gradient(#99ccff, #00e6e6, #cccccc);  
+    
+    height:2000px; 
+}
+.hidden {
+    display: none;
     position: absolute;
     margin-top: -100px;
     margin-left: -100px;
 }
-.visible{
-    display: auto;
-    visibility:visible;
-    opacity:1;
+
+.visible {
+    display: block;
 }
 
-.listDiv{
-    overflow:auto;
-    height: 300px;
-    display:inline-block;
-    width: 100%;
-list-style: none;
-     
+.listdiv {
+    overflow: auto;
+    height:  calc(50vh - 40px - 80px);
+    width:30%;
+    margin-left:  auto;
+    margin-right:  auto;
 }
 
-.h2List{
-    margin-bottom:0px;
+
+.h2List {
+    margin-bottom: 0px;
 }
 
-.bracketFrame{
+.bracketFrame {
     border: solid 1px black;
     background: #4D4D4D;
-    width:700px;
-    height:600px;
+    width: 700px;
+    height: 600px;
 }
-#cursor{
-    cursor:pointer;
-    text-align: center;
+/* .cursor, */
+a {
+    cursor: pointer;
 }
 
-.newTournament{
- float:left; 
- width:49.9%;
-  height:1000px;
- 
-  text-align: center;
-    display:block;
-    padding-top: 15%;
-
-
+h1{
+  border-bottom:  1px solid black;
+  padding-bottom:  10px;
+  margin-bottom:  0;
 }
-#openTournaments{
-  
+
+h1, h2{
+  text-align:  center;
+}
+#tNamePlace{
+ font-weight:bold;
+}
+#tournamentName{
+  display:  inline-block;
+  margin:  2px;
+   text-align:  center;
+}
+
+h2{
+  margin-bottom:  10px;
+}
+.newTournament {
+    float: left;
+    width: calc(50% - 1px);
    
-   float:left;
-width:50%;
-  height:450px;
-  border-bottom: 1px solid black;
-   display:flex;
-    align-items: center;
-    justify-content: center;
-    
+    height: calc(100vh - 78px);
+    text-align: center;
+   
+   
+}
 
+.newTournament h2{
+  margin-top:  45%;
+}
+
+.right-col{
+  float: left;
+  width: 50%;
+  height: calc(50vh - 40px);
+  border-bottom: 1px solid black;
+ 
+}
+
+
+#participants{
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.vborder {
+    border-right: 1px solid black;
 }
 
 #inProgress{
-
-    float:left;
-  width:50%;
-  height:450px;
-  
-  text-align: center;
-    position:relative;
-
-
-}
-.vborder {
-    border-right:1px solid black;
-   
-}
-#listClosed
-{
-    
-    text-align:center;
-     position: absolute;
-    margin-left: 33%;
+  float: left;
+  width: 50%;
+  height: calc(50vh - 40px);
+  overflow:auto;
+  border-bottom: 1px solid black;
 }
 
-#joinScreen{
+
+
+
+#joinScreen {
     overflow: auto;
-    position:fixed;
-    border: double; 
-    margin-left:37%;
-    margin-top:10%; 
-    width:500px;
+   
+    border: double;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top:10%;
+   
+    width: 50%;
     text-align: center;
-    font-size:50px;
+    font-size: 50px;
+}
+
+#startTime{
+font-weight:bold;
+margin-top:10px;
+}
+
+#enter{
+    width:20em; height: 3em;
+}
+#playerName,#tourName{
+     width:20em; height: 2.5em;
+      display:  inline-block;
+}
+
+
+#datepicker{
+      width:20em; height: 1em;
+}
+#runMax{
+height:1.5em; width: 1.5em;
 }
  
+#numPlayers{
+    height: 2.5em; width: 10em;
+}
