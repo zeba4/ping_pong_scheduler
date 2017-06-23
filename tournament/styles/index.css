@@ -1,7 +1,10 @@
-body {
-   
-}
 
+body{
+    font-size:20px;
+    background: linear-gradient(#99ccff, #00e6e6, #cccccc);  
+    
+    height:2000px; 
+}
 .hidden {
     display: none;
     position: absolute;
@@ -13,13 +16,14 @@ body {
     display: block;
 }
 
-.listDiv {
-    overflow-y: auto;
+.listdiv {
+    overflow: auto;
     height:  calc(50vh - 40px - 80px);
-    width:  50%;
+    width:30%;
     margin-left:  auto;
     margin-right:  auto;
 }
+
 
 .h2List {
     margin-bottom: 0px;
@@ -42,76 +46,98 @@ h1{
   margin-bottom:  0;
 }
 
-h1, h2, h3{
+h1, h2{
   text-align:  center;
 }
 #tNamePlace{
-  color:  red;
+ font-weight:bold;
 }
-h3{
+#tournamentName{
   display:  inline-block;
   margin:  2px;
+   text-align:  center;
 }
 
 h2{
-  margin-bottom:  5px;
+  margin-bottom:  10px;
 }
 .newTournament {
     float: left;
     width: calc(50% - 1px);
-    height: 1000px;
+   
     height: calc(100vh - 78px);
     text-align: center;
-    /* padding-top: 15%; */
+   
+   
 }
 
 .newTournament h2{
-  margin-top:  200px;
+  margin-top:  45%;
 }
 
 .right-col{
   float: left;
   width: 50%;
   height: calc(50vh - 40px);
-  /* height: 450px; */
   border-bottom: 1px solid black;
-/*   display: flex;
-  align-items: center;
-  justify-content: center; */
-}
-#openTournaments {
-    
-    
-    
-    
+ 
 }
 
-#inProgress {
-    /* float: left;
-    width: 50%;
-    height: 450px;
-    text-align: center;
-    position: relative; */
+
+#participants{
+    margin-bottom: 0;
+    margin-top: 10px;
 }
 
 .vborder {
     border-right: 1px solid black;
 }
 
-#listClosed {
-    text-align: center;
-    position: absolute;
-    margin-left: 33%;
+#inProgress{
+  float: left;
+  width: 50%;
+  height: calc(50vh - 40px);
+  overflow:auto;
+  border-bottom: 1px solid black;
 }
+
+
+
 
 #joinScreen {
     overflow: auto;
-    position: fixed;
+   
     border: double;
-    margin-left: 37%;
-    margin-top: 10%;
-    width: 500px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top:10%;
+   
+    width: 50%;
     text-align: center;
     font-size: 50px;
 }
 
+#startTime{
+font-weight:bold;
+margin-top:10px;
+}
+
+#enter{
+    width:20em; height: 3em;
+}
+#playerName,#tourName{
+     width:20em; height: 2.5em;
+      display:  inline-block;
+}
+
+
+#datepicker{
+      width:20em; height: 1em;
+}
+#runMax{
+height:1.5em; width: 1.5em;
+}
+ 
+#numPlayers{
+    height: 2.5em; width: 10em;
+}

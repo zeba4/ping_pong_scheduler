@@ -354,6 +354,7 @@ function updateOpenTour(name,date,key){
     type: 'button',
     id: key,
     text: 'Join',
+    class: 'inlineButton',
     click: function() {
       viewTour(this.id)
     }

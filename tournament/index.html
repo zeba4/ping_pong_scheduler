@@ -26,7 +26,7 @@
         <section id="homeScreen" class="visible">
             <div class="newTournament vborder">
                 <h2>Create new tournament</h2>
-                        <h3>Tournament Name:</h3>
+                        <p>Tournament Name:</p>
                         <input type="text" id="tourName" placeholder="Tourney Name">
                         <br>
                         <label for="runMax">Start Tourney When Max Players Hit?</label>
@@ -58,18 +58,18 @@
                             <div>
 
                                 <h2 class="nameOpen">Open Tournaments</h2>
-                                <div class="listDiv">
-                                    <ul id="listOpen">
+                                <div class="listdiv">
+                                <ul id="listOpen" style = "list-style: none" >
                                     </ul>
 
                                 </div>
                             </div>
                         </div>
 
-                        <div id="inProgress" class="right-col">
+                        <div id="inProgress" >
                             <h2>In Progress Tournaments</h2>
                             <div class="listdiv">
-                                <ul id="listClosed">
+                                <ul id="listClosed" style = "list-style: none" class:"inlineButton">
                                 </ul>
                             </div>
                         </div>
@@ -81,11 +81,11 @@
             <div id="joinScreen">
                 <div id="tNamePlace"></div>
                 <div id="playerList">
-                    <p> Participants: </p>
+                    <p id ="participants"> Participants: </p>
                 </div>
                 <div id="signedUp"></div>
                 <div id="startTime">
-                    <p>00d 00h 00m 00s</p>
+                    <h3 >00d 00h 00m 00s</h3>
                 </div>
                 <div class="cursor">
                     <input type="text" placeholder="Put Name Here" id="playerName">
