@@ -31,7 +31,7 @@ var countDownDate;
 var currentJoinKey;
 var currentBracketKey;
 var timerVariable;
-var tournamentExists; // If this is false, then call listenForNewTournaments after someone creates a tournament
+var tournamentExists;
 var isConnected;
 
 
@@ -47,12 +47,10 @@ connectedRef.on("value", function(snap) {
 // Timeout finish tournaments
 // Create a Winner Screen once bracket is over?
 //Add number of people in tournament next to dynamic list tags
-//Update to firebase on value entered(Tournament State) *Need to verify fix
-//Instant feedback on entering score, creating tournament, joining tournament
+//Instant feedback on entering score
 //Add Start on max players
 //Check to see if internet connection is lost
 //Ask for full name of 1st-3rd place winners at end for storage purposes
-//App doesnt update if there are no tournaments and someone makes a tournament.
 
 
 // Homepage Load Code
@@ -237,10 +235,14 @@ function viewTour(key){
 }
 
 function viewBracket(key){
-  currentBracketKey = key;
-  screenState = "bracket";
-  transition(screenState);
-  loadBracket(key);
+  if(isConnected == true){
+    currentBracketKey = key;
+    screenState = "bracket";
+    transition(screenState);
+    loadBracket(key);
+  }else{
+    alert("You are not connected to the internet.")
+  }
 }
 
 // Time/DOM Code
