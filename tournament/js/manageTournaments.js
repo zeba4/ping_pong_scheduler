@@ -23,28 +23,34 @@ const tournamentRef = database.ref(details_firebase_route + tournament_firebase_
 const loadQuery = tournamentRef.orderByChild('date');
 const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
 const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
-
+const connectedRef = database.ref(".info/connected");
 
 var updatePlayersRef;
-
-
 var screenState = "home";
 var countDownDate;
 var currentJoinKey;
 var currentBracketKey;
 var timerVariable;
+var tournamentExists;
+var isConnected;
 
+
+connectedRef.on("value", function(snap) {
+  if (snap.val() === true) {
+    isConnected = true;
+  } else {
+    isConnected = false;
+  }
+});
 
 //TODO:
 // Timeout finish tournaments
 // Create a Winner Screen once bracket is over?
 //Add number of people in tournament next to dynamic list tags
-//Update to firebase on value entered(Tournament State) *Need to verify fix
-//Instant feedback on entering score, creating tournament, joining tournament
+//Instant feedback on entering score
 //Add Start on max players
 //Check to see if internet connection is lost
 //Ask for full name of 1st-3rd place winners at end for storage purposes
-
 
 
 // Homepage Load Code
@@ -63,6 +69,8 @@ loadQuery.once('value', function(snapshot){
       pos++;
     });
     listenForNewTournaments();
+  }else{
+    tournamentExists = false;
   }
 });
 
@@ -111,21 +119,26 @@ function updateList(name){
 }
 
 function createTournament(){
-  var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax'])
-  if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
-  {
-    var newPostRef = tournamentRef.push();
-    newPostRef.set({
-      name: tourValues[0],
-      date: tourValues[1],
-      maxPlayers: tourValues[2],
-      startOnMax: tourValues[3],
-      tourString: ""
-    });
-    clearDocument(["tourName","datepicker"])
-    console.log("success");
-  }else {
-    console.log("failure");
+  if(isConnected == true){
+    listenForNewTournaments();
+    var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax']);
+    if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
+    {
+      var newPostRef = tournamentRef.push();
+      newPostRef.set({
+        name: tourValues[0],
+        date: tourValues[1],
+        maxPlayers: tourValues[2],
+        startOnMax: tourValues[3],
+        tourString: ""
+      });
+      clearDocument(["tourName","datepicker"]);
+      console.log("success");
+    }else {
+      console.log("failure");
+    }
+  }else{
+    alert("Failed, you are not connected to the internet");
   }
 }
 
@@ -143,14 +156,18 @@ function getDivValue(ids){
 
 function joinTournament(){
   try{
-    if(document.getElementById("playerName").value != "")
-    {
-      var newPostRef = database.ref(details_firebase_route+tournament_firebase_route+ currentJoinKey + '/' + players_firebase_route).push();
-      newPostRef.set({
-        name: document.getElementById("playerName").value
-      });
-      document.getElementById("playerName").value = "";
-    }
+    if(isConnected == true){
+      if(document.getElementById("playerName").value != "")
+      {
+        var newPostRef = database.ref(details_firebase_route+tournament_firebase_route+ currentJoinKey + '/' + players_firebase_route).push();
+        newPostRef.set({
+          name: document.getElementById("playerName").value
+        });
+        document.getElementById("playerName").value = "";
+      }
+    }else{
+    alert("Failed, you are not connected to the internet");
+  }
   }catch(err){
     console.log(err)
   }
@@ -186,7 +203,6 @@ function clearDocument(ids){
     }else{
       document.getElementById(ids[i]).innerHTML = "";
     }
-    
   }
 }
 
@@ -219,10 +235,14 @@ function viewTour(key){
 }
 
 function viewBracket(key){
-  currentBracketKey = key;
-  screenState = "bracket";
-  transition(screenState);
-  loadBracket(key);
+  if(isConnected == true){
+    currentBracketKey = key;
+    screenState = "bracket";
+    transition(screenState);
+    loadBracket(key);
+  }else{
+    alert("You are not connected to the internet.")
+  }
 }
 
 // Time/DOM Code

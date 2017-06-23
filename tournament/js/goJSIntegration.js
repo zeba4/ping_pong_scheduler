@@ -114,15 +114,20 @@
 
     function checkWinner(model)
     {
-        model.addChangedListener(function(e) {
-        saveTournamentState()
-        if (e.propertyName !== 'score1' && e.propertyName !== 'score2') return;
-        var data = e.object;
-        if (isNaN(data.score1) || isNaN(data.score2)) return;
-        var parent = myDiagram.findNodeForKey(data.parent);
-        if (parent === null) return;
-        var playerName = parseInt(data.score1) > parseInt(data.score2) ? data.player1 : data.player2;
-        if (parseInt(data.score1) === parseInt(data.score2)) playerName = "";
-        myDiagram.model.setDataProperty(parent.data, (data.parentNumber === 0 ? "player1" : "player2"), playerName);
-      });
+        if(isConnected == true){
+          model.addChangedListener(function(e) {
+          saveTournamentState()
+          if (e.propertyName !== 'score1' && e.propertyName !== 'score2') return;
+          var data = e.object;
+          if (isNaN(data.score1) || isNaN(data.score2)) return;
+          var parent = myDiagram.findNodeForKey(data.parent);
+          if (parent === null) return;
+          var playerName = parseInt(data.score1) > parseInt(data.score2) ? data.player1 : data.player2;
+          if (parseInt(data.score1) === parseInt(data.score2)) playerName = "";
+          myDiagram.model.setDataProperty(parent.data, (data.parentNumber === 0 ? "player1" : "player2"), playerName);
+          });
+        }else{
+          alert("You are not connected to the internet!");
+          homePage()
+        }
     }
