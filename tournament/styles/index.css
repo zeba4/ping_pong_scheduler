@@ -3,7 +3,7 @@ body{
     font-size:20px;
     background: linear-gradient(#99ccff, #00e6e6, #cccccc);  
     
-    height:2000px; 
+    height:900px; 
 }
 .hidden {
     display: none;
