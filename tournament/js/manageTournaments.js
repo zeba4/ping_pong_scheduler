@@ -18,6 +18,7 @@ const database = firebase.database();
 const details_firebase_route = "details/";
 const tournament_firebase_route = "tournament/";
 const players_firebase_route = "players/";
+const tournament_string = "tourString";
 const detailsRef = database.ref(details_firebase_route);
 const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
 const loadQuery = tournamentRef.orderByChild('date');
@@ -26,6 +27,7 @@ const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketSc
 const connectedRef = database.ref(".info/connected");
 
 var updatePlayersRef;
+var updateBracketRef;
 var screenState = "home";
 var countDownDate;
 var currentJoinKey;
@@ -47,9 +49,7 @@ connectedRef.on("value", function(snap) {
 // Timeout finish tournaments
 // Create a Winner Screen once bracket is over?
 //Add number of people in tournament next to dynamic list tags
-//Instant feedback on entering score
 //Add Start on max players
-//Check to see if internet connection is lost
 //Ask for full name of 1st-3rd place winners at end for storage purposes
 
 
@@ -73,6 +73,21 @@ loadQuery.once('value', function(snapshot){
     tournamentExists = false;
   }
 });
+
+function listenForCurrentBracketUpdates(key){
+  updateBracketRef = database.ref(details_firebase_route+tournament_firebase_route + key);
+  updateBracketRef.on('child_changed', function(snapshot) {
+    if(myDiagram.model.toJSON() != snapshot.val())
+    {
+      console.log("test");
+      myDiagram.model = go.Model.fromJson(JSON.parse(snapshot.val()));
+    }
+  });
+}
+
+function killListenForCurrentBracketUpdates(){
+  updateBracketRef.off();
+}
 
 function listenForNewTournaments(){
   updateTournamentRef.on('child_added', function(snapshot){
@@ -214,8 +229,10 @@ function homePage(){
   if(screenState == "bracket")
   {
     saveTournamentState();
+    killListenForCurrentBracketUpdates()
   }
   killTimer();
+
   screenState = "home";
   transition(screenState);
 }
@@ -338,7 +355,7 @@ function loadBracket(key){
     snapshot.forEach(function(data){
       if(data.key == key)
       {
-        displayBracket(data.val().tourString);
+        displayBracket(data.val().tourString,key);
       }
     })
   }, function(error) {
@@ -348,9 +365,10 @@ function loadBracket(key){
   });
 }
 
-function displayBracket(dataString){
+function displayBracket(dataString,key){
   var bracketString = JSON.parse(dataString);
   updateModel(bracketString.nodeDataArray);
+  listenForCurrentBracketUpdates(key)
 }
 
 function updateOpenTour(name,date,key){
