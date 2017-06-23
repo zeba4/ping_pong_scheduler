@@ -1,25 +1,16 @@
 
-var totalTime;
+var totalTimeInSeconds;
 var flag=true;
 var designatedStart_time = localStorage.setItem('startTime', designatedStart_time)
 var countSec;
-function start20()
-{
-  totalTime=1200;
-  countSec=setInterval(function(){minuteTimer(totalTime,"2")}, 1000);
+function startTimer(numGames){
+   totalTimeInSeconds = 600*numGames;
+  countSec=setInterval(function()
+    {
+      minuteTimer(totalTimeInSeconds,numGames)
+    }, 1000);
 }
 
-function start10()
-{
-  totalTime = 600;
-  countSec=setInterval(function(){minuteTimer(totalTime,"1")}, 1000);
-}
-
-function start30()
-{
-  totalTime = 1800;
-  countSec=setInterval(function(){minuteTimer(totalTime,"3")}, 1000);
-}
 function minuteTimer(time, uid) //decreses the seconds value
 {
   $("#button1").unbind("click", startTenMinuteTimer);
@@ -52,5 +43,5 @@ if ((time < 0))
    document.getElementById('audio2').play();
    return;
     }
-totalTime=totalTime-1;
+totalTimeInSeconds=totalTimeInSeconds-1;
 }

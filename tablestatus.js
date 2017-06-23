@@ -7,6 +7,10 @@ var config = {
   messagingSenderId: "290287324381"
 };
 firebase.initializeApp(config);
+var updateDivTagContent= function(id,content){
+  var x =document.getElementById(id);
+  x.innerHTML = content;
+};
 
 var database = firebase.database();
 var callData = database.ref("timerInfo/");
@@ -34,21 +38,18 @@ var displayNewTime= function(data){
     }
     if(minutes<10){
       var newTime =hour+":0"+minutes
-      document.getElementById("endTime").innerHTML=newTime;
+      updateDivTagContent();
       document.getElementById("table").style.display="";
     }else{
       var newTime= hour+":"+minutes;
-      document.getElementById("endTime").innerHTML=newTime;
+      updateDivTagContent();
       document.getElementById("table").style.display="";}
     }else{
       document.getElementById("endTime").innerHTML="Table Is Open";
       document.getElementById("table").style.display="none";
     }
   }
-  var updateDivTagContent= function(id,content){
-    var x =document.getElementById(id);
-    x.innerHTML = content;
-  };
+
   var createTag= function(){
     var startTime=displayNewTime();
     updateDivTagContent("endTime", startTime);
