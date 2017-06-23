@@ -71,6 +71,8 @@ loadQuery.once('value', function(snapshot){
       pos++;
     });
     listenForNewTournaments();
+  }else{
+    tournamentExists = false;
   }
 });
 
@@ -120,6 +122,7 @@ function updateList(name){
 
 function createTournament(){
   if(isConnected == true){
+    listenForNewTournaments();
     var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax']);
     if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
     {
