@@ -1,7 +1,7 @@
 
 body{
     font-size:20px;
-    background: linear-gradient(#99ccff, #00e6e6, #cccccc);  
+    background: #99ccff;  
     
     height:900px; 
 }
@@ -19,13 +19,20 @@ body{
 .listdiv {
     overflow: auto;
     height:  calc(50vh - 40px - 80px);
-    width:30%;
+    width:70%;
+    display:inline-block;
     margin-left:  auto;
     margin-right:  auto;
         display: inline-block;
     margin-right: 20px;
 }
+#listOpen{
+    display:inline-block; 
+}
 
+#listClosed{
+    display:inline-block; 
+}
 
 .h2List {
     margin-bottom: 0px;
@@ -37,7 +44,7 @@ body{
     width: 700px;
     height: 600px;
 }
-/* .cursor, */
+
 a {
     cursor: pointer;
 }
@@ -56,7 +63,7 @@ h1, h2{
 }
 #tournamentName{
   display:  inline-block;
- margin-left: 15%;
+ margin-left: 27%;
  margin-top:50px;  
 }
 
@@ -104,21 +111,6 @@ h2{
 }
 
 
-
-
-#joinScreen {
-    overflow: auto;
-   
-    border: solid;
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-top:10%;
-   
-    width: 50%;
-    text-align: center;
-    font-size: 50px;
-}
-
 #startTime{
 font-weight:bold;
 margin-top:10px;
@@ -156,14 +148,41 @@ margin-top:80px;
 }
 #startTourney{
     margin-top:60px;
-    margin-left:15%;
+    margin-left:27%;
 }
 #needToStart{
     margin-top:50px;
-    margin-left:15%;
+    margin-left:27%;
 }
 
 #startDate{
     margin-top:70px;
-    margin-left:15%;
+    margin-left:27%;
+}
+
+#joinScreen {
+    margin-top:5%;
+    text-align: center;
+    font-size: 50px;
+}
+
+#playerList{
+    margin-left:36.5%;
+    font-weight: bold;
+    font-size: 35px;
+}
+#signedUp{
+    margin-left:36.5%;
+    width:20%;
+   overflow: auto;
+    font-size: 30px;
+ 
+}
+#enterButton{
+    margin-left:35%;
+   
+}
+#startTime{
+    margin-left: 60%;
+   
 }
