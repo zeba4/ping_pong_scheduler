@@ -2,8 +2,8 @@ var express = require('express')
 var app = express()
 
 app.get('/health', function (req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({'status': 'up'}))
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify({'status': 'up'}))
 })
 
 app.use(express.static(__dirname))
