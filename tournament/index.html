@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
+ 
     <head>
         <meta charset="utf-8">
         <title>Challenger Home</title>
@@ -15,6 +15,7 @@
                 <div class="cursor">
 
                     <h1>
+                        <img src="ping.gif"  height="60" width="60">
                         <a onClick="homePage()">Ping Pong Tournament Home</a>
 
                     </h1>
@@ -26,7 +27,7 @@
         <section id="homeScreen" class="visible">
             <div class="newTournament vborder">
                 <h2>Create new tournament</h2>
-                        <p>Tournament Name:</p>
+                        <p id = "tournamentName">Tournament Name:</p>
                         <input type="text" id="tourName" placeholder="Tourney Name">
                         <br>
                         <label for="runMax">Start Tourney When Max Players Hit?</label>
