@@ -1,8 +1,8 @@
 
 body{
+    font-family: Helvetica;
     font-size:20px;
     background: #99ccff;  
-    
     height:900px; 
 }
 .hidden {
@@ -11,50 +11,42 @@ body{
     margin-top: -100px;
     margin-left: -100px;
 }
-
 .visible {
     display: block;
 }
-
 .listdiv {
     overflow: auto;
     height:  calc(50vh - 40px - 80px);
     width:70%;
-    display:inline-block;
-    margin-left:  auto;
-    margin-right:  auto;
-        display: inline-block;
+    margin-left:  20%;
+    display: inline-block;
     margin-right: 20px;
 }
-#listOpen{
+#listOpen li{
     display:inline-block; 
+    margin-right:5%; 
 }
-
-#listClosed{
-    display:inline-block; 
+#listClosed li{
+    display:inline-block;
+    margin-right:5%; 
 }
-
 .h2List {
     margin-bottom: 0px;
 }
-
 .bracketFrame {
     border: solid 1px black;
     background: #4D4D4D;
     width: 700px;
     height: 600px;
 }
-
 a {
     cursor: pointer;
 }
-
 h1{
-  border-bottom:  1px solid black;
-  padding-bottom:  10px;
-  margin-bottom:  0;
+    border-bottom:  1px solid black;
+    padding-bottom:  10px;
+    margin-bottom:  0;
 }
-
 h1, h2{
   text-align:  center;
 }
@@ -66,42 +58,31 @@ h1, h2{
  margin-left: 27%;
  margin-top:50px;  
 }
-
 h2{
   margin-bottom:  10px;
 }
 .newTournament {
     float: left;
     width: calc(50% - 1px);
-   
     height: calc(100vh - 78px);
     text-align: left;
-   
-   
 }
-
 .newTournament h2{
   margin-top:  10%;
 }
-
 .right-col{
   float: left;
   width: 50%;
   height: calc(50vh - 40px);
   border-bottom: 1px solid black;
- 
 }
-
-
 #participants{
     margin-bottom: 0;
     margin-top: 10px;
 }
-
 .vborder {
     border-right: 1px solid black;
 }
-
 #inProgress{
   float: left;
   width: 50%;
@@ -109,13 +90,6 @@ h2{
   overflow:auto;
   border-bottom: 1px solid black;
 }
-
-
-#startTime{
-font-weight:bold;
-margin-top:10px;
-}
-
 #enter{
     width:20em; height: 3em;
 }
@@ -123,8 +97,6 @@ margin-top:10px;
      width:20em; height: 2.5em;
       display:  inline-block;
 }
-
-
 #datepicker{
       width:20em; height: 1em;
 }
@@ -132,11 +104,9 @@ margin-top:10px;
 height:1.5em; width: 1.5em;
 
 }
- 
 #numPlayers{
     height: 2.5em; width: 10em;
 }
-
 #generate{
 margin-top:80px;
     width:200px;
@@ -144,7 +114,6 @@ margin-top:80px;
     font-size:20px;
    margin-left:35%;
    margin-right:35%;
-
 }
 #startTourney{
     margin-top:60px;
@@ -154,7 +123,6 @@ margin-top:80px;
     margin-top:50px;
     margin-left:27%;
 }
-
 #startDate{
     margin-top:70px;
     margin-left:27%;
@@ -165,7 +133,6 @@ margin-top:80px;
     text-align: center;
     font-size: 50px;
 }
-
 #playerList{
     margin-left:36.5%;
     font-weight: bold;
@@ -174,15 +141,52 @@ margin-top:80px;
 #signedUp{
     margin-left:36.5%;
     width:20%;
+    height:30%;
    overflow: auto;
     font-size: 30px;
- 
 }
 #enterButton{
     margin-left:35%;
-   
 }
 #startTime{
     margin-left: 60%;
-   
+    font-weight:bold;
+margin-top:10px;
+}
+@media screen and (max-width: 768px){
+#tournamentName{
+  margin-left: 10%;
+}
+#startTourney{
+    margin-left:10%;
+}
+#needToStart{
+    margin-left:10%;
+}
+#startDate{
+    margin-left:10%;
+}
+#generate{
+   margin-left:20%;
+}
+#playerList{
+    margin-left:20%;
+    font-weight: bold;
+    font-size: 35px;
+}
+#signedUp{
+    margin-left:20%;
+    font-size: 30px;
+}
+#enterButton{
+    margin-left:15%;
+}
+.listdiv {
+    overflow: auto;
+    width:100%;
+    margin-left:  0;
+}
+.nameOpen{
+    margin-top: 10%;
+}
 }

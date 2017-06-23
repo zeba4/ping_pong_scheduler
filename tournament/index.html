@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
  
     <head>
@@ -27,8 +28,9 @@
         <section id="homeScreen" class="visible">
             <div class="newTournament vborder">
                 <h2>Create new tournament</h2>
-                        <p id = "tournamentName">Tournament Name:</p>
-                        <input type="text" id="tourName" placeholder="Tourney Name">
+                    
+                        <p id = "tournamentName">Tournament Name: <input type="text" id="tourName" placeholder="Tourney Name"></p>
+                        
                         <br>
                         <div id ="startTourney">
                         <label for="runMax">Start Tourney When Max Players Hit?</label>
@@ -90,13 +92,15 @@
                
                 <div id="tNamePlace">  </div>
                 </div>
-                <div id="startTime">
-                    <!--<h3 > 00d 00h 00m 00s</h3>-->
-                </div>
+                
                 <div id="playerList">
                     
                     <p id ="participants">  Participants: </p>
                     
+                </div>
+
+                <div id="startTime">
+                    <!--<h3 > 00d 00h 00m 00s</h3>-->
                 </div>
                <div id="signedUp"> </div>
                 
