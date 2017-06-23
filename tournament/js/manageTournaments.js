@@ -23,17 +23,25 @@ const tournamentRef = database.ref(details_firebase_route + tournament_firebase_
 const loadQuery = tournamentRef.orderByChild('date');
 const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
 const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
-
+const connectedRef = database.ref(".info/connected");
 
 var updatePlayersRef;
-
-
 var screenState = "home";
 var countDownDate;
 var currentJoinKey;
 var currentBracketKey;
 var timerVariable;
+var tournamentExists; // If this is false, then call listenForNewTournaments after someone creates a tournament
+var isConnected;
 
+
+connectedRef.on("value", function(snap) {
+  if (snap.val() === true) {
+    isConnected = true;
+  } else {
+    isConnected = false;
+  }
+});
 
 //TODO:
 // Timeout finish tournaments
@@ -44,7 +52,7 @@ var timerVariable;
 //Add Start on max players
 //Check to see if internet connection is lost
 //Ask for full name of 1st-3rd place winners at end for storage purposes
-
+//App doesnt update if there are no tournaments and someone makes a tournament.
 
 
 // Homepage Load Code
@@ -111,21 +119,25 @@ function updateList(name){
 }
 
 function createTournament(){
-  var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax'])
-  if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
-  {
-    var newPostRef = tournamentRef.push();
-    newPostRef.set({
-      name: tourValues[0],
-      date: tourValues[1],
-      maxPlayers: tourValues[2],
-      startOnMax: tourValues[3],
-      tourString: ""
-    });
-    clearDocument(["tourName","datepicker"])
-    console.log("success");
-  }else {
-    console.log("failure");
+  if(isConnected == true){
+    var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax']);
+    if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
+    {
+      var newPostRef = tournamentRef.push();
+      newPostRef.set({
+        name: tourValues[0],
+        date: tourValues[1],
+        maxPlayers: tourValues[2],
+        startOnMax: tourValues[3],
+        tourString: ""
+      });
+      clearDocument(["tourName","datepicker"]);
+      console.log("success");
+    }else {
+      console.log("failure");
+    }
+  }else{
+    alert("Failed, you are not connected to the internet");
   }
 }
 
@@ -143,14 +155,18 @@ function getDivValue(ids){
 
 function joinTournament(){
   try{
-    if(document.getElementById("playerName").value != "")
-    {
-      var newPostRef = database.ref(details_firebase_route+tournament_firebase_route+ currentJoinKey + '/' + players_firebase_route).push();
-      newPostRef.set({
-        name: document.getElementById("playerName").value
-      });
-      document.getElementById("playerName").value = "";
-    }
+    if(isConnected == true){
+      if(document.getElementById("playerName").value != "")
+      {
+        var newPostRef = database.ref(details_firebase_route+tournament_firebase_route+ currentJoinKey + '/' + players_firebase_route).push();
+        newPostRef.set({
+          name: document.getElementById("playerName").value
+        });
+        document.getElementById("playerName").value = "";
+      }
+    }else{
+    alert("Failed, you are not connected to the internet");
+  }
   }catch(err){
     console.log(err)
   }
@@ -186,7 +202,6 @@ function clearDocument(ids){
     }else{
       document.getElementById(ids[i]).innerHTML = "";
     }
-    
   }
 }
 
