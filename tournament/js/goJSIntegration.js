@@ -126,6 +126,7 @@
           if (parseInt(data.score1) === parseInt(data.score2)) playerName = "";
           myDiagram.model.setDataProperty(parent.data, (data.parentNumber === 0 ? "player1" : "player2"), playerName);
           });
+          alert("Success")
         }else{
           alert("You are not connected to the internet!");
           homePage()

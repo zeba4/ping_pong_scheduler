@@ -49,7 +49,6 @@ connectedRef.on("value", function(snap) {
 // Timeout finish tournaments
 // Create a Winner Screen once bracket is over?
 //Add number of people in tournament next to dynamic list tags
-//Instant feedback on entering score
 //Add Start on max players
 //Ask for full name of 1st-3rd place winners at end for storage purposes
 
