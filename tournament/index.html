@@ -30,12 +30,14 @@
                         <p id = "tournamentName">Tournament Name:</p>
                         <input type="text" id="tourName" placeholder="Tourney Name">
                         <br>
+                        <div id ="startTourney">
                         <label for="runMax">Start Tourney When Max Players Hit?</label>
 
                         <input type="checkbox" id="runMax" name="runMax">
+                        </div>
                         <br>
 
-
+                        <div id ="needToStart">
                         <label for="numPlayers"> Number of Players needed to start:</label>
                         <select id="numPlayers" name="numPlayers">
                             <option value="">Select</option>
@@ -45,13 +47,16 @@
                             <option value="32">32</option>
                             <div class="cursor">
                         </select>
+                        
                         <br>
+                        </div>
+                        <div id ="startDate">
                         <label for="datepicker">Tourney Start Date:</label>
 
                         <input type="text" id="datepicker" name="datepicker">
                         <br>
-
-                        <input type="button" onClick="createTournament()" value="Generate it!">
+                        </div>
+                        <input type="button" onClick="createTournament()" value="Generate it!" id="generate">
                         </div>
 
 
@@ -61,6 +66,7 @@
                                 <h2 class="nameOpen">Open Tournaments</h2>
                                 <div class="listdiv">
                                 <ul id="listOpen" style = "list-style: none" >
+                                  
                                     </ul>
 
                                 </div>
@@ -90,7 +96,7 @@
                 </div>
                 <div id="signedUp"></div>
                 <div id="startTime">
-                    <h3 > 00d 00h 00m 00s</h3>
+                    <!--<h3 > 00d 00h 00m 00s</h3>-->
                 </div>
                 <div class="cursor">
                     <input type="text" placeholder="Put Name Here" id="playerName">

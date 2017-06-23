@@ -22,6 +22,8 @@ body{
     width:30%;
     margin-left:  auto;
     margin-right:  auto;
+        display: inline-block;
+    margin-right: 20px;
 }
 
 
@@ -54,8 +56,8 @@ h1, h2{
 }
 #tournamentName{
   display:  inline-block;
-  margin:  2px;
-   text-align:  center;
+ margin-left: 15%;
+ margin-top:50px;  
 }
 
 h2{
@@ -66,13 +68,13 @@ h2{
     width: calc(50% - 1px);
    
     height: calc(100vh - 78px);
-    text-align: center;
+    text-align: left;
    
    
 }
 
 .newTournament h2{
-  margin-top:  40%;
+  margin-top:  10%;
 }
 
 .right-col{
@@ -107,7 +109,7 @@ h2{
 #joinScreen {
     overflow: auto;
    
-    border: double;
+    border: solid;
     margin-left: 25%;
     margin-right: 25%;
     margin-top:10%;
@@ -136,8 +138,32 @@ margin-top:10px;
 }
 #runMax{
 height:1.5em; width: 1.5em;
+
 }
  
 #numPlayers{
     height: 2.5em; width: 10em;
+}
+
+#generate{
+margin-top:80px;
+    width:200px;
+    height:40px;
+    font-size:20px;
+   margin-left:35%;
+   margin-right:35%;
+
+}
+#startTourney{
+    margin-top:60px;
+    margin-left:15%;
+}
+#needToStart{
+    margin-top:50px;
+    margin-left:15%;
+}
+
+#startDate{
+    margin-top:70px;
+    margin-left:15%;
 }
