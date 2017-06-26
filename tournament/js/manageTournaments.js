@@ -9,7 +9,7 @@ index.js
     authDomain: "ping-pong-tournament-a18d7.firebaseapp.com",
     databaseURL: "https://ping-pong-tournament-a18d7.firebaseio.com",
     projectId: "ping-pong-tournament-a18d7",
-    storageBucket: "",
+    storageBucket: "ping-pong-tournament-a18d7.appspot.com",
     messagingSenderId: "685269907531"
   };
   firebase.initializeApp(config);
@@ -53,20 +53,19 @@ connectedRef.on("value", function(snap) {
 //Ask for full name of 1st-3rd place winners at end for storage purposes
 
 
+//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event. 
+
 // Homepage Load Code
 
 loadQuery.once('value', function(snapshot){
   if(snapshot.val() != null){
-    var keysOfTournaments = Object.keys(snapshot.val());
-    var pos = 0;
     snapshot.forEach(function(data){
-      if(hasStarted(data.val(),keysOfTournaments[pos]) == false)
+      if(hasStarted(data.val(),data.key) == false)
       {
-        updateOpenTour(data.val().name, data.val().date, keysOfTournaments[pos]);
+        updateOpenTour(data.val().name, data.val().date, data.key);
       }else{
-        updateClosedTour(data.val().name, keysOfTournaments[pos]);
+        updateClosedTour(data.val().name, data.key);
       }
-      pos++;
     });
     listenForNewTournaments();
   }else{
