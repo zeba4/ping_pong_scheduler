@@ -1,3 +1,4 @@
+// Initialize Firebase
 var config = {
   apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
   authDomain: "ping-pong-scheduler-1dd4f.firebaseapp.com",
@@ -15,12 +16,13 @@ var updateDivTagContent= function(id,content){
 var database = firebase.database();
 var callData = database.ref("timerInfo/");
 callData.on("value", function(snapshot) {
- displayNewTime(snapshot.val());
+ display (snapshot.val());
 }, function (error) {
  console.log("Error: " + error.code);
 });
-var displayNewTime= function(data){
+var display= function(data){
   var hour = data.hour;
+  var displayMessage;
   var minutes = data.min;
   var time = data.time;
   var checkforzero =false;
@@ -37,20 +39,19 @@ var displayNewTime= function(data){
       hour=hour;
     }
     if(minutes<10){
-      var newTime =hour+":0"+minutes
-      updateDivTagContent();
+       displayMessage =hour+":0"+minutes
       document.getElementById("table").style.display="";
     }else{
-      var newTime= hour+":"+minutes;
-      updateDivTagContent();
+       displayMessage= hour+":"+minutes;
       document.getElementById("table").style.display="";}
     }else{
-      document.getElementById("endTime").innerHTML="Table Is Open";
       document.getElementById("table").style.display="none";
+      displayMessage="Table Is Open";
     }
+    updateDivTagContent("endTime", displayMessage);
   }
 
   var createTag= function(){
-    var startTime=displayNewTime();
+    var startTime=display();
     updateDivTagContent("endTime", startTime);
   }
