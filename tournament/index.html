@@ -13,59 +13,59 @@
         <header>
 
             <nav>
-
-                <div class="cursor">
-
                     <h1>
-                        <img src="ping.gif"  height="60" width="60">
+                        <img src="ping.gif"  height="60" width="60" />
                         <a onClick="homePage()">Hoffman Ping Pong</a>
-
                     </h1>
-                </div>
-
             </nav>
         </header>
 
         <section id="homeScreen" class="visible">
             <div id ="createNewTournament"> 
-                <h2>Create new tournament</h2>
-                    <div id ="left-col">
-                        <p id = "tournamentName">Tournament Name: <input type="text" id="tourName" placeholder="Tourney Name"></p>
-                        <div id ="maxPlayers">
-                        <br>
-                        
-                        <label for="runMax">Begin When Max Players Hit?</label>
+                    <div class="main-section">
+                        <h2>Create new tournament</h2>
 
-                        <input type="checkbox" id="runMax" name="runMax">
-                        </div>
+                        <div class="left-col">
+                            <p id = "tournamentName">Tournament Name: <input type="text" id="tourName" placeholder="Tourney Name"></p>
+                            <div id ="maxPlayers">
+                            
+                        
+                                <label for="runMax">Begin When Max Players Hit?</label>
+
+                                <input type="checkbox" id="runMax" name="runMax">
+                            </div>
                           <div id = "playerAmount">
-                        <br>
+                      
 
                      
-                        <label for="numPlayers"> Number of Players needed to start:</label>
-                        <select id="numPlayers" name="numPlayers">
-                            <option value="">Select</option>
-                            <option value="4">4</option>
-                            <option value="8">8</option>
-                            <option value="16">16</option>
-                            <option value="32">32</option>
-                            <div class="cursor">
-                        </select>
-                        </div>
-                        <br>
+                                <label for="numPlayers"> Number of Players needed to start:</label>
+                                <select id="numPlayers" name="numPlayers">
+                                    <option value="">Select</option>
+                                    <option value="4">4</option>
+                                    <option value="8">8</option>
+                                    <option value="16">16</option>
+                                    <option value="32">32</option>
+                                </select>
                        
-                        <div id ="startDate">
-                        <label for="datepicker">Tourney Start Date:</label>
+                            <div id ="startDate">
+                                <label for="datepicker">Tourney Start Date:</label>
 
-                        <input type="text" id="datepicker" name="datepicker">
-                        <br>
+                                <input type="text" id="datepicker" name="datepicker">
+                        
+                            </div>
                         </div>
+                    </div><!-- end left column -->
+                    
+                    <div class="right-col">
                         <div id = "generateButton">
-                        <input type="button" onClick="createTournament()" value="Generate it!" id="generate">
-                    </div>
-</div>
+                            <input type="button" onClick="createTournament()" value="Generate it!" id="generate">
+                        </div>
+                    </div><!-- end right column -->
+                </div><!-- end tournament main section -->
 
-                        <div id="openTournaments" class="right-col">
+
+
+                        <div id="openTournaments">
                             <div>
 
                                 <h2 class="nameOpen">Open Tournaments</h2>
