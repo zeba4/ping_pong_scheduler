@@ -1,6 +1,6 @@
 
 
-
+/*  add comments  */
 
 body{
     font-family: "Roboto";
@@ -27,22 +27,15 @@ body{
     font-size:25px;
   
 }
-#listOpen li{
+#listOpen li,
+#listClosed li{
     display:inline-block;
     margin-left:3%; 
     width: calc(100% - 3% - 75px);
     vertical-align: top;
     margin-top:20px;
 }
-    
-}
-#listClosed li{
-   display:inline-block;
-    margin-left:40%; 
-    width: calc(50% - 3% - 75px);
-    vertical-align: top;
-    margin-top:20px;
-}
+
 .h2List {
     margin-bottom: 0px;
 }
@@ -125,12 +118,13 @@ h1,h2{
 
 
 #enter{
-    width:20em; height: 3em;
+    width:49%; 
+    height: 3em;
     color:#fff;
     background-color:#33d6ff;
     font-weight:bold;
     font-size:15px;
-    margin-left:0%;
+    /* margin-left:0%; */
     float:left;
   
 }
@@ -140,16 +134,22 @@ h1,h2{
 }
 
 #playerName{
-    margin-left:50%;
+    /* margin-left:50%; */
    float:left;
+   width:  50%;
   
 }
-#joinRight{
+.joinRight{
     float:left;
+    width:  50%;
+    outline:  1px solid blue;
 }
 
-#joinLeft{
+.joinLeft{
     float:left;
+    width:  50%;
+    outline:  1px solid red;
+
 }
 #datepicker{
       width:20em; height: 1em;
@@ -191,11 +191,12 @@ height:1.5em; width: 1.5em;
     font-size: 35px;
 }
 #signedUp{
-    width:20%;
+    width:70%;
     height:30%;
-    overflow-x: auto;
+    /* overflow-x: auto; */
     font-size: 30px;
-     margin-left:24.5%;
+     /* margin-left:24.5%; */
+     margin:  0 auto;
      /*float:left;*/
 }
 
@@ -221,13 +222,18 @@ height:1.5em; width: 1.5em;
     
     
 }
-.startDateLabel{
-    font-weight:bold;
-    display:inline-block;
+.startDateLabel,
+.startDate{
+    font-size:  smaller;
+    color:  gray;
+/*     display:inline-block; */
+
 
 }
 .startDate{
-    display:inline-block;
+  font-size:  smaller;
+  color:  gray;
+    /* display:inline-block; */
 
 }
 
@@ -250,11 +256,13 @@ button{
 }
 
 #startTime{
+    outline:  1px solid orange;
     font-weight:bold;
     font-size:50px;
-    margin-left:1000px; 
-    margin-top:0%;
-    float:left;
+    /* margin-left:1000px;  */
+    text-align: center;
+    /* margin-top:0%; */
+    /* float:left; */
 }
 
 #enterButton{
@@ -262,6 +270,16 @@ button{
     margin-top:0%;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 968px){
+    .left-col,
+    .right-col{
+      width:  100%;
+      /* float:  none; */
+    }
+
 
 }
+
+
+
+

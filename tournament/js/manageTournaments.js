@@ -382,7 +382,7 @@ function updateOpenTour(name,date,key){
     }
   });
   $button.appendTo('#listOpen');
-  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span> <span class='startDateLabel'>Start Date:</span><span class='startDate'> " + date+ '</span></li><br>')
+  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
 function updateClosedTour(name,key){
