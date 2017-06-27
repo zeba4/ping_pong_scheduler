@@ -130,7 +130,7 @@ function displayTournament(data, objKey){
 
 function updateList(name){
   
-  document.getElementById("signedUp").innerHTML +=  name + "<br>";
+  document.getElementById("signedUp").innerHTML +=  "<li>" + name + "</li>";
 }
 
 function createTournament(){
@@ -372,7 +372,7 @@ function displayBracket(dataString,key){
 }
 
 function updateOpenTour(name,date,key){
-  $("#listOpen").append('<li>' + name + " | Start Dates: " + date+ '</li>')
+  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span> <span class='startDateLabel'>Start Date:</span><span class='startDate'> " + date+ '</span></li>')
   var $button = $('<button/>', {
     type: 'button',
     id: key,
@@ -386,7 +386,6 @@ function updateOpenTour(name,date,key){
 }
 
 function updateClosedTour(name,key){
-  $("#listClosed").append('<li>' + name + '</li>')
   var $button = $('<button/>', {
     type: 'button',
     id: key,
@@ -396,4 +395,5 @@ function updateClosedTour(name,key){
     }
   });
   $button.appendTo('#listClosed');
+  $("#listClosed").append('<li>' + name + '</li><br>')
 }

@@ -1,10 +1,10 @@
 
-
 body{
     font-family: "Roboto";
     font-size:20px;
    background-color:white;
     height:900px; 
+    overflow-y:auto;
   
 }
 .hidden {
@@ -17,32 +17,34 @@ body{
     display: block;
 }
 .listdiv {
-    overflow: auto;
+    overflow-x: auto;
     height:  calc(50vh - 40px - 80px);
     width:70%;
     margin-left:  20%;
-    display: inline-block;
-    margin-right: 20px;
+  
 }
 #listOpen li{
-    display:inline-block; 
-    margin-right:5%; 
+  
+    
 }
 #listClosed li{
     display:inline-block;
-    margin-right:5%; 
+    margin-left:10%; 
 }
 .h2List {
     margin-bottom: 0px;
 }
 .bracketFrame {
     border: solid 1px black;
-    background: #4D4D4D;
+    background: #33d6ff;
     width: 700px;
     height: 600px;
+    margin-left:32.5%;
+    margin-top:30px;
 }
 a {
     cursor: pointer;
+  
 }
 h1{
    
@@ -54,10 +56,12 @@ h1, h2{
 }
 #tNamePlace{
  font-weight:bold;
+ margin-bottom:100px;
+ color: #33d6ff;
 }
 #tournamentName{
   display:  inline-block;
-  margin-left: 80px;
+  margin-left: 150px;
 
 }
 
@@ -81,7 +85,7 @@ h2{
     margin-left:40%;
   margin-top:80px;
   width:  30%;
-  height:120px;
+  height:150px;
   font-size:20px;
   text-align:  center;
   background-color:white;
@@ -92,24 +96,12 @@ h2{
     margin-top: 10px;
 }
 
-.openProgress{
-background-color:white;
- color:black;
- width:50%;
-   overflow:auto;
-   float:left;
-}
 
-#inProgress{
-background-color:white;
- color:black;
- 
-
-  overflow:auto;
- 
-}
 #enter{
     width:20em; height: 3em;
+    color:#fff;
+    background-color:#33d6ff;
+    font-weight:bold;
 }
 #playerName,#tourName{
      width:20em; height: 2.5em;
@@ -129,7 +121,8 @@ height:1.5em; width: 1.5em;
 
 #playerAmount{
   margin-top:50px; 
-  margin-left:80px; 
+      margin-left:150px;
+
 }
 
 #startDate{
@@ -139,7 +132,7 @@ height:1.5em; width: 1.5em;
 }
 #maxPlayers{
     margin-top:30px;
-    margin-left:80px; 
+   margin-left: 150px;
 }
 #joinScreen {
     margin-top:5%;
@@ -148,15 +141,16 @@ height:1.5em; width: 1.5em;
 }
 #playerList{
     margin-left:36.5%;
+ 
     font-weight: bold;
     font-size: 35px;
 }
 #signedUp{
-    margin-left:36.5%;
     width:20%;
     height:30%;
    overflow: auto;
     font-size: 30px;
+    margin-left:37%;
 }
 #enterButton{
     margin-left:35%;
@@ -164,7 +158,8 @@ height:1.5em; width: 1.5em;
 #startTime{
     margin-left: 60%;
     font-weight:bold;
-margin-top:10px;
+    margin-top:10px;
+    
 }
 
 .main-section{
@@ -177,8 +172,23 @@ margin-top:10px;
   float:  left;
   width:  50%;
   background-color:#33d6ff;
+ 
 }
 
+#backgroundWhite{
+    background-color: white;
+    color:black;
+    
+    
+}
+.startDateLabel{
+    font-weight:bold;
+    display:inline-block;
+
+}
+.startDate{
+    display:inline-block;
+}
 
 
 
