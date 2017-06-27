@@ -173,12 +173,7 @@ height:1.5em; width: 1.5em;
 #enterButton{
     margin-left:35%;
 }
-#startTime{
-    margin-left: 60%;
-    font-weight:bold;
-    margin-top:10px;
-    
-}
+
 
 .main-section{
   overflow:  auto;
@@ -220,7 +215,15 @@ button{
 
 }
 
+#joinRightCol{
+    float:left;
+}
 
+#startTime{
+    font-weight:bold;
+  float:left;
+    
+}
 
 @media screen and (max-width: 768px){
 
