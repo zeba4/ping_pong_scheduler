@@ -372,7 +372,6 @@ function displayBracket(dataString,key){
 }
 
 function updateOpenTour(name,date,key){
-  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span> <span class='startDateLabel'>Start Date:</span><span class='startDate'> " + date+ '</span></li>')
   var $button = $('<button/>', {
     type: 'button',
     id: key,
@@ -383,6 +382,7 @@ function updateOpenTour(name,date,key){
     }
   });
   $button.appendTo('#listOpen');
+  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span> <span class='startDateLabel'>Start Date:</span><span class='startDate'> " + date+ '</span></li><br>')
 }
 
 function updateClosedTour(name,key){
