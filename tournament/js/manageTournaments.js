@@ -279,7 +279,7 @@ function startTimer(){
       document.getElementById("startTime").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (distance < 0) {
         clearInterval(timerVariable);
-        startTournament();
+        generateBracket(currentJoinKey);
       }
   }, 1000);
 }
@@ -318,14 +318,14 @@ function hasStarted(data, key,override){
     {
       if(data.tourString == "")
       {
-        generateBracket(data,key);
+        generateBracket(key);
       }
       return true;
     }
     return false;
 }
 
-function generateBracket(data,key){
+function generateBracket(key){
   currentBracketKey = key;
   var playerArray = [];
   var tempRef = database.ref(details_firebase_route + tournament_firebase_route + key + "/" + players_firebase_route)
@@ -334,7 +334,7 @@ function generateBracket(data,key){
         playerArray.push(data1.val().name);
     });
       makeModel(playerArray);
-      startTournament(myDiagram.model.toJSON(),data,key);
+      startTournament(myDiagram.model.toJSON(),key);
       }, function(error) {
     // The Promise was rejected.
     console.error(error);
@@ -342,7 +342,7 @@ function generateBracket(data,key){
   });
 }
 
-function startTournament(tString,data, key){
+function startTournament(tString, key){
       var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route + key);
       var updates = {};
       updates['/tourString'] = tString;
