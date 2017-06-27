@@ -95,28 +95,32 @@
                
                 <div id="tNamePlace">  </div>
                 </div>
-                 <div class="joinRightCol">
-                <div id="playerList">
+               
+                <div class="joinLeft">
                    
                     <p id ="participants">  Participants: </p>
                     
+                    <ol id="signedUp">
+                   
+               </ol> 
                 </div>
 
               
-               <ol id="signedUp">
+              
+
+<div class="joinRight">
+              <div id= "enterButton">
+                    <input type="text" placeholder="Enter Name Here" id="playerName">
                    
-               </ol>
-               </div>
+                    <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()"> <img src="table.png"  height="60" width="60">
+                </div>
+
                   <div id="startTime">
                     <!--<h3 > 00d 00h 00m 00s</h3>-->
                 </div>
 
-                <div class="cursor"></div>
-                    <div id= "enterButton">
-                    <input type="text" placeholder="Put Name Here" id="playerName">
-                   
-                    <input type="button" id="enter" value="Enter the tournament" onClick="joinTournament()"> <img src="table.png"  height="60" width="60">
-                </div>
+              </div>       
+
         </section>
         <section id="tournamentBracketScreen" class="hidden">
 
