@@ -51,7 +51,7 @@ connectedRef.on("value", function(snap) {
 //Add number of people in tournament next to dynamic list tags
 //Add Start on max players
 //Ask for full name of 1st-3rd place winners at end for storage purposes
-
+//Shuffle player list
 
 //Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event. 
 
