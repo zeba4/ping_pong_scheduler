@@ -293,7 +293,7 @@ function checkPastStartDate(data){
   var selectedDate = new Date(data);
   var now = new Date();
   now.setHours(0,0,0,0);
-  if (selectedDate < now) {
+  if (selectedDate <= now) {
     // selected date is in the past
     return true;
   }else{
