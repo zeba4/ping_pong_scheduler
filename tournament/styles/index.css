@@ -15,7 +15,7 @@ body{
     display: block;
 }
 .listdiv {
-    height:  calc(50vh - 40px - 80px);
+    
     width:70%;
     margin-left:30%;
     font-size:25px;
@@ -94,7 +94,7 @@ h1,h2{
 
 #generate{
     margin-left:40%;
-  margin-top:80px;
+  margin-top:35px;
   width:  30%;
   height:150px;
   font-size:30px;
@@ -106,7 +106,7 @@ h1,h2{
   font-weight:bold;
 }
 #participants{
-    /*margin-top:-5%;*/
+   
     margin-top: 0;
     margin-left:calc(100%-50%-60px);
     background-color: white;
@@ -128,7 +128,9 @@ h1,h2{
      width:20em; height: 2.5em;
       display:  inline-block;
 }
-
+#tourName{
+    font-size: 17px;
+}
 #playerName{
    float:left;
   width:50%; 
@@ -138,8 +140,7 @@ h1,h2{
 .center{
     width: 60%;
     margin: 0 auto;
-    /*overflow:auto;*/
-    /*outline: 1px solid red;*/
+    
 }
 
 .joinLeft,
@@ -149,7 +150,8 @@ h1,h2{
 }
 #datepicker{
       width:20em; 
-      height: 1em;
+      height: 2.5em;
+      font-size: 17px;
 }
 #runMax{
 height:1.5em;
@@ -186,11 +188,10 @@ height:1.5em;
     font-size: 35px;
 }
 #signedUp{
-    /*width:50%;*/
+    
     height:30%;
    margin:0;
     font-size: 25px;
-    /*margin-left:calc(100% - 50% - 60px);*/
      overflow-x:auto;
 }
 .main-section{
@@ -236,24 +237,52 @@ button{
     width:70%;
     margin-top:5%;
 }
-#enterButton{
-    /*margin-top:-5%;*/
-    /*margin-left:8%*/
-}
 
-/*#center{
-    margin-left:-5%;
-}*/
 
-@media screen and (max-width: 968px){
+@media screen and (max-width: 1144px){
     .left-col,
     .right-col{
       width:  100%;
-      /* float:  none; */
-    
-}
+      overflow: auto;
+      }
 
 .center{
     width: 90%;
+}
+
+#generate{
+    margin-left:35%;
+}
+
+#tournamentName{
+  margin-left: 120px;
+}
+
+.tourneyStartDate{
+     margin-left: -30px;
+}
+
+#nameProgress{
+  margin-left:-50%;
+}
+#listOpen li{
+    overflow:auto;
+    width:100%;
+}
+#listClosed{
+    margin-left:-42%;
+}
+#nameOpen{
+    margin-left:-60%;
+     overflow-x: auto;
+}
+
+#listOpen{
+    margin-left:-10%;
+     overflow-x: auto;
+     width:100%;
+}
+#listdiv{
+    overflow-x: auto;
 }
 }

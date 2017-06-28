@@ -436,9 +436,3 @@ function updateClosedTour(name,key, finished){
   $button.appendTo('#listClosed');
   $("#listClosed").append('<li>' + name + '</li><br>')
 }
-$(document).ready(function(){
-    $('#button').keypress(function(e){
-      if(e.keyCode==Enter)
-      $('#linkadd').click();
-    });
-});
