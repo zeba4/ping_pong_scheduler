@@ -23,7 +23,6 @@ var displayNewTime= function(data)
   var hour = data.hour;
   var minutes = data.min;
   var time = data.time;
-  console.log(hour + " " + minutes + " " + time)
   var checkforzero = false;
   minutes = minutes +time
   if(minutes >= 60)
