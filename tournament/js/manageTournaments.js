@@ -35,7 +35,7 @@ var currentBracketKey;
 var timerVariable;
 var tournamentExists;
 var isConnected;
-
+var isTourOver;
 
 connectedRef.on("value", function(snap) {
   if (snap.val() === true) {
@@ -60,12 +60,20 @@ connectedRef.on("value", function(snap) {
 loadQuery.once('value', function(snapshot){
   if(snapshot.val() != null){
     snapshot.forEach(function(data){
-      if(hasStarted(data.val(),data.key) == false)
+      if(data.val().tourOver == true)
       {
-        updateOpenTour(data.val().name, data.val().date, data.key);
-      }else{
-        updateClosedTour(data.val().name, data.key);
-      }
+        if(deleteTournament(data.val().date, data.key))
+        {
+          updateClosedTour(data.val().name, data.key, "Finished: ");
+        }
+    }else{
+        if(hasStarted(data.val(),data.key) == false)
+        {
+          updateOpenTour(data.val().name, data.val().date, data.key);
+        }else{
+          updateClosedTour(data.val().name, data.key, "");
+        }
+    }
     });
     listenForNewTournaments();
   }else{
@@ -73,18 +81,29 @@ loadQuery.once('value', function(snapshot){
   }
 });
 
+function deleteTournament(date,key){
+  if(checkPastStartDate(date))
+  {
+    var deleteRef = database.ref(details_firebase_route + tournament_firebase_route + key);
+    deleteRef.remove();
+    return false;
+  }
+  return true;
+}
+
+
 function listenForCurrentBracketUpdates(key){
   updateBracketRef = database.ref(details_firebase_route+tournament_firebase_route + key);
   updateBracketRef.on('child_changed', function(snapshot) {
     if(myDiagram.model.toJSON() != snapshot.val())
     {
-      console.log("test");
-      myDiagram.model = go.Model.fromJson(JSON.parse(snapshot.val()));
+        updateModel(JSON.parse(snapshot.val()).nodeDataArray);
     }
   });
 }
 
 function killListenForCurrentBracketUpdates(){
+  isTourOver = "";
   updateBracketRef.off();
 }
 
@@ -135,16 +154,17 @@ function updateList(name){
 function createTournament(){
   if(isConnected == true){
     listenForNewTournaments();
-    var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax']);
+    var tourValues = getDivValue(['tourName','datepicker']);//,'numPlayers'//,'runMax']);
     if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
     {
       var newPostRef = tournamentRef.push();
       newPostRef.set({
         name: tourValues[0],
         date: tourValues[1],
-        maxPlayers: tourValues[2],
-        startOnMax: tourValues[3],
-        tourString: ""
+        //maxPlayers: tourValues[2],
+        //startOnMax: tourValues[3],
+        tourString: "",
+        tourOver: false
       });
       clearDocument(["tourName","datepicker"]);
       console.log("success");
@@ -232,6 +252,7 @@ function homePage(){
   }
   killTimer();
 
+  isTourOver = ""
   screenState = "home";
   transition(screenState);
 }
@@ -311,9 +332,26 @@ function saveTournamentState(){
     updateStartRef.update(updates);
 }
 
+function finishTournament(){
+    killListenForCurrentBracketUpdates();
+    if(isTourOver === false){
+      var d = new Date();
+      var temp = new Date(d.setDate(d.getDate() + 1));
+      var m = temp.getMonth()+1;
+      var d = temp.getDate();
+      var y = temp.getFullYear();
+      var endDate = m +"/" +d +"/"+ y;
+      var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route+ currentBracketKey);
+      var updates = {};
+      updates['/tourOver'] = true;
+      updates['/date'] = endDate;
+      updateStartRef.update(updates);
+    }
+}
+
 // Tournament has started code
 
-function hasStarted(data, key,override){
+function hasStarted(data, key){
     if(checkPastStartDate(data.date))
     {
       if(data.tourString == "")
@@ -354,6 +392,7 @@ function loadBracket(key){
     snapshot.forEach(function(data){
       if(data.key == key)
       {
+        isTourOver = data.val().tourOver;
         displayBracket(data.val().tourString,key);
       }
     })
@@ -384,8 +423,8 @@ function updateOpenTour(name,date,key){
   $button.appendTo('#listOpen');
 }
 
-function updateClosedTour(name,key){
-  $("#listClosed").append('<li>' + name + '</li>')
+function updateClosedTour(name,key, finished){
+  $("#listClosed").append('<li>'+ finished + name + '</li>')
   var $button = $('<button/>', {
     type: 'button',
     id: key,
