@@ -56,7 +56,7 @@ h1,h2{
 }
 #tNamePlace{
  font-weight:bold;
- margin-bottom:7%;
+ margin-bottom:3%;
  color: #A4D65E
 ;
 }
@@ -106,8 +106,9 @@ h1,h2{
   font-weight:bold;
 }
 #participants{
-    margin-top:-5%;
-    margin-left:70%;
+    /*margin-top:-5%;*/
+    margin-top: 0;
+    margin-left:calc(100%-50%-60px);
     background-color: white;
     font-weight: bold;
     font-size: 33px;
@@ -130,8 +131,15 @@ h1,h2{
 
 #playerName{
    float:left;
-  width:25%; 
+  width:50%; 
    height: 3.5em;
+}
+
+.center{
+    width: 60%;
+    margin: 0 auto;
+    /*overflow:auto;*/
+    /*outline: 1px solid red;*/
 }
 
 .joinLeft,
@@ -178,11 +186,11 @@ height:1.5em;
     font-size: 35px;
 }
 #signedUp{
-    width:30%;
+    /*width:50%;*/
     height:30%;
-   margin:0 auto;
+   margin:0;
     font-size: 25px;
-     margin-left:70%;
+    /*margin-left:calc(100% - 50% - 60px);*/
      overflow-x:auto;
 }
 .main-section{
@@ -224,18 +232,18 @@ button{
     font-weight:bold;
     font-size:50px;
     text-align: center;
-    margin-left:-5%;
+    
     width:70%;
     margin-top:5%;
 }
 #enterButton{
-    margin-top:-5%;
-    margin-left:8%
+    /*margin-top:-5%;*/
+    /*margin-left:8%*/
 }
 
-#center{
+/*#center{
     margin-left:-5%;
-}
+}*/
 
 @media screen and (max-width: 968px){
     .left-col,
@@ -243,5 +251,9 @@ button{
       width:  100%;
       /* float:  none; */
     
+}
+
+.center{
+    width: 90%;
 }
 }
