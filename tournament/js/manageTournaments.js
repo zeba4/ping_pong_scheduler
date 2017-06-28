@@ -425,7 +425,6 @@ function updateOpenTour(name,date,key){
 
 
 function updateClosedTour(name,key, finished){
-  $("#listClosed").append('<li>'+ finished + name + '</li>')
   var $button = $('<button/>', {
     type: 'button',
     id: key,
