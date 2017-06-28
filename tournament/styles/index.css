@@ -57,7 +57,8 @@ h1,h2{
 #tNamePlace{
  font-weight:bold;
  margin-bottom:7%;
- color: #33d6ff;
+ color: #A4D65E
+;
 }
 #tournamentName{
   display:  inline-block;
@@ -78,14 +79,17 @@ h1,h2{
 
 #createNewTournament{
 
- background-color:#33d6ff;
-      color:white;
+ background-color:#619400
+;
+      color:#fff;
       height:80px;
       margin-bottom:20px;
 }
 .main-section{
     margin-top:0;
-    background-color:#33d6ff;
+    background-color:#A4D65E
+
+;
 }
 
 #generate{
@@ -96,7 +100,9 @@ h1,h2{
   font-size:30px;
   text-align:  center;
   background-color:white;
-  color:#33d6ff;
+  color:#A4D65E
+
+;
   font-weight:bold;
 }
 #participants{
@@ -110,7 +116,7 @@ h1,h2{
     width:25%; 
     height: 3.5em;
     color:#fff;
-    background-color:#33d6ff;
+    background-color:#A4D65E;
     font-weight:bold;
     font-size:15px;
  
@@ -205,7 +211,7 @@ button{
     height:50px;
     width:65px;
     margin-top:20px;
-    background-color:#33d6ff;
+    background-color:#A4D65E;
     color:white;
     font-size:20px;
     font-weight:bold;
@@ -225,6 +231,10 @@ button{
 #enterButton{
     margin-top:-5%;
     margin-left:8%
+}
+
+#center{
+    margin-left:-5%;
 }
 
 @media screen and (max-width: 968px){
