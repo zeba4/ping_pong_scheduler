@@ -2,7 +2,7 @@ body{
     font-family: "Roboto";
     font-size:25px;
    background-color:white;
-    height:900px; 
+    height:900px;
     overflow-y:auto;
 }
 .hidden {
@@ -15,7 +15,7 @@ body{
     display: block;
 }
 .listdiv {
-    
+
     width:70%;
     margin-left:30%;
     font-size:25px;
@@ -23,18 +23,18 @@ body{
 #listOpen li,
 #listClosed li{
     display:inline-block;
-    margin-left:3%; 
+    margin-left:3%;
     width: calc(100% - 3% - 75px);
     vertical-align: top;
     margin-top:20px;
     overflow-x: auto;
-}    
+}
 .h2List {
     margin-bottom: 0px;
 }
 .bracketFrame {
     border: solid 1px black;
-    background: #33d6ff;
+    background: #53565A;
     width: 700px;
     height: 600px;
     margin-left:32.5%;
@@ -106,7 +106,7 @@ h1,h2{
   font-weight:bold;
 }
 #participants{
-   
+
     margin-top: 0;
     margin-left:calc(100%-50%-60px);
     background-color: white;
@@ -114,15 +114,15 @@ h1,h2{
     font-size: 33px;
 }
 #enter{
-    width:25%; 
+    width:25%;
     height: 3.5em;
     color:#fff;
     background-color:#A4D65E;
     font-weight:bold;
     font-size:15px;
- 
+
     float:left;
-  
+
 }
 #playerName,#tourName{
      width:20em; height: 2.5em;
@@ -133,14 +133,14 @@ h1,h2{
 }
 #playerName{
    float:left;
-  width:50%; 
+  width:50%;
    height: 3.5em;
 }
 
 .center{
     width: 60%;
     margin: 0 auto;
-    
+
 }
 
 .joinLeft,
@@ -149,7 +149,7 @@ h1,h2{
     width:  50%;
 }
 #datepicker{
-      width:20em; 
+      width:20em;
       height: 2.5em;
       font-size: 17px;
 }
@@ -159,16 +159,16 @@ height:1.5em;
 
 }
 #numPlayers{
-    height: 2.5em; 
+    height: 2.5em;
     width: 10em;
 }
 #playerAmount{
-  margin-top:50px; 
+  margin-top:50px;
       margin-left:150px;
 }
 
 #startDate{
-     margin-top:50px; 
+     margin-top:50px;
     margin-bottom:50px;
 }
 #maxPlayers{
@@ -183,12 +183,12 @@ height:1.5em;
 }
 #playerList{
     margin-left:36.5%;
- 
+
     font-weight: bold;
     font-size: 35px;
 }
 #signedUp{
-    
+
     height:30%;
    margin:0;
     font-size: 25px;
@@ -207,12 +207,12 @@ height:1.5em;
     color:black;
 }
 .startDateLabel{
-  
+
    font-size:  smaller;
     color:  gray;
 }
 .startDate{
-    
+
  font-size:  smaller;
   color:  gray;
 }
@@ -233,9 +233,13 @@ button{
     font-weight:bold;
     font-size:50px;
     text-align: center;
-    
+
     width:70%;
     margin-top:5%;
+}
+
+.home:hover{
+ display:block;
 }
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <head>
@@ -15,30 +15,31 @@
             <nav>
                     <h1>
                         <img src="ping.gif"  height="60" width="60" />
-                        <a onClick="homePage()">Hoffman Ping Pong</a>
+                        <a  onClick="homePage()">Hoffman Ping Pong</a>
+                        <!-- <p class="home">Return to homescreen. </p> -->
                     </h1>
             </nav>
         </header>
 
         <section id="homeScreen" class="visible">
-            <div id ="createNewTournament"> 
+            <div id ="createNewTournament">
                     <div class="main-section">
                         <h2>Create New Tournament</h2>
 
                         <div class="left-col">
                             <p id = "tournamentName">Tournament Name: <input type="text" id="tourName" placeholder="Tourney Name"></p>
                             <div id ="maxPlayers">
-                            
-                        
+
+
 
                                 <!--<label for="runMax">Begin When Max Players Hit?</label>
 
                                 <input type="checkbox" id="runMax" name="runMax">
                             </div>-->
                           <!--<div id = "playerAmount">-->
-                      
 
-                     
+
+
                                 <!--<label for="numPlayers"> Number of Players needed to start:</label>
                                 <select id="numPlayers" name="numPlayers">
                                     <option value="">Select</option>
@@ -47,18 +48,18 @@
                                     <option value="16">16</option>
                                     <option value="32">32</option>
                                 </select>-->
-                       
+
                             <div class ="tourneyStartDate">
                                 <label for="datepicker">Tourney Start Date:</label>
 
                                 <input type="text" id="datepicker" name="datepicker">
-                        
+
                             </div>
 
 
                         </div>
                     </div><!-- end left column -->
-                    
+
                     <div class="right-col">
                         <div id = "generateButton">
                             <input type="button" onClick="createTournament()" value="Generate it!" id="generate">
@@ -68,13 +69,13 @@
 
 
                     <div class="right-col" id = "backgroundWhite" >
-                       
+
 
                                 <h2 id="nameOpen">Open Tournaments</h2>
                                <div class="openTourney">
                                 <div class="listdiv">
                                 <ul id="listOpen" style = "list-style: none" >
-                                  
+
                                     </ul>
 
                                 </div>
@@ -87,34 +88,34 @@
                                 <ul id="listClosed" style = "list-style: none" class:"inlineButton">
                                 </ul>
                             </div>
-                       
+
 </div>
 
         </section>
 
         <section id="joinTournamentScreen" class="hidden">
-            
+
             <div id="joinScreen">
-               
+
                 <div id="tNamePlace">  </div>
                 </div>
                <div class ="center">
                 <div class="joinLeft">
-                   
+
                     <p id ="participants">  Participants: </p>
-                    
+
                     <ol id="signedUp">
-                   
-               </ol> 
+
+               </ol>
                 </div>
 
-              
-              
+
+
 
 <div class="joinRight">
               <div id= "enterButton">
                     <input type="text" placeholder="Enter Name Here" id="playerName">
-                   
+
                     <input type="button" id="enter" value=Join onClick="joinTournament()"> <img src="table.png"  height="60" width="60">
                 </div>
 
@@ -122,7 +123,7 @@
                     <!--<h3> 00d 00h 00m 00s</h3>-->
                 </div>
 
-              </div>       
+              </div>
 </div>
         </section>
         <section id="tournamentBracketScreen" class="hidden">

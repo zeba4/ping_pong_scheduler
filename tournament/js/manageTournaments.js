@@ -53,7 +53,7 @@ connectedRef.on("value", function(snap) {
 //Ask for full name of 1st-3rd place winners at end for storage purposes
 //Shuffle player list
 
-//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event. 
+//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event.
 
 // Homepage Load Code
 
@@ -147,7 +147,7 @@ function displayTournament(data, objKey){
 }
 
 function updateList(name){
-  
+
   document.getElementById("signedUp").innerHTML +=  "<li>" + name + "</li>";
 }
 
@@ -443,5 +443,13 @@ document.getElementById("playerName")
     event.preventDefault();
     if (event.keyCode == 13) {
         document.getElementById("enter").click();
+    }
+});
+
+document.getElementById("datepicker")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("generate").click();
     }
 });
