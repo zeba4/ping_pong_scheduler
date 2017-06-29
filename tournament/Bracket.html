@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+<<<<<<< HEAD
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -55,8 +56,46 @@
                                 <input type="text" id="datepicker" name="datepicker">
 
                             </div>
+=======
+>>>>>>> 41ab990548412dbcb05c8e1e5657989120ce53b7
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Challenger Home</title>
+</head>
+
+<body>
+    <header>
+
+        <nav>
+            <h1>
+                <img src="ping.gif" height="60" width="60" />
+                <a onClick="homePage()">Hoffman Ping Pong</a>
+            </h1>
+        </nav>
+    </header>
+
+    <section id="homeScreen" class="visible">
+        <div id="createNewTournament">
+            <div class="main-section">
+                <h2>Create New Tournament</h2>
+
+                <div class="left-col">
+                    <p id="tournamentName">Tournament Name: <input type="text" id="tourName" placeholder="Tourney Name"></p>
+                    <div id="maxPlayers">
 
 
+
+                        <!--<label for="runMax">Begin When Max Players Hit?</label>
+
+                                    <input type="checkbox" id="runMax" name="runMax">
+                                </div>-->
+                        <!--<div id = "playerAmount">-->
+
+<<<<<<< HEAD
                         </div>
                     </div><!-- end left column -->
 
@@ -77,11 +116,27 @@
                                 <ul id="listOpen" style = "list-style: none" >
 
                                     </ul>
+=======
 
-                                </div>
-                            </div>
+
+                        <!--<label for="numPlayers"> Number of Players needed to start:</label>
+                                    <select id="numPlayers" name="numPlayers">
+                                        <option value="">Select</option>
+                                        <option value="4">4</option>
+                                        <option value="8">8</option>
+                                        <option value="16">16</option>
+                                        <option value="32">32</option>
+                                    </select>-->
+
+                        <div class="tourneyStartDate">
+                            <label for="datepicker">Tourney Start Date:</label>
+
+                            <input type="text" id="datepicker" name="datepicker">
+>>>>>>> 41ab990548412dbcb05c8e1e5657989120ce53b7
+
                         </div>
 
+<<<<<<< HEAD
                         <div class="left-col" id = "backgroundWhite" >
                             <h2 id ="nameProgress">In Progress Tournaments</h2>
                             <div class="listdiv">
@@ -107,8 +162,23 @@
                     <ol id="signedUp">
 
                </ol>
-                </div>
+=======
 
+                    </div>
+                </div>
+                <!-- end left column -->
+
+                <div class="right-col">
+                    <div id="generateButton">
+                        <input type="button" onClick="createTournament()" value="Generate it!" id="generate">
+                    </div>
+>>>>>>> 41ab990548412dbcb05c8e1e5657989120ce53b7
+                </div>
+                <!-- end right column -->
+            </div>
+            <!-- end tournament main section -->
+
+<<<<<<< HEAD
 
 
 
@@ -117,37 +187,98 @@
                     <input type="text" placeholder="Enter Name Here" id="playerName">
 
                     <input type="button" id="enter" value=Join onClick="joinTournament()"> <img src="table.png"  height="60" width="60">
+=======
+
+            <div class="right-col" id="backgroundWhite">
+
+
+                <h2 id="nameOpen">Open Tournaments</h2>
+                <div class="openTourney">
+                    <div class="listdiv">
+                        <ul id="listOpen" style="list-style: none">
+
+                        </ul>
+
+                    </div>
+>>>>>>> 41ab990548412dbcb05c8e1e5657989120ce53b7
+                </div>
+            </div>
+
+            <div class="left-col" id="backgroundWhite">
+                <h2 id="nameProgress">In Progress Tournaments</h2>
+                <div class="listdiv">
+                    <ul id="listClosed" style="list-style: none" class: "inlineButton">
+                    </ul>
                 </div>
 
-                  <div id="startTime">
-                    <!--<h3> 00d 00h 00m 00s</h3>-->
-                </div>
-
+<<<<<<< HEAD
               </div>
 </div>
         </section>
         <section id="tournamentBracketScreen" class="hidden">
+=======
+            </div>
 
-            <div id="bracketDiv" class="bracketFrame">
+    </section>
 
+    <section id="joinTournamentScreen" class="hidden">
+>>>>>>> 41ab990548412dbcb05c8e1e5657989120ce53b7
+
+        <div id="joinScreen">
+
+            <div id="tNamePlace"> </div>
+        </div>
+        <div class="center">
+            <div class="joinLeft">
+
+                <p id="participants"> Participants: </p>
+
+                <ol id="signedUp">
+
+                </ol>
+            </div>
+
+
+
+
+            <div class="joinRight">
+                <div id="enterButton">
+                    <input type="text" placeholder="Enter Name Here" id="playerName">
+
+                    <input type="button" id="enter" value=Join onClick="joinTournament()"> <img src="table.png" height="60"
+                        width="60">
+                </div>
+
+                <div id="startTime">
+                    <!--<h3> 00d 00h 00m 00s</h3>-->
+                </div>
 
             </div>
-            </div>
-        </section>
+        </div>
+    </section>
+    <section id="tournamentBracketScreen" class="hidden">
+
+        <div id="bracketDiv" class="bracketFrame">
 
 
-        <footer>
-        </footer>
-        <link rel="stylesheet" type="text/css" href="styles/Bracket.css">
-        <link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.12/go.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
-        <script src="js/goJSIntegration.js"></script>
-        <script src="js/manageTournaments.js"></script>
+        </div>
+        </div>
+    </section>
 
-    </body>
+
+    <footer>
+    </footer>
+    <link rel="stylesheet" type="text/css" href="styles/Bracket.css">
+    <link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.12/go.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="js/goJSIntegration.js"></script>
+    <script src="js/manageTournaments.js"></script>
+
+</body>
 
 </html>
