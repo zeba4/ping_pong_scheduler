@@ -237,7 +237,15 @@ button{
     width:70%;
     margin-top:5%;
 }
+#hiddenPopUp{
+  display:none;
+}
+.home:hover #hiddenPopUp{
+ display:block;
 
+ text-decoration: underline;
+ color: blue;
+}
 
 
 @media screen and (max-width: 1144px){
