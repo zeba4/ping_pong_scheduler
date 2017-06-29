@@ -436,3 +436,12 @@ function updateClosedTour(name,key, finished){
   $button.appendTo('#listClosed');
   $("#listClosed").append('<li>' + name + '</li><br>')
 }
+
+
+document.getElementById("playerName")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("enter").click();
+    }
+});
