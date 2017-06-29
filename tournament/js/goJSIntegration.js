@@ -116,7 +116,18 @@
     {
         if(isConnected == true){
           model.addChangedListener(function(e) {
-          saveTournamentState()
+          saveTournamentState();
+          if(e.Tm == "score1" || e.Tm == "score2")
+          {
+            if(e.object.parent == "-1-0")
+            {
+              if(e.object.score1 && e.object.score2 != undefined || "")
+              {
+                alert("Tournament is over!");
+                finishTournament();
+              }
+            }
+           }
           if (e.propertyName !== 'score1' && e.propertyName !== 'score2') return;
           var data = e.object;
           if (isNaN(data.score1) || isNaN(data.score2)) return;
@@ -130,5 +141,6 @@
         }else{
           alert("You are not connected to the internet!");
           homePage()
+          isTourOver = "";
         }
     }

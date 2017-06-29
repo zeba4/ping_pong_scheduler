@@ -9,7 +9,7 @@ index.js
     authDomain: "ping-pong-tournament-a18d7.firebaseapp.com",
     databaseURL: "https://ping-pong-tournament-a18d7.firebaseio.com",
     projectId: "ping-pong-tournament-a18d7",
-    storageBucket: "",
+    storageBucket: "ping-pong-tournament-a18d7.appspot.com",
     messagingSenderId: "685269907531"
   };
   firebase.initializeApp(config);
@@ -35,7 +35,7 @@ var currentBracketKey;
 var timerVariable;
 var tournamentExists;
 var isConnected;
-
+var isTourOver;
 
 connectedRef.on("value", function(snap) {
   if (snap.val() === true) {
@@ -51,22 +51,29 @@ connectedRef.on("value", function(snap) {
 //Add number of people in tournament next to dynamic list tags
 //Add Start on max players
 //Ask for full name of 1st-3rd place winners at end for storage purposes
+//Shuffle player list
 
+//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event. 
 
 // Homepage Load Code
 
 loadQuery.once('value', function(snapshot){
   if(snapshot.val() != null){
-    var keysOfTournaments = Object.keys(snapshot.val());
-    var pos = 0;
     snapshot.forEach(function(data){
-      if(hasStarted(data.val(),keysOfTournaments[pos]) == false)
+      if(data.val().tourOver == true)
       {
-        updateOpenTour(data.val().name, data.val().date, keysOfTournaments[pos]);
-      }else{
-        updateClosedTour(data.val().name, keysOfTournaments[pos]);
-      }
-      pos++;
+        if(deleteTournament(data.val().date, data.key))
+        {
+          updateClosedTour(data.val().name, data.key, "Finished: ");
+        }
+    }else{
+        if(hasStarted(data.val(),data.key) == false)
+        {
+          updateOpenTour(data.val().name, data.val().date, data.key);
+        }else{
+          updateClosedTour(data.val().name, data.key, "");
+        }
+    }
     });
     listenForNewTournaments();
   }else{
@@ -74,18 +81,29 @@ loadQuery.once('value', function(snapshot){
   }
 });
 
+function deleteTournament(date,key){
+  if(checkPastStartDate(date))
+  {
+    var deleteRef = database.ref(details_firebase_route + tournament_firebase_route + key);
+    deleteRef.remove();
+    return false;
+  }
+  return true;
+}
+
+
 function listenForCurrentBracketUpdates(key){
   updateBracketRef = database.ref(details_firebase_route+tournament_firebase_route + key);
   updateBracketRef.on('child_changed', function(snapshot) {
     if(myDiagram.model.toJSON() != snapshot.val())
     {
-      console.log("test");
-      myDiagram.model = go.Model.fromJson(JSON.parse(snapshot.val()));
+        updateModel(JSON.parse(snapshot.val()).nodeDataArray);
     }
   });
 }
 
 function killListenForCurrentBracketUpdates(){
+  isTourOver = "";
   updateBracketRef.off();
 }
 
@@ -130,22 +148,23 @@ function displayTournament(data, objKey){
 
 function updateList(name){
   
-  document.getElementById("signedUp").innerHTML +=  name + "<br>";
+  document.getElementById("signedUp").innerHTML +=  "<li>" + name + "</li>";
 }
 
 function createTournament(){
   if(isConnected == true){
     listenForNewTournaments();
-    var tourValues = getDivValue(['tourName','datepicker','numPlayers','runMax']);
+    var tourValues = getDivValue(['tourName','datepicker']);//,'numPlayers'//,'runMax']);
     if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
     {
       var newPostRef = tournamentRef.push();
       newPostRef.set({
         name: tourValues[0],
         date: tourValues[1],
-        maxPlayers: tourValues[2],
-        startOnMax: tourValues[3],
-        tourString: ""
+        //maxPlayers: tourValues[2],
+        //startOnMax: tourValues[3],
+        tourString: "",
+        tourOver: false
       });
       clearDocument(["tourName","datepicker"]);
       console.log("success");
@@ -233,6 +252,7 @@ function homePage(){
   }
   killTimer();
 
+  isTourOver = ""
   screenState = "home";
   transition(screenState);
 }
@@ -280,7 +300,7 @@ function startTimer(){
       document.getElementById("startTime").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
       if (distance < 0) {
         clearInterval(timerVariable);
-        startTournament();
+        generateBracket(currentJoinKey);
       }
   }, 1000);
 }
@@ -294,7 +314,7 @@ function checkPastStartDate(data){
   var selectedDate = new Date(data);
   var now = new Date();
   now.setHours(0,0,0,0);
-  if (selectedDate < now) {
+  if (selectedDate <= now) {
     // selected date is in the past
     return true;
   }else{
@@ -312,21 +332,38 @@ function saveTournamentState(){
     updateStartRef.update(updates);
 }
 
+function finishTournament(){
+    killListenForCurrentBracketUpdates();
+    if(isTourOver === false){
+      var d = new Date();
+      var temp = new Date(d.setDate(d.getDate() + 1));
+      var m = temp.getMonth()+1;
+      var d = temp.getDate();
+      var y = temp.getFullYear();
+      var endDate = m +"/" +d +"/"+ y;
+      var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route+ currentBracketKey);
+      var updates = {};
+      updates['/tourOver'] = true;
+      updates['/date'] = endDate;
+      updateStartRef.update(updates);
+    }
+}
+
 // Tournament has started code
 
-function hasStarted(data, key,override){
+function hasStarted(data, key){
     if(checkPastStartDate(data.date))
     {
       if(data.tourString == "")
       {
-        generateBracket(data,key);
+        generateBracket(key);
       }
       return true;
     }
     return false;
 }
 
-function generateBracket(data,key){
+function generateBracket(key){
   currentBracketKey = key;
   var playerArray = [];
   var tempRef = database.ref(details_firebase_route + tournament_firebase_route + key + "/" + players_firebase_route)
@@ -335,7 +372,7 @@ function generateBracket(data,key){
         playerArray.push(data1.val().name);
     });
       makeModel(playerArray);
-      startTournament(myDiagram.model.toJSON(),data,key);
+      startTournament(myDiagram.model.toJSON(),key);
       }, function(error) {
     // The Promise was rejected.
     console.error(error);
@@ -343,7 +380,7 @@ function generateBracket(data,key){
   });
 }
 
-function startTournament(tString,data, key){
+function startTournament(tString, key){
       var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route + key);
       var updates = {};
       updates['/tourString'] = tString;
@@ -355,6 +392,7 @@ function loadBracket(key){
     snapshot.forEach(function(data){
       if(data.key == key)
       {
+        isTourOver = data.val().tourOver;
         displayBracket(data.val().tourString,key);
       }
     })
@@ -372,7 +410,6 @@ function displayBracket(dataString,key){
 }
 
 function updateOpenTour(name,date,key){
-  $("#listOpen").append('<li>' + name + " | Start Dates: " + date+ '</li>')
   var $button = $('<button/>', {
     type: 'button',
     id: key,
@@ -383,10 +420,11 @@ function updateOpenTour(name,date,key){
     }
   });
   $button.appendTo('#listOpen');
+  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
-function updateClosedTour(name,key){
-  $("#listClosed").append('<li>' + name + '</li>')
+
+function updateClosedTour(name,key, finished){
   var $button = $('<button/>', {
     type: 'button',
     id: key,
@@ -396,4 +434,14 @@ function updateClosedTour(name,key){
     }
   });
   $button.appendTo('#listClosed');
+  $("#listClosed").append('<li>' + name + '</li><br>')
 }
+
+
+document.getElementById("playerName")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("enter").click();
+    }
+});
