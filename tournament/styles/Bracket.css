@@ -238,9 +238,6 @@ button{
     margin-top:5%;
 }
 
-.home:hover{
- display:block;
-}
 
 
 @media screen and (max-width: 1144px){
