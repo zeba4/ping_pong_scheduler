@@ -23,7 +23,7 @@ const detailsRef = database.ref(details_firebase_route);
 const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
 const loadQuery = tournamentRef.orderByChild('date');
 const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
-const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen","titleName","returnButton"]
+const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
 const connectedRef = database.ref(".info/connected");
 
 var updatePlayersRef;
@@ -213,12 +213,12 @@ function transition(screen){
   // home is home page, join is join screen, bracket is the Bracket screen
   if(screen == "home")
   {
-    changeClassName(screenSections,["visible","hidden","hidden","visible","hidden"]);
+    changeClassName(screenSections,["visible","hidden","hidden"]);
     clearDocument(["signedUp","startTime"]);
   }else if(screen == "join"){
-    changeClassName(screenSections,["hidden","visible","hidden","hidden","visible"]);
+    changeClassName(screenSections,["hidden","visible","hidden"]);
   }else if(screen == "bracket"){
-    changeClassName(screenSections,["hidden","hidden","visible","hidden","visible"]);
+    changeClassName(screenSections,["hidden","hidden","visible"]);
   }
 }
 
@@ -251,6 +251,7 @@ function homePage(){
     killListenForCurrentBracketUpdates()
   }
   killTimer();
+
   isTourOver = ""
   screenState = "home";
   transition(screenState);
@@ -442,13 +443,5 @@ document.getElementById("playerName")
     event.preventDefault();
     if (event.keyCode == 13) {
         document.getElementById("enter").click();
-    }
-});
-
-document.getElementById("datepicker")
-    .addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode == 13) {
-        document.getElementById("generate").click();
     }
 });
