@@ -237,23 +237,12 @@ button{
     width:70%;
     margin-top:5%;
 }
-/*#hiddenPopUp{
-  display:none;
-}
-.home:hover #hiddenPopUp{
- display:block;
 
- text-decoration: underline;
- color: #A4D65E;
- margin-left:4%;
- font size:5pt;
-}*/
-/*.home{
- display:none;
-}*/
+
 #homescreen .home2{
       display:none;
 }
+
 
 @media screen and (max-width: 1144px){
     .left-col,
