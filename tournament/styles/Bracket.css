@@ -237,23 +237,8 @@ button{
     width:70%;
     margin-top:5%;
 }
-/*#hiddenPopUp{
-  display:none;
-}
-<<<<<<< HEAD
-.home:hover #hiddenPopUp{
- display:block;
 
- text-decoration: underline;
- color: #A4D65E;
- margin-left:4%;
- font size:5pt;
-}*/
-#homescreen .home2{
-  display:none;
-}
-=======
->>>>>>> e222f0790a16c3b343041c5e33e589bdd39a8cea
+
 
 @media screen and (max-width: 1144px){
     .left-col,
