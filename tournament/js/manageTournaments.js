@@ -23,7 +23,7 @@ const detailsRef = database.ref(details_firebase_route);
 const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
 const loadQuery = tournamentRef.orderByChild('date');
 const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
-const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
+const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen","titleName","returnButton"]
 const connectedRef = database.ref(".info/connected");
 
 var updatePlayersRef;
@@ -213,12 +213,12 @@ function transition(screen){
   // home is home page, join is join screen, bracket is the Bracket screen
   if(screen == "home")
   {
-    changeClassName(screenSections,["visible","hidden","hidden"]);
+    changeClassName(screenSections,["visible","hidden","hidden","visible","hidden"]);
     clearDocument(["signedUp","startTime"]);
   }else if(screen == "join"){
-    changeClassName(screenSections,["hidden","visible","hidden"]);
+    changeClassName(screenSections,["hidden","visible","hidden","hidden","visible"]);
   }else if(screen == "bracket"){
-    changeClassName(screenSections,["hidden","hidden","visible"]);
+    changeClassName(screenSections,["hidden","hidden","visible","hidden","visible"]);
   }
 }
 
@@ -251,7 +251,6 @@ function homePage(){
     killListenForCurrentBracketUpdates()
   }
   killTimer();
-
   isTourOver = ""
   screenState = "home";
   transition(screenState);
