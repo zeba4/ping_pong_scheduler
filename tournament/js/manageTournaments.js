@@ -117,6 +117,7 @@ function checkForDuplicates(name, date, key){
   if(document.getElementById(key) == null)
   {
     updateOpenTour(name, date,key);
+    alert("Tournament Created");
   }
 }
 
@@ -170,6 +171,7 @@ function createTournament(){
       console.log("success");
     }else {
       console.log("failure");
+      alert("fill in all the values");
     }
   }else{
     alert("Failed, you are not connected to the internet");
@@ -418,9 +420,9 @@ function updateOpenTour(name,date,key){
     click: function() {
       viewTour(this.id)
     }
-  });
+  }); 
   $button.appendTo('#listOpen');
-  $("#listOpen").prepend('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
+  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
 
