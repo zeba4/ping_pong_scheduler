@@ -60,7 +60,7 @@ connectedRef.on("value", function(snap) {
 loadQuery.once('value', function(snapshot){
   if(snapshot.val() != null){
     snapshot.forEach(function(data){
-      if(data.val().tourOver == true)
+      if(data.val().tourOver)
       {
         if(deleteTournament(data.val().date, data.key))
         {
