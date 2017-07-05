@@ -53,7 +53,7 @@ connectedRef.on("value", function(snap) {
 //Ask for full name of 1st-3rd place winners at end for storage purposes
 //Shuffle player list
 
-//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event. 
+//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event.
 
 // Homepage Load Code
 
@@ -147,7 +147,7 @@ function displayTournament(data, objKey){
 }
 
 function updateList(name){
-  
+
   document.getElementById("signedUp").innerHTML +=  "<li>" + name + "</li>";
 }
 
