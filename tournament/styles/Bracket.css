@@ -1,0 +1,294 @@
+body{
+    font-family: "Roboto";
+    font-size:25px;
+   background-color:white;
+    height:900px;
+    overflow-y:auto;
+}
+.hidden {
+    display: none;
+    position: absolute;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+.visible {
+    display: block;
+}
+.listdiv {
+
+    width:70%;
+    margin-left:30%;
+    font-size:25px;
+}
+#listOpen li,
+#listClosed li{
+    display:inline-block;
+    margin-left:3%;
+    width: calc(100% - 3% - 75px);
+    vertical-align: top;
+    margin-top:20px;
+    overflow-x: auto;
+}
+.h2List {
+    margin-bottom: 0px;
+}
+.bracketFrame {
+    border: solid 1px black;
+    background: #53565A;
+    width: 700px;
+    height: 600px;
+    margin-left:32.5%;
+    margin-top:30px;
+}
+a {
+    cursor: pointer;
+}
+h1{
+    padding-bottom:  10px;
+    margin-bottom:  0;
+}
+h1,h2{
+  text-align:  center;
+  font-size:35px;
+}
+.openTourney{
+    margin-left:-29%;
+}
+#tNamePlace{
+ font-weight:bold;
+ margin-bottom:3%;
+ color: #A4D65E
+;
+}
+#tournamentName{
+  display:  inline-block;
+  margin-left: 150px;
+
+}
+
+#nameProgress{
+  margin-bottom:  10px;
+  margin-left:7%;
+  font-size:30px;
+}
+
+#nameOpen{
+    font-size:30px;
+    margin-left:-43%;
+}
+
+#createNewTournament{
+
+ background-color:#619400
+;
+      color:#fff;
+      height:80px;
+      margin-bottom:20px;
+}
+.main-section{
+    margin-top:0;
+    background-color:#A4D65E
+
+;
+}
+
+#generate{
+    margin-left:40%;
+  margin-top:35px;
+  width:  30%;
+  height:150px;
+  font-size:30px;
+  text-align:  center;
+  background-color:white;
+  color:#A4D65E
+
+;
+  font-weight:bold;
+}
+#participants{
+
+    margin-top: 0;
+    margin-left:calc(100%-50%-60px);
+    background-color: white;
+    font-weight: bold;
+    font-size: 33px;
+}
+#enter{
+    width:25%;
+    height: 3.5em;
+    color:#fff;
+    background-color:#A4D65E;
+    font-weight:bold;
+    font-size:15px;
+
+    float:left;
+
+}
+#playerName,#tourName{
+     width:20em; height: 2.5em;
+      display:  inline-block;
+}
+#tourName{
+    font-size: 17px;
+}
+#playerName{
+   float:left;
+  width:50%;
+   height: 3.5em;
+}
+
+.center{
+    width: 60%;
+    margin: 0 auto;
+
+}
+
+.joinLeft,
+.joinRight{
+    float:left;
+    width:  50%;
+}
+#datepicker{
+      width:20em;
+      height: 2.5em;
+      font-size: 17px;
+}
+#runMax{
+height:1.5em;
+ width: 1.5em;
+
+}
+#numPlayers{
+    height: 2.5em;
+    width: 10em;
+}
+#playerAmount{
+  margin-top:50px;
+      margin-left:150px;
+}
+
+#startDate{
+     margin-top:50px;
+    margin-bottom:50px;
+}
+#maxPlayers{
+    margin-top:30px;
+   margin-left: 150px;
+}
+#joinScreen {
+   margin-top:2%;
+    text-align: center;
+    font-size: 50px;
+    background-color:white;
+}
+#playerList{
+    margin-left:36.5%;
+
+    font-weight: bold;
+    font-size: 35px;
+}
+#signedUp{
+
+    height:30%;
+   margin:0;
+    font-size: 25px;
+     overflow-x:auto;
+}
+.main-section{
+  overflow:  auto;
+}
+.left-col,
+.right-col{
+  float:  left;
+  width:  50%;
+}
+#backgroundWhite{
+    background-color: white;
+    color:black;
+}
+.startDateLabel{
+
+   font-size:  smaller;
+    color:  gray;
+}
+.startDate{
+
+ font-size:  smaller;
+  color:  gray;
+}
+button{
+    height:50px;
+    width:65px;
+    margin-top:20px;
+    background-color:#A4D65E;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+#joinRightCol{
+    float:left;
+    margin-left:50%;
+}
+#startTime{
+    font-weight:bold;
+    font-size:50px;
+    text-align: center;
+
+    width:70%;
+    margin-top:5%;
+}
+
+
+
+#homescreen .home2{
+      display:none;
+}
+
+
+@media screen and (max-width: 1144px){
+    .left-col,
+    .right-col{
+      width:  100%;
+      overflow: auto;
+      }
+
+.center{
+    width: 90%;
+}
+
+#generate{
+    margin-left:35%;
+}
+
+#tournamentName{
+  margin-left: 120px;
+}
+
+.tourneyStartDate{
+     margin-left: -30px;
+}
+
+#nameProgress{
+  margin-left:-50%;
+}
+#listOpen li{
+    overflow:auto;
+    width:100%;
+}
+#listClosed{
+    margin-left:-42%;
+}
+#nameOpen{
+    margin-left:-60%;
+     overflow-x: auto;
+}
+
+#listOpen{
+    margin-left:-10%;
+     overflow-x: auto;
+     width:100%;
+}
+#listdiv{
+    overflow-x: auto;
+}
+}

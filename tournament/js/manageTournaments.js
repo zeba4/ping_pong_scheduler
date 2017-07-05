@@ -53,7 +53,7 @@ connectedRef.on("value", function(snap) {
 //Ask for full name of 1st-3rd place winners at end for storage purposes
 //Shuffle player list
 
-//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event. 
+//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event.
 
 // Homepage Load Code
 
@@ -117,6 +117,7 @@ function checkForDuplicates(name, date, key){
   if(document.getElementById(key) == null)
   {
     updateOpenTour(name, date,key);
+    alert("Tournament Created");
   }
 }
 
@@ -147,8 +148,8 @@ function displayTournament(data, objKey){
 }
 
 function updateList(name){
-  
-  document.getElementById("signedUp").innerHTML +=  name + "<br>";
+
+  document.getElementById("signedUp").innerHTML +=  "<li>" + name + "</li>";
 }
 
 function createTournament(){
@@ -170,6 +171,7 @@ function createTournament(){
       console.log("success");
     }else {
       console.log("failure");
+      alert("fill in all the values");
     }
   }else{
     alert("Failed, you are not connected to the internet");
@@ -410,7 +412,6 @@ function displayBracket(dataString,key){
 }
 
 function updateOpenTour(name,date,key){
-  $("#listOpen").append('<li>' + name + " | Start Dates: " + date+ '</li>')
   var $button = $('<button/>', {
     type: 'button',
     id: key,
@@ -419,12 +420,13 @@ function updateOpenTour(name,date,key){
     click: function() {
       viewTour(this.id)
     }
-  });
+  }); 
   $button.appendTo('#listOpen');
+  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
+
 function updateClosedTour(name,key, finished){
-  $("#listClosed").append('<li>'+ finished + name + '</li>')
   var $button = $('<button/>', {
     type: 'button',
     id: key,
@@ -434,4 +436,14 @@ function updateClosedTour(name,key, finished){
     }
   });
   $button.appendTo('#listClosed');
+  $("#listClosed").append('<li>' + name + '</li><br>')
 }
+
+
+document.getElementById("playerName")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("enter").click();
+    }
+});
