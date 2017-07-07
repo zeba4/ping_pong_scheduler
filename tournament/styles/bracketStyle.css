@@ -94,7 +94,7 @@ h1,h2{
 
 #generate{
     margin-left:40%;
-  margin-top:35px;
+
   width:  30%;
   height:150px;
   font-size:30px;
@@ -143,8 +143,7 @@ h1,h2{
 
 }
 
-.joinLeft,
-.joinRight{
+.twoCols{
     float:left;
     width:  50%;
 }
@@ -152,6 +151,7 @@ h1,h2{
       width:20em;
       height: 2.5em;
       font-size: 17px;
+      margin-bottom: 3%;
 }
 #runMax{
 height:1.5em;
@@ -197,11 +197,7 @@ height:1.5em;
 .main-section{
   overflow:  auto;
 }
-.left-col,
-.right-col{
-  float:  left;
-  width:  50%;
-}
+
 #backgroundWhite{
     background-color: white;
     color:black;
@@ -234,7 +230,8 @@ button{
     font-size:50px;
     text-align: center;
 
-    width:70%;
+    width:100%;
+    margin-left:-15%;
     margin-top:5%;
 }
 
@@ -246,8 +243,7 @@ button{
 
 
 @media screen and (max-width: 1144px){
-    .left-col,
-    .right-col{
+    .twoCols{
       width:  100%;
       overflow: auto;
       }
@@ -256,9 +252,7 @@ button{
     width: 90%;
 }
 
-#generate{
-    margin-left:35%;
-}
+
 
 #tournamentName{
   margin-left: 120px;
