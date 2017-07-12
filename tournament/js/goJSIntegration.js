@@ -65,7 +65,7 @@
       checkWinner(model)
       myDiagram.model = model;
     }
-     function updateModel(tournamentJSON) {
+    function updateModel(tournamentJSON) {
       var model = new go.TreeModel(tournamentJSON);
       checkWinner(model)
       myDiagram.model = model;

@@ -42,8 +42,6 @@ connectedRef.on("value", function(snap) {
 });
 
 //TODO:
-// Timeout finish tournaments
-// Create a Winner Screen once bracket is over?
 //Add number of people in tournament next to dynamic list tags
 //Add Start on max players
 //Ask for full name of 1st-3rd place winners at end for storage purposes
@@ -86,7 +84,6 @@ function deleteTournament(date,key){
   }
   return true;
 }
-
 
 function listenForCurrentBracketUpdates(key){
   updateBracketRef = database.ref(details_firebase_route+tournament_firebase_route + key);
@@ -187,9 +184,6 @@ function getDivValue(ids){
   return listOfValues;
 }
 
-
-
-
 function joinTournament(){
   try{
     if(isConnected){
@@ -232,7 +226,6 @@ function transition(screen){
   }
 }
 
-
 function changeClassName(ids,state){
   for(var i = 0; i<state.length;i++){
     document.getElementById(ids[i]).className = state[i]
@@ -273,7 +266,6 @@ function killCheckForNewPlayers(){
 
   updatePlayersRef.off();
 }
-
 
 function viewTour(key){
   screenState = "join";
@@ -316,7 +308,7 @@ function startTimer(){
         clearInterval(timerVariable);
         generateBracket(currentJoinKey);
       }
-  }, 1000);
+    }, 1000);
 }
 
 function killTimer(){
