@@ -429,6 +429,31 @@ function updateOpenTour(name,date,key){
   $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
+var dbRef = firebase.database().ref("winner");
+
+database.ref('/').on('value', function(snapshot){
+  console.log(snapshot.val());
+});
+
+
+dbRef.on('value', function(snapshot){
+    var displayWinner = snapshot.val();
+
+    
+addWinnerNameToHtml(displayWinner.nameOfWinner);
+addWinnerDateToHtml(displayWinner.dateWon);
+addWinnerWonToHtml(displayWinner.numWon);
+});
+
+function addWinnerNameToHtml(winningTeamName){
+  $("#winnerNameList").append('<li><span>' + winningTeamName );
+}
+function addWinnerDateToHtml(date){
+  $("#winnerNameList").append('<li><span>' + date );
+}
+function addWinnerWonToHtml(won){
+  $("#winnerNameList").append('<li><span>' + won );
+}
 
 function updateClosedTour(name,key, finished){
   var $button = $('<button/>', {
