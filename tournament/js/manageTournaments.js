@@ -25,6 +25,7 @@ const loadQuery = tournamentRef.orderByChild('date');
 const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
 const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
 const connectedRef = database.ref(".info/connected");
+const winners_route = "/winners/"
 
 var updatePlayersRef;
 var updateBracketRef;
@@ -36,6 +37,7 @@ var timerVariable;
 var tournamentExists;
 var isConnected;
 var isTourOver;
+var currentBracketName;
 
 connectedRef.on("value", function(snap) {
   isConnected = snap.val();
@@ -275,9 +277,10 @@ function viewTour(key){
   listenForNewPlayers(key);
 }
 
-function viewBracket(key){
+function viewBracket(key, name){
   if(isConnected)
   {
+    currentBracketName = name;
     currentBracketKey = key;
     screenState = "bracket";
     transition(screenState);
@@ -431,7 +434,7 @@ function updateClosedTour(name,key, finished){
     id: key,
     text: 'View',
     click: function() {
-      viewBracket(this.id)
+      viewBracket(this.id, name)
     }
   });
   $button.appendTo('#listClosed');
@@ -445,3 +448,26 @@ document.getElementById("playerName")
         document.getElementById("enter").click();
     }
 });
+
+function addWinner(name) {
+  var winnersRef = database.ref(winners_route + currentBracketName);
+  var updates = {};
+  winnersRef.set({
+    winner: name,
+    date: getTodayDate()
+  });
+}
+
+function getTodayDate() {
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1;
+var yyyy = today.getFullYear();
+if(dd<10) {
+    dd = '0'+dd
+} 
+if(mm<10) {
+    mm = '0'+mm
+} 
+return mm + '/' + dd + '/' + yyyy;
+}

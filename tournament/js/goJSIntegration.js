@@ -83,6 +83,12 @@
             {
               if(e.object.score1 && e.object.score2 != undefined || "")
               {
+                if(e.object.score1 > e.object.score2)
+                {
+                  addWinner(e.object.player1)
+                }else{
+                  addWinner(e.object.player2)
+                }
                 alert("Tournament is over!");
                 finishTournament();
               }
