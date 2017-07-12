@@ -42,6 +42,10 @@ body{
 }
 a {
     cursor: pointer;
+    font-size: 35px;
+font-weight:bold;
+text-align: center;
+/*margin-left:38.5%;*/
 }
 h1{
     padding-bottom:  10px;
@@ -213,6 +217,7 @@ height:1.5em;
   color:  gray;
 }
 button{
+
     height:50px;
     width:65px;
     margin-top:20px;
@@ -220,6 +225,7 @@ button{
     color:white;
     font-size:20px;
     font-weight:bold;
+    display: inline-block;
 }
 #joinRightCol{
     float:left;
@@ -234,15 +240,43 @@ button{
     margin-left:-15%;
     margin-top:5%;
 }
+.titleWin{
+    color:black;
+    font-size:45px;
+}
+.flex{
 
+    display: flex; 
+    align-content: center;
+    justify-content: space-around;
+   
+}
 
+.headers{
+    background:#A4D65E;
+    color:white;
+    width:350px;
+    height:50px;
+    vertical-align: center;
+  
+}
 
-#homescreen .home2{
-      display:none;
+.winnerButton{
+    position: absolute;
+    display: block;
+    /*transform: rotate(-35deg);*/
+    top: 50px;
+    font-size:25px;
+    background:#A4D65E;
+    color:white;
+    height: 40px;
+    width: 180px;
+    margin-top: -20px;
+    
 }
 
 
-@media screen and (max-width: 1144px){
+@media screen and (max-width: 1155px){
     .twoCols{
       width:  100%;
       overflow: auto;
@@ -251,23 +285,27 @@ button{
 .center{
     width: 90%;
 }
-
-
+#generate{
+    margin-left:35%;
+}
+#homeForWin{
+    margin-left:38.5%;
+}
 
 #tournamentName{
-  margin-left: 120px;
+  margin-left: 25%;
 }
 
 .tourneyStartDate{
-     margin-left: -30px;
+     margin-left: 13%;
 }
 
 #nameProgress{
-  margin-left:-50%;
+  margin-left:-53.5%;
 }
 #listOpen li{
+    
     overflow:auto;
-    width:100%;
 }
 #listClosed{
     margin-left:-42%;
@@ -279,10 +317,22 @@ button{
 
 #listOpen{
     margin-left:-10%;
-     overflow-x: auto;
+    
      width:100%;
 }
 #listdiv{
     overflow-x: auto;
+}
+button {
+margin-right:0px;
+display: inline-block;
+}
+#homeForWin {
+    margin-left:0%;
+}
+.bracketFrame {
+   
+    margin-left:20%;
+    
 }
 }
