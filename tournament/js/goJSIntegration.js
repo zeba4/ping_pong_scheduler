@@ -66,6 +66,7 @@
       myDiagram.model = model;
     }
     function updateModel(tournamentJSON) {
+      console.log(tournamentJSON)
       var model = new go.TreeModel(tournamentJSON);
       checkWinner(model)
       myDiagram.model = model;
@@ -232,4 +233,9 @@ function makeJSON(list){
         }
     }
     makeModel(dataT)
+    dataT = {
+    "class": "go.TreeModel",
+    "nodeDataArray": [
+    ]
+}
 }

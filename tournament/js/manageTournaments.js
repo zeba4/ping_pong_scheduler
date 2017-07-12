@@ -3,16 +3,16 @@ index.js
 */
 "use strict";
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBy-CYW3EOzYUZLoBR0kYwE9bOFt1pWeEU",
-    authDomain: "ping-pong-tournament-a18d7.firebaseapp.com",
-    databaseURL: "https://ping-pong-tournament-a18d7.firebaseio.com",
-    projectId: "ping-pong-tournament-a18d7",
-    storageBucket: "ping-pong-tournament-a18d7.appspot.com",
-    messagingSenderId: "685269907531"
-  };
-  firebase.initializeApp(config);
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBy-CYW3EOzYUZLoBR0kYwE9bOFt1pWeEU",
+  authDomain: "ping-pong-tournament-a18d7.firebaseapp.com",
+  databaseURL: "https://ping-pong-tournament-a18d7.firebaseio.com",
+  projectId: "ping-pong-tournament-a18d7",
+  storageBucket: "ping-pong-tournament-a18d7.appspot.com",
+  messagingSenderId: "685269907531"
+};
+firebase.initializeApp(config);
 
 const database = firebase.database();
 const details_firebase_route = "details/";
@@ -60,14 +60,14 @@ loadQuery.once('value', function(snapshot){
         {
           updateClosedTour(data.val().name, data.key, "Finished: ");
         }
-    }else{
+      }else{
         if(hasStarted(data.val(),data.key) == false)
         {
           updateOpenTour(data.val().name, data.val().date, data.key);
         }else{
           updateClosedTour(data.val().name, data.key, "");
         }
-    }
+      }
     });
     listenForNewTournaments();
   }else{
@@ -320,13 +320,6 @@ function checkPastStartDate(data){
   var selectedDate = new Date(data);
   var now = new Date();
   now.setHours(0,0,0,0);
-  // if (selectedDate <= now) {
-  //   // selected date is in the past
-  //   return true;
-  // }else{
-  //   return false;
-  // }
-
   return selectedDate <= now;
 };
 
@@ -358,7 +351,6 @@ function finishTournament(){
 }
 
 // Tournament has started code
-
 function hasStarted(data, key){
     if(checkPastStartDate(data.date))
     {
@@ -372,15 +364,19 @@ function hasStarted(data, key){
 }
 
 function generateBracket(key){
-  currentBracketKey = key;
+  currentBracketKey = key; // This might be the issue
   var playerArray = [];
   var tempRef = database.ref(details_firebase_route + tournament_firebase_route + key + "/" + players_firebase_route)
+  console.log(key)
   tempRef.once('value').then(function(snapshot) {
+    console.log(key + " Here")
     snapshot.forEach(function(data1){
         playerArray.push(data1.val().name);
     });
+      console.log(key + "There")
       createArrayWithEmptyAndNodes(playerArray);
       startTournament(myDiagram.model.toJSON(),key);
+      console.log(key + "Come on")
       }, function(error) {
     // The Promise was rejected.
     console.error(error);
@@ -389,6 +385,7 @@ function generateBracket(key){
 }
 
 function startTournament(tString, key){
+      console.log(tString)
       var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route + key);
       var updates = {};
       updates['/tourString'] = tString;
@@ -398,7 +395,7 @@ function startTournament(tString, key){
 function loadBracket(key){
   tournamentRef.once('value').then(function(snapshot) {
     snapshot.forEach(function(data){
-      if(data.key === key)
+      if(data.key == key)
       {
         isTourOver = data.val().tourOver;
         displayBracket(data.val().tourString,key);
