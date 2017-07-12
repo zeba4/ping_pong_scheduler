@@ -369,14 +369,11 @@ function generateBracket(key){
   var tempRef = database.ref(details_firebase_route + tournament_firebase_route + key + "/" + players_firebase_route)
   console.log(key)
   tempRef.once('value').then(function(snapshot) {
-    console.log(key + " Here")
     snapshot.forEach(function(data1){
         playerArray.push(data1.val().name);
     });
-      console.log(key + "There")
       createArrayWithEmptyAndNodes(playerArray);
       startTournament(myDiagram.model.toJSON(),key);
-      console.log(key + "Come on")
       }, function(error) {
     // The Promise was rejected.
     console.error(error);
