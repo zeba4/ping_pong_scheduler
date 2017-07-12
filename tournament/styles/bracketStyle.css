@@ -275,6 +275,32 @@ button{
     
 }
 
+#name{
+    margin-left:50px;
+    background-color:#A4D65E;
+}
+
+table{
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ddd;
+}
+
+th{
+    text-align: left;
+}
+td,
+th{
+    width: 50%;
+    padding-left: 15px;
+}
+
+td:nth-child(1),
+th:nth-child(1){
+    border-right: 5px dotted green;
+}
+
 
 @media screen and (max-width: 1155px){
     .twoCols{

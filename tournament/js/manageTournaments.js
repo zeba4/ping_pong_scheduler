@@ -429,7 +429,7 @@ function updateOpenTour(name,date,key){
   $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
-var dbRef = firebase.database().ref("winner");
+var dbRef = firebase.database().ref("winners");
 
 database.ref('/').on('value', function(snapshot){
   console.log(snapshot.val());
@@ -440,20 +440,39 @@ dbRef.on('value', function(snapshot){
     var displayWinner = snapshot.val();
 
     
-addWinnerNameToHtml(displayWinner.nameOfWinner);
-addWinnerDateToHtml(displayWinner.dateWon);
-addWinnerWonToHtml(displayWinner.numWon);
+
+
+var tournamentList = Object.keys(displayWinner);
+$("#winnerRow").html("");
+tournamentList.forEach(function(tournamentName){
+console.log(tournamentName);
+var tournamentInfo = displayWinner[tournamentName];
+console.log(tournamentInfo.date + " " + tournamentInfo.winner + " " + tournamentName);
+addWinnerNameToHtml(tournamentInfo.winner, tournamentInfo.date);
+
+
+})
+
 });
 
-function addWinnerNameToHtml(winningTeamName){
-  $("#winnerNameList").append('<li><span>' + winningTeamName );
+// function addWinnerNameToHtml(winningTeamName){
+//   $("#winnerNameList").append('<li><span>' + winningTeamName );
+// }
+// function addWinnerDateToHtml(date){
+//   $("#winnerDateList").append('<li><span>' + date );
+// }
+
+
+function addWinnerNameToHtml(winningTeamName, date){
+  var str = '<tr><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
+  console.log("my test = " + str);
+  $("#winnerRow").append(str);
+  
 }
-function addWinnerDateToHtml(date){
-  $("#winnerNameList").append('<li><span>' + date );
-}
-function addWinnerWonToHtml(won){
-  $("#winnerNameList").append('<li><span>' + won );
-}
+// function addWinnerDateToHtml(date){
+//   $("#winnerRow").append('<td>' + date + '</td>');
+// }
+
 
 function updateClosedTour(name,key, finished){
   var $button = $('<button/>', {
