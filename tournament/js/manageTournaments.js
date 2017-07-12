@@ -338,7 +338,7 @@ function saveTournamentState(){
 
 function finishTournament(){
     killListenForCurrentBracketUpdates();
-    if(isTourOver === false){
+    if(isTourOver == false){
       var d = new Date();
       var temp = new Date(d.setDate(d.getDate() + 1));
       var m = temp.getMonth()+1;
