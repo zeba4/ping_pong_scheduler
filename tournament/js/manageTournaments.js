@@ -38,11 +38,7 @@ var isConnected;
 var isTourOver;
 
 connectedRef.on("value", function(snap) {
-  if (snap.val() === true) {
-    isConnected = true;
-  } else {
-    isConnected = false;
-  }
+  isConnected = snap.val();
 });
 
 //TODO:
@@ -153,10 +149,10 @@ function updateList(name){
 }
 
 function createTournament(){
-  if(isConnected == true){
+  if(isConnected){
     listenForNewTournaments();
     var tourValues = getDivValue(['tourName','datepicker']);//,'numPlayers'//,'runMax']);
-    if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
+    if(tourValues[0]&& tourValues[1] !== "" || undefined)
     {
       var newPostRef = tournamentRef.push();
       newPostRef.set({
@@ -169,11 +165,15 @@ function createTournament(){
       });
       clearDocument(["tourName","datepicker"]);
       console.log("success");
-    }else {
+    }
+    else 
+    {
       console.log("failure");
       alert("fill in all the values");
     }
-  }else{
+  }
+  else
+  {
     alert("Failed, you are not connected to the internet");
   }
 }
@@ -192,7 +192,7 @@ function getDivValue(ids){
 
 function joinTournament(){
   try{
-    if(isConnected == true){
+    if(isConnected){
       if(document.getElementById("playerName").value != "")
       {
         var newPostRef = database.ref(details_firebase_route+tournament_firebase_route+ currentJoinKey + '/' + players_firebase_route).push();
@@ -201,10 +201,14 @@ function joinTournament(){
         });
         document.getElementById("playerName").value = "";
       }
-    }else{
-    alert("Failed, you are not connected to the internet");
+    }
+    else
+    {
+      alert("Failed, you are not connected to the internet");
+    }
   }
-  }catch(err){
+  catch(err)
+  {
     console.log(err)
   }
 }
@@ -213,13 +217,17 @@ function joinTournament(){
 
 function transition(screen){
   // home is home page, join is join screen, bracket is the Bracket screen
-  if(screen == "home")
+  if(screen === "home")
   {
     changeClassName(screenSections,["visible","hidden","hidden"]);
     clearDocument(["signedUp","startTime"]);
-  }else if(screen == "join"){
+  }
+  else if(screen === "join")
+  {
     changeClassName(screenSections,["hidden","visible","hidden"]);
-  }else if(screen == "bracket"){
+  }
+  else if(screen === "bracket")
+  {
     changeClassName(screenSections,["hidden","hidden","visible"]);
   }
 }
@@ -232,29 +240,31 @@ function changeClassName(ids,state){
 }
 
 function clearDocument(ids){
-  for(var i = 0; i<ids.length;i++){
-    if(ids[i] == "startTime")
+  for(var i = 0; i < ids.length;i++){
+    if(ids[i] === "startTime")
     {
       document.getElementById(ids[i]).innerHTML = "00d 00h 00m 00s";
-    }else{
+    }
+    else
+    {
       document.getElementById(ids[i]).innerHTML = "";
     }
   }
 }
 
 function homePage(){
-  if(screenState == "join")
+  if(screenState === "join")
   {
     killCheckForNewPlayers();
   }
-  if(screenState == "bracket")
+  if(screenState === "bracket")
   {
     saveTournamentState();
     killListenForCurrentBracketUpdates()
   }
   killTimer();
 
-  isTourOver = ""
+  isTourOver = "";
   screenState = "home";
   transition(screenState);
 }
@@ -274,12 +284,15 @@ function viewTour(key){
 }
 
 function viewBracket(key){
-  if(isConnected == true){
+  if(isConnected)
+  {
     currentBracketKey = key;
     screenState = "bracket";
     transition(screenState);
     loadBracket(key);
-  }else{
+  }
+  else
+  {
     alert("You are not connected to the internet.")
   }
 }
@@ -287,7 +300,6 @@ function viewBracket(key){
 // Time/DOM Code
 
 $(function() {
-
   $( "#datepicker" ).datepicker({ minDate: 1});
 });
 
@@ -316,12 +328,14 @@ function checkPastStartDate(data){
   var selectedDate = new Date(data);
   var now = new Date();
   now.setHours(0,0,0,0);
-  if (selectedDate <= now) {
-    // selected date is in the past
-    return true;
-  }else{
-    return false;
-  }
+  // if (selectedDate <= now) {
+  //   // selected date is in the past
+  //   return true;
+  // }else{
+  //   return false;
+  // }
+
+  return selectedDate <= now;
 };
 
 // Saving the State of the tournament
@@ -356,7 +370,7 @@ function finishTournament(){
 function hasStarted(data, key){
     if(checkPastStartDate(data.date))
     {
-      if(data.tourString == "")
+      if(data.tourString === "")
       {
         generateBracket(key);
       }
@@ -373,7 +387,7 @@ function generateBracket(key){
     snapshot.forEach(function(data1){
         playerArray.push(data1.val().name);
     });
-      makeModel(playerArray);
+      createArrayWithEmptyAndNodes(playerArray);
       startTournament(myDiagram.model.toJSON(),key);
       }, function(error) {
     // The Promise was rejected.
@@ -392,7 +406,7 @@ function startTournament(tString, key){
 function loadBracket(key){
   tournamentRef.once('value').then(function(snapshot) {
     snapshot.forEach(function(data){
-      if(data.key == key)
+      if(data.key === key)
       {
         isTourOver = data.val().tourOver;
         displayBracket(data.val().tourString,key);
@@ -425,7 +439,6 @@ function updateOpenTour(name,date,key){
   $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
-
 function updateClosedTour(name,key, finished){
   var $button = $('<button/>', {
     type: 'button',
@@ -438,7 +451,6 @@ function updateClosedTour(name,key, finished){
   $button.appendTo('#listClosed');
   $("#listClosed").append('<li>' + name + '</li><br>')
 }
-
 
 document.getElementById("playerName")
     .addEventListener("keyup", function(event) {
