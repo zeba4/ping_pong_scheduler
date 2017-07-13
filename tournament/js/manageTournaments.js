@@ -141,12 +141,22 @@ function loadTournament(key){
   });
 }
 
+function loadTournamentBracket(key){
+  detailsRef.once('value').then(function(snapshot) {
+    // The Promise was "fulfilled" (it succeeded)
+      displayTournamentBracket(snapshot.val(),key);
+  });
+}
+
 function displayTournament(data, objKey){
     countDownDate = new Date(data.tournament[objKey].date).getTime();
     startTimer();
     document.getElementById("tNamePlace").innerHTML = "Tournament Name: " + data.tournament[objKey].name;
 }
 
+function displayTournamentBracket(data, objKey){
+    document.getElementById("tNameBracket").innerHTML = "Tournament Name: " + data.tournament[objKey].name;
+}
 function updateList(name){
 
   document.getElementById("signedUp").innerHTML +=  "<li>" + name + "</li>";
@@ -270,6 +280,7 @@ function viewTour(key){
   currentJoinKey = key;
   transition(screenState);
   loadTournament(key);
+ 
   listenForNewPlayers(key);
 }
 function viewWin(){
@@ -286,6 +297,7 @@ function viewBracket(key){
   }else{
     alert("You are not connected to the internet.")
   }
+   loadTournamentBracket(key);
 }
 
 // Time/DOM Code
