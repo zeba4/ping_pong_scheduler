@@ -24,11 +24,13 @@ var displayNewTime= function(data)
   var minutes = data.min;
   var time = data.time;
   var checkforzero = false;
+   console.log(data.hour);
   minutes = minutes +time
   if(minutes >= 60)
   {
     hour++;
     minutes = minutes % 60;
+    console.log(data.hour);
   }
   else if(time==0){
       document.getElementById("endTime").innerHTML="Table Is Open";

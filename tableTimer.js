@@ -60,6 +60,8 @@
 
       var onLoad=function(){
        addtodatabase(0,0,0);
+       clearName();
+       clearInput();
     }
 
     function addtodatabase(h,m,t){
@@ -79,7 +81,7 @@
     function stop(){
      clearInterval(countSec);
      clearTimeout(myStop);
-     hideTimerSections(["set1","set2","set3","stop"]);
+     hideTimerSections(["set1","set2","set3","stop","reservation","reservationName","change"]);
      showTimerSections(["button1","button2","button3","para","select"])
      resetTimer();
       $("#button1").bind("click", startTenMinuteTimer);
@@ -87,6 +89,8 @@
       $("#button3").bind("click", startThirtyMinuteTimer);
        hideTimerWarning();
        addtodatabase(0,0,0);
+       clearName();
+       clearInput();
     }
      var getCurrentTime= function(){
      var d= new Date();
@@ -98,38 +102,41 @@
   var startTenMinuteTimer= function() {
      startTimer(1);
     hideTimerSections(["button1", "button2","button3","para","select"]);
-    showTimerSections(["stop","firstTimer","set1"]);
+    showTimerSections(["stop","firstTimer","set1","reservation","reservationName","change"]);
     var time = getCurrentTime();
     addtodatabase(time.hours,time.minutes, 10);
     myStop= setTimeout(function(){
-      hideTimerSections(["stop", "set1"]);
+      hideTimerSections(["stop", "set1","reservation","reservationName","change"]);
       showTimerSections(["button1","button2","button3","para","select"]);
       addtodatabase(time.hours,time.minutes, 0);
+      clearInput();
         },600000);
   };
 
   var startTwentyMinuteTimer=function() {
      startTimer(2);
     hideTimerSections(["button1","button2", "button3","para","select"]);
-    showTimerSections(["stop","set2","secondTimer"]);
+    showTimerSections(["stop","set2","secondTimer","reservation","reservationName","change"]);
     var time = getCurrentTime();
     addtodatabase(time.hours,time.minutes, 20);
     myStop=setTimeout(function(){
-      hideTimerSections(["stop", "set2"]);
+      hideTimerSections(["stop", "set2","reservation","reservationName","change"]);
       showTimerSections(["button1","button2","button3","para","select"]);
       addtodatabase(time.hours,time.minutes, 0);
+      clearInput();
         },1200000);
   };
   var startThirtyMinuteTimer=function()  {
      startTimer(3);
     hideTimerSections(["button1", "button2","button3","para","select"]);
-    showTimerSections(["stop","set3","thirdTimer"]);
+    showTimerSections(["stop","set3","thirdTimer","reservation","reservationName","change"]);
     var time = getCurrentTime();
     addtodatabase(time.hours,time.minutes, 0);
     myStop = setTimeout(function(){
-      hideTimerSections(["stop", "set3"]);
+      hideTimerSections(["stop", "set3","reservation","reservationName","change"]);
       showTimerSections(["button1","button2","button3","para","select"]);
       addtodatabase(time.hours,time.minutes, 0);
+      clearInput();
     },1800000);
   }
 
@@ -160,3 +167,20 @@
       $("#" + eachId).show();
     });
   }
+  function reserveTable(){
+    var r =document.getElementById("reserve").value;
+    document.getElementById("reservationName").innerHTML = "Next Game Reserved By:" + r;
+    clearInput();
+    hideTimerSections(["reservation"])
+  }
+ function clearName(){
+    document.getElementById("reservationName").innerHTML = "";
+ }
+ function clearInput(){
+   document.getElementById("reserve").value= "";
+ }
+function changeReservation(){
+  clearInput();
+  clearName();
+  showTimerSections(["reservation"])
+}

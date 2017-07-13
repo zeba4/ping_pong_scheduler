@@ -1,4 +1,4 @@
-           var bracket = go.GraphObject.make;  // for conciseness in defining templates
+var bracket = go.GraphObject.make;  // for conciseness in defining templates
     myDiagram =
       bracket(go.Diagram, "bracketDiv",  // create a Diagram for the DIV HTML element
         {

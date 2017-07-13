@@ -112,3 +112,11 @@ body{
   font-size:40px;
   text-align:center;
 }
+#reservation{
+ margin: 5% auto 0 auto;
+}
+#reservationName{
+  font-family:"Roboto","comics sans"
+  margin-bottom:2%;
+}
+#changeReservation{}
