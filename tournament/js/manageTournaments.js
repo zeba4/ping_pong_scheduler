@@ -448,23 +448,16 @@ tournamentList.forEach(function(tournamentName){
 console.log(tournamentName);
 var tournamentInfo = displayWinner[tournamentName];
 console.log(tournamentInfo.date + " " + tournamentInfo.winner + " " + tournamentName);
-addWinnerNameToHtml(tournamentInfo.winner, tournamentInfo.date);
+addWinnerNameToHtml(tournamentName, tournamentInfo.winner, tournamentInfo.date);
 
 
 })
 
 });
 
-// function addWinnerNameToHtml(winningTeamName){
-//   $("#winnerNameList").append('<li><span>' + winningTeamName );
-// }
-// function addWinnerDateToHtml(date){
-//   $("#winnerDateList").append('<li><span>' + date );
-// }
 
-
-function addWinnerNameToHtml(winningTeamName, date){
-  var str = '<tr><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
+function addWinnerNameToHtml(teamName,winningTeamName, date){
+  var str ='<tr><td>' + teamName + '</td><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
   console.log("my test = " + str);
   $("#winnerRow").append(str);
   

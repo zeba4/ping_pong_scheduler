@@ -275,30 +275,41 @@ button{
     
 }
 
-#name{
-    margin-left:50px;
+.name{
     background-color:#A4D65E;
+    width: 33.33%;
+    padding-left: 15px;
+    font-size:35px;
+    color:white;
+   
 }
 
 table{
-    width: 800px;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid #ddd;
+    margin-top:1.5%;
+    border: 1px solid gray;
+    
 }
 
-th{
+th .name{
     text-align: left;
+     
 }
-td,
-th{
-    width: 50%;
+
+/*#winDate{
+    width: 20%;
     padding-left: 15px;
-}
+     width: 800px;
+}*/
 
 td:nth-child(1),
-th:nth-child(1){
-    border-right: 5px dotted green;
+th:nth-child(1),
+th:nth-child(2),
+td:nth-child(2){
+    border-right: 5px dotted gray;
+  
 }
 
 
