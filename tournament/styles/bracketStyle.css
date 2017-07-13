@@ -241,7 +241,7 @@ button{
     margin-top:5%;
 }
 .titleWin{
-    color:black;
+    color:#A4D65E;
     font-size:45px;
 }
 .flex{
@@ -312,6 +312,16 @@ td:nth-child(2){
   
 }
 
+.doneButton{
+background-color:#A4D65E;
+margin-left:20%;
+margin-top: 5%;
+height:3.5em;
+width:25%;
+font-size:20px;
+font-weight:bold;
+color: white;
+}
 
 @media screen and (max-width: 1155px){
     .twoCols{
