@@ -189,10 +189,10 @@ var makeTree = function(list) {
         }
         currentCol = currentCol + 1
     }
-    makeJSON(tempArray)
+    prepareJSONForGoJS(tempArray)
 }
 
-function makeJSON(list){
+function prepareJSONForGoJS(list){
     var x = 0;
     for(var i = 0;i<list.length;i++)
     {
