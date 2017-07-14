@@ -19,14 +19,12 @@
         </header>
 
         <section id="homeScreen" class="visible">
+
+            <input type="button" class="winnerButton" id="winnerButton" onClick="viewWin(this.id)" value="View Winners!">
           <h1 class="home" >
               <img src="ping.gif"  height="60" width="60" />
             Hoffman Ping Pong
-
-
-
           </h1>
-
             <div id ="createNewTournament">
                     <div class="main-section">
                         <h2>Create New Tournament</h2>
@@ -93,9 +91,7 @@
                                 <ul id="listClosed" style = "list-style: none" class:"inlineButton">
                                 </ul>
                             </div>
-
-</div>
-
+            </div>
         </section>
 
         <section id="joinTournamentScreen" class="hidden">
@@ -109,7 +105,7 @@
                 <div id="tNamePlace">  </div>
                 </div>
                <div class ="center">
-                <div class="twoCols">
+                <div class="twoCols" id="right2">
 
                     <p id ="participants">  Participants: </p>
 
@@ -121,7 +117,7 @@
 
 
 
-<div class="twoCols">
+<div class="twoCols" id="left2">
               <div id= "enterButton">
                     <input type="text" placeholder="Enter Name Here" id="playerName">
 
@@ -131,22 +127,54 @@
                   <div id="startTime">
                     <!--<h3> 00d 00h 00m 00s</h3>-->
                 </div>
-
+ <input type="button" class="doneButton"  onClick="homePage()" value="Done!">
               </div>
 </div>
         </section>
-        <section id="tournamentBracketScreen" class="hidden">
 
-            <h1 class="home" >
-<a  onClick="homePage()">
+
+
+        <section id="tournamentBracketScreen" class="hidden">
+ 
+            <h1 class="homeWin" >
+<a   onClick="homePage()">
     <img src="ping.gif"  height="60" width="60" />Return To Homepage</a>
 </h1>
+ <div id="tNameBracket">  </div>
             <div id="bracketDiv" class="bracketFrame">
 
 
             </div>
             </div>
         </section>
+    
+<section id="winnerScreen" class="hidden">
+    <h1 id="homeForWin">
+    <a  onClick="homePage()">
+    <img src="ping.gif"  height="60" width="60" />Return To Homepage</a>
+    </h1>
+
+    <div>
+        <h1 class="titleWin">Ping Pong Champions</h1>
+           
+
+            <table>
+                <thead>
+            <tr>
+                <th class= "name">Tournament Name</th>
+                 <th class= "name">Winner</th>
+                <th class= "name" id="winDate">Date of Tournament</th>
+               
+            </tr>
+            </thead>
+            <tbody id="winnerRow"></tbody>
+            
+        </table>
+            
+    </div>
+</section>
+
+
 
 
         <footer>

@@ -42,6 +42,10 @@ body{
 }
 a {
     cursor: pointer;
+    font-size: 35px;
+font-weight:bold;
+text-align: center;
+/*margin-left:38.5%;*/
 }
 h1{
     padding-bottom:  10px;
@@ -213,6 +217,7 @@ height:1.5em;
   color:  gray;
 }
 button{
+
     height:50px;
     width:65px;
     margin-top:20px;
@@ -220,6 +225,7 @@ button{
     color:white;
     font-size:20px;
     font-weight:bold;
+    display: inline-block;
 }
 #joinRightCol{
     float:left;
@@ -234,55 +240,174 @@ button{
     margin-left:-15%;
     margin-top:5%;
 }
+.titleWin{
+    color:#A4D65E;
+    font-size:50px;
+}
+.flex{
 
+    display: flex; 
+    align-content: center;
+    justify-content: space-around;
+   
 
-
-#homescreen .home2{
-      display:none;
 }
 
+.headers{
+    background:#A4D65E;
+    color:white;
+    width:350px;
+    height:50px;
+    vertical-align: center;
+  
+}
 
-@media screen and (max-width: 1144px){
+.winnerButton{
+    position: absolute;
+    display: block;
+    /*transform: rotate(-35deg);*/
+    top: 50px;
+    font-size:25px;
+    background:#A4D65E;
+    color:white;
+    height: 40px;
+    width: 180px;
+    margin-top: -20px;
+    
+}
+
+#tNameBracket{
+    color:#A4D65E;
+    font-size:50px;
+    margin-left:35%;
+    font-weight:bold;
+    margin-top:1.5%;
+}
+.name{
+    background-color:#A4D65E;
+    width: 33.33%;
+    padding-left: 15px;
+    font-size:35px;
+    color:white;
+   
+}
+
+table{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:1.5%;
+    border: 1px solid gray;
+    
+}
+
+th .name{
+    text-align: left;
+     
+}
+
+/*#winDate{
+    width: 20%;
+    padding-left: 15px;
+     width: 800px;
+}*/
+
+td:nth-child(1),
+th:nth-child(1),
+th:nth-child(2),
+td:nth-child(2){
+    border-right: 5px dotted gray;
+  
+}
+
+.doneButton{
+background-color:#A4D65E;
+margin-left:20%;
+margin-top: 5%;
+height:3.5em;
+width:25%;
+font-size:20px;
+font-weight:bold;
+color: white;
+}
+
+@media screen and (max-width: 1155px){
     .twoCols{
       width:  100%;
-      overflow: auto;
+     overflow-x: hidden;
       }
 
 .center{
     width: 90%;
 }
-
-
+#generate{
+    margin-left:35%;
+}
+#homeForWin{
+    margin-left:38.5%;
+}
 
 #tournamentName{
-  margin-left: 120px;
+  margin-left: 25%;
 }
 
 .tourneyStartDate{
-     margin-left: -30px;
+     margin-left: 13%;
 }
 
 #nameProgress{
-  margin-left:-50%;
+  margin-left:0;
 }
 #listOpen li{
+    
     overflow:auto;
-    width:100%;
 }
 #listClosed{
-    margin-left:-42%;
+    margin-left:1%;
 }
 #nameOpen{
-    margin-left:-60%;
+    margin-left:0%;
      overflow-x: auto;
 }
 
 #listOpen{
-    margin-left:-10%;
-     overflow-x: auto;
+    margin-left:15%;
+    
      width:100%;
 }
 #listdiv{
     overflow-x: auto;
+}
+button {
+margin-right:0px;
+display: inline-block;
+}
+#homeForWin {
+    margin-left:0%;
+}
+.bracketFrame {
+   
+    margin-left:20%;
+    
+}
+#tNameBracket{
+    
+    margin-left:25%;
+    
+}
+#playerName{
+     width:15em; 
+     float:left;
+}
+#right2{
+    width:30%;
+    margin-left: 15%;
+}
+#left2{
+    width:70%;
+    margin-right:-30%;
+}
+.openTourney{
+    margin-left:-15%;
 }
 }

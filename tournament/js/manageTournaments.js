@@ -23,7 +23,7 @@ const detailsRef = database.ref(details_firebase_route);
 const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
 const loadQuery = tournamentRef.orderByChild('date');
 const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
-const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen"]
+const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen","winnerScreen"]
 const connectedRef = database.ref(".info/connected");
 
 var updatePlayersRef;
@@ -141,12 +141,22 @@ function loadTournament(key){
   });
 }
 
+function loadTournamentBracket(key){
+  detailsRef.once('value').then(function(snapshot) {
+    // The Promise was "fulfilled" (it succeeded)
+      displayTournamentBracket(snapshot.val(),key);
+  });
+}
+
 function displayTournament(data, objKey){
     countDownDate = new Date(data.tournament[objKey].date).getTime();
     startTimer();
     document.getElementById("tNamePlace").innerHTML = "Tournament Name: " + data.tournament[objKey].name;
 }
 
+function displayTournamentBracket(data, objKey){
+    document.getElementById("tNameBracket").innerHTML = "Tournament Name: " + data.tournament[objKey].name;
+}
 function updateList(name){
 
   document.getElementById("signedUp").innerHTML +=  "<li>" + name + "</li>";
@@ -210,17 +220,17 @@ function joinTournament(){
 }
 
 // Transition Code
-
 function transition(screen){
   // home is home page, join is join screen, bracket is the Bracket screen
-  if(screen == "home")
-  {
-    changeClassName(screenSections,["visible","hidden","hidden"]);
+  if(screen == "home"){
+    changeClassName(screenSections,["visible","hidden","hidden","hidden"]);
     clearDocument(["signedUp","startTime"]);
   }else if(screen == "join"){
-    changeClassName(screenSections,["hidden","visible","hidden"]);
+    changeClassName(screenSections,["hidden","visible","hidden","hidden"]);
   }else if(screen == "bracket"){
-    changeClassName(screenSections,["hidden","hidden","visible"]);
+    changeClassName(screenSections,["hidden","hidden","visible","hidden"]);
+  }else if(screen == "winner"){
+    changeClassName(screenSections,["hidden","hidden","hidden","visible"])
   }
 }
 
@@ -270,9 +280,14 @@ function viewTour(key){
   currentJoinKey = key;
   transition(screenState);
   loadTournament(key);
+ 
   listenForNewPlayers(key);
 }
-
+function viewWin(){
+  screenState = "winner";
+  transition(screenState);
+  
+}
 function viewBracket(key){
   if(isConnected == true){
     currentBracketKey = key;
@@ -282,6 +297,7 @@ function viewBracket(key){
   }else{
     alert("You are not connected to the internet.")
   }
+   loadTournamentBracket(key);
 }
 
 // Time/DOM Code
@@ -424,6 +440,43 @@ function updateOpenTour(name,date,key){
   $button.appendTo('#listOpen');
   $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
+
+var dbRef = firebase.database().ref("winners");
+
+database.ref('/').on('value', function(snapshot){
+  console.log(snapshot.val());
+});
+
+
+dbRef.on('value', function(snapshot){
+    var displayWinner = snapshot.val();
+
+    
+
+
+var tournamentList = Object.keys(displayWinner);
+$("#winnerRow").html("");
+tournamentList.forEach(function(tournamentName){
+console.log(tournamentName);
+var tournamentInfo = displayWinner[tournamentName];
+console.log(tournamentInfo.date + " " + tournamentInfo.winner + " " + tournamentName);
+addWinnerNameToHtml(tournamentName, tournamentInfo.winner, tournamentInfo.date);
+
+
+})
+
+});
+
+
+function addWinnerNameToHtml(teamName,winningTeamName, date){
+  var str ='<tr><td>' + teamName + '</td><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
+  console.log("my test = " + str);
+  $("#winnerRow").append(str);
+  
+}
+// function addWinnerDateToHtml(date){
+//   $("#winnerRow").append('<td>' + date + '</td>');
+// }
 
 
 function updateClosedTour(name,key, finished){
