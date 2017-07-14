@@ -165,6 +165,8 @@ var makeTree = function(list) {
     var currentCol = 0;
     while(currentCol <= maxCol)
     {
+        var parentValue = 0;
+        var pairCounter = 0;
         var parentRow = 0;
         for(var i = 0;i < tempArray.length;i++)
         {
@@ -172,19 +174,6 @@ var makeTree = function(list) {
             {
                 tempArray[i].row = parentRow;
                 parentRow = parentRow + 1;
-            }
-        }
-        currentCol = currentCol + 1
-    }
-    var currentCol = 0;
-    while(currentCol <= maxCol)
-    {
-        var parentValue = 0;
-        var pairCounter = 0;
-        for(var i = 0;i<tempArray.length;i++)
-        {
-            if(tempArray[i].col == currentCol)
-            {
                 if(pairCounter === 0 || pairCounter === 1)
                 {
                     tempArray[i].pv = parentValue;
@@ -198,7 +187,7 @@ var makeTree = function(list) {
                 }
             }
         }
-        currentCol = currentCol + 1;
+        currentCol = currentCol + 1
     }
     makeJSON(tempArray)
 }
