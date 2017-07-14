@@ -20,6 +20,7 @@ console.log("Error: " + error.code);
 });
 var displayNewTime= function(data)
 {
+
 var hour = data.hour;
 var minutes = data.min;
 var time = data.time;
@@ -35,6 +36,7 @@ if(minutes >= 60)
 else if(time==0){
     updateDivTagContent("table", "Table Is Open");
     document.getElementById("table").style.display="none";
+
   }
 else
 {
