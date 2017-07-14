@@ -298,7 +298,6 @@ table{
     margin-right: auto;
     margin-top:1.5%;
     border: 1px solid gray;
-
 }
 
 th .name{
@@ -306,11 +305,9 @@ th .name{
 
 }
 
-/*#winDate{
-    width: 20%;
-    padding-left: 15px;
-     width: 800px;
-}*/
+td{
+padding-left:10px;
+}
 
 td:nth-child(1),
 th:nth-child(1),
