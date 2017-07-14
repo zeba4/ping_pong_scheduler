@@ -148,17 +148,18 @@ var createArrayWithEmptyAndNodes = function(list) {
 
 var makeTree = function(list) {
     var maxCol;
-    var tempArray = []
+    var newBinaryTree = []
     for(var i = 0; i < list.length - numPlayer; i++) {
         var currentNode = list[i];
         currentNode.left = list[2 * i + 1].name;
         currentNode.right = list[2 * i + 2].name;
-        tempArray.push(currentNode)
+        newBinaryTree.push(currentNode)
     }
+    list.length = 0;
 
-    for(var i = 0; i <tempArray.length;i++)
+    for(var i = 0; i <newBinaryTree.length;i++)
     {
-        var temp = tempArray[i]
+        var temp = newBinaryTree[i]
         temp.col = Math.floor(Math.log2(i+1));
         maxCol = Math.floor(Math.log2(i+1));
     }
@@ -168,35 +169,35 @@ var makeTree = function(list) {
         var parentValue = 0;
         var pairCounter = 0;
         var parentRow = 0;
-        for(var i = 0;i < tempArray.length;i++)
+        for(var i = 0;i < newBinaryTree.length;i++)
         {
-            if(tempArray[i].col == currentCol)
+            if(newBinaryTree[i].col == currentCol)
             {
-                tempArray[i].row = parentRow;
+                newBinaryTree[i].row = parentRow;
                 parentRow = parentRow + 1;
                 if(pairCounter === 0 || pairCounter === 1)
                 {
-                    tempArray[i].pv = parentValue;
+                    newBinaryTree[i].pv = parentValue;
                     pairCounter = pairCounter + 1;
                 }
                 else
                 {
                     pairCounter = 1;
                     parentValue = parentValue + 1;
-                    tempArray[i].pv = parentValue;
+                    newBinaryTree[i].pv = parentValue;
                 }
             }
         }
         currentCol = currentCol + 1
     }
-    prepareJSONForGoJS(tempArray)
+    prepareJSONForGoJS(newBinaryTree)
 }
 
 function prepareJSONForGoJS(list){
     var x = 0;
     for(var i = 0;i<list.length;i++)
     {
-        var temp = {
+        var goJsFormat = {
           "key": list[i].col + "-" + list[i].row,
           "parent": (list[i].col - 1) + "-" + list[i].pv,
           "parentNumber": x,
@@ -205,14 +206,14 @@ function prepareJSONForGoJS(list){
         };
         if(list[i].left == "")
         {
-          temp.player1 = list[i].right;
-          temp.player2 = list[i].left;
+          goJsFormat.player1 = list[i].right;
+          goJsFormat.player2 = list[i].left;
         }else{
-          temp.player1 = list[i].left,
-          temp.player2 = list[i].right
+          goJsFormat.player1 = list[i].left,
+          goJsFormat.player2 = list[i].right
         }
 
-        dataT.nodeDataArray.push(temp)
+        dataT.nodeDataArray.push(goJsFormat)
         if(x == 0){
             x = 1;
         }else{
