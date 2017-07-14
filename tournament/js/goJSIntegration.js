@@ -207,23 +207,20 @@ function makeJSON(list){
     var x = 0;
     for(var i = 0;i<list.length;i++)
     {
+        var temp = {
+          "key": list[i].col + "-" + list[i].row,
+          "parent": (list[i].col - 1) + "-" + list[i].pv,
+          "parentNumber": x,
+          "player1": null,
+          "player2": null
+        };
         if(list[i].left == "")
         {
-            var temp = {
-                "key": list[i].col + "-" + list[i].row,
-                "parent": (list[i].col - 1) + "-" + list[i].pv,
-                "player1": list[i].right,
-                "player2": list[i].left,
-                "parentNumber": x
-            };
+          temp.player1 = list[i].right;
+          temp.player2 = list[i].left;
         }else{
-            var temp = {
-                "key": list[i].col + "-" + list[i].row,
-                "parent": (list[i].col - 1) + "-" + list[i].pv,
-                "player1": list[i].left,
-                "player2": list[i].right,
-                "parentNumber": x
-            };
+          temp.player1 = list[i].left,
+          temp.player2 = list[i].right
         }
 
         dataT.nodeDataArray.push(temp)
@@ -235,8 +232,8 @@ function makeJSON(list){
     }
     makeModel(dataT)
     dataT = {
-    "class": "go.TreeModel",
-    "nodeDataArray": [
-    ]
-}
+      "class": "go.TreeModel",
+      "nodeDataArray": [
+      ]
+    }
 }
