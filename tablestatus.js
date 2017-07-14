@@ -33,7 +33,7 @@ if(minutes >= 60)
   console.log(data.time);
 }
 else if(time==0){
-    document.getElementById("endTime").innerHTML="Table Is Open";
+    updateDivTagContent("table", "Table Is Open");
     document.getElementById("table").style.display="none";
   }
 else
