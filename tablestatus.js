@@ -1,12 +1,12 @@
-var config = {
-  apiKey: "AIzaSyDDrze4WIGeBYuyl_Y7RhmISYm_zGUz4OU",
-  authDomain: "ping-pong-scheduler-1dd4f.firebaseapp.com",
-  databaseURL: "https://ping-pong-scheduler-1dd4f.firebaseio.com",
-  projectId: "ping-pong-scheduler-1dd4f",
-  storageBucket: "ping-pong-scheduler-1dd4f.appspot.com",
-  messagingSenderId: "290287324381"
-};
-firebase.initializeApp(config);
+  var config = {
+    apiKey: "AIzaSyBy-CYW3EOzYUZLoBR0kYwE9bOFt1pWeEU",
+    authDomain: "ping-pong-tournament-a18d7.firebaseapp.com",
+    databaseURL: "https://ping-pong-tournament-a18d7.firebaseio.com",
+    projectId: "ping-pong-tournament-a18d7",
+    storageBucket: "ping-pong-tournament-a18d7.appspot.com",
+    messagingSenderId: "685269907531"
+  };
+  firebase.initializeApp(config);
 var updateDivTagContent= function(id,content){
   var x =document.getElementById(id);
   x.innerHTML = content;
