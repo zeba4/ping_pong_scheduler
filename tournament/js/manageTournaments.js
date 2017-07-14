@@ -280,13 +280,13 @@ function viewTour(key){
   currentJoinKey = key;
   transition(screenState);
   loadTournament(key);
- 
+
   listenForNewPlayers(key);
 }
 function viewWin(){
   screenState = "winner";
   transition(screenState);
-  
+
 }
 function viewBracket(key){
   if(isConnected == true){
@@ -436,7 +436,7 @@ function updateOpenTour(name,date,key){
     click: function() {
       viewTour(this.id)
     }
-  }); 
+  });
   $button.appendTo('#listOpen');
   $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
@@ -451,7 +451,7 @@ database.ref('/').on('value', function(snapshot){
 dbRef.on('value', function(snapshot){
     var displayWinner = snapshot.val();
 
-    
+
 
 
 var tournamentList = Object.keys(displayWinner);
@@ -472,7 +472,7 @@ function addWinnerNameToHtml(teamName,winningTeamName, date){
   var str ='<tr><td>' + teamName + '</td><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
   console.log("my test = " + str);
   $("#winnerRow").append(str);
-  
+
 }
 // function addWinnerDateToHtml(date){
 //   $("#winnerRow").append('<td>' + date + '</td>');

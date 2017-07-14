@@ -246,10 +246,10 @@ button{
 }
 .flex{
 
-    display: flex; 
+    display: flex;
     align-content: center;
     justify-content: space-around;
-   
+
 
 }
 
@@ -259,7 +259,7 @@ button{
     width:350px;
     height:50px;
     vertical-align: center;
-  
+
 }
 
 .winnerButton{
@@ -273,7 +273,7 @@ button{
     height: 40px;
     width: 180px;
     margin-top: -20px;
-    
+
 }
 
 #tNameBracket{
@@ -289,7 +289,7 @@ button{
     padding-left: 15px;
     font-size:35px;
     color:white;
-   
+
 }
 
 table{
@@ -298,12 +298,12 @@ table{
     margin-right: auto;
     margin-top:1.5%;
     border: 1px solid gray;
-    
+
 }
 
 th .name{
     text-align: left;
-     
+
 }
 
 /*#winDate{
@@ -317,7 +317,7 @@ th:nth-child(1),
 th:nth-child(2),
 td:nth-child(2){
     border-right: 5px dotted gray;
-  
+
 }
 
 .doneButton{
@@ -359,7 +359,7 @@ color: white;
   margin-left:0;
 }
 #listOpen li{
-    
+
     overflow:auto;
 }
 #listClosed{
@@ -372,7 +372,7 @@ color: white;
 
 #listOpen{
     margin-left:15%;
-    
+
      width:100%;
 }
 #listdiv{
@@ -386,17 +386,17 @@ display: inline-block;
     margin-left:0%;
 }
 .bracketFrame {
-   
+
     margin-left:20%;
-    
+
 }
 #tNameBracket{
-    
+
     margin-left:25%;
-    
+
 }
 #playerName{
-     width:15em; 
+     width:15em;
      float:left;
 }
 #right2{
