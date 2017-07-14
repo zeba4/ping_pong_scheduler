@@ -125,7 +125,7 @@
     hideTimerSections(["button1", "button2","button3","para","select"]);
     showTimerSections(["stop","set3","thirdTimer"]);
     var time = getCurrentTime();
-    addtodatabase(time.hours,time.minutes, 0);
+    addtodatabase(time.hours,time.minutes, 30);
     myStop = setTimeout(function(){
       hideTimerSections(["stop", "set3"]);
       showTimerSections(["button1","button2","button3","para","select"]);
