@@ -150,10 +150,10 @@ var makeTree = function(list) {
     var maxCol;
     var tempArray = []
     for(var i = 0; i < list.length - numPlayer; i++) {
-        var temp = list[i];
-        temp.left = list[2 * i + 1].name;
-        temp.right = list[2 * i + 2].name;
-        tempArray.push(temp)
+        var currentNode = list[i];
+        currentNode.left = list[2 * i + 1].name;
+        currentNode.right = list[2 * i + 2].name;
+        tempArray.push(currentNode)
     }
 
     for(var i = 0; i <tempArray.length;i++)
