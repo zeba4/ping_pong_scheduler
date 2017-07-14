@@ -1,4 +1,4 @@
-	var config = {
+var config = {
 		apiKey: "AIzaSyBy-CYW3EOzYUZLoBR0kYwE9bOFt1pWeEU",
 		authDomain: "ping-pong-tournament-a18d7.firebaseapp.com",
 		databaseURL: "https://ping-pong-tournament-a18d7.firebaseio.com",
