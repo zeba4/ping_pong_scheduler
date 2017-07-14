@@ -50,10 +50,12 @@
     <div id="center"><button onClick="stop()" id="stop" class="hidden"> End Current Game </button></div>
     <div id = 'timerWarningMessage' class="hidden" > Game is Almost Over! </div>
     <div class="hidden" id="reservation">
-    <span id="name" >Reservation Name: </span><input type="text" id="reserve" value="">
-    <button onclick="reserveTable()">Reserve Table</button>
+    <span id="name" >Reservation Name: <input type="text" id="reserve" value=""></span>
+    <button id="reserveButton" onclick="reserveTable()">Reserve Table</button>
     </div>
-     <button class="hidden"id="change" onclick="changeReservation()">Change Reservation</button>
+    <div class='hidden' id="changeReserve">
+     <button class="hidden" id="change" onclick="changeReservation()">Change Reservation</button>
+     </div>
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
     <script src="tableTimer.js"></script>

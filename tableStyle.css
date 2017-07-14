@@ -107,16 +107,34 @@ body{
   margin:1px 0 40px 0;
 }
 #timerWarningMessage{
-  font-family:"Roboto", "comics sans";
+  font-family:"Roboto", "comic sans";
   color:red;
   font-size:40px;
   text-align:center;
 }
-#reservation{
- margin: 5% auto 0 auto;
+#name,
+#reserve,
+#reservation,
+#changeReserve{
+ margin: 2% auto 0 auto;
+ font-family: "Roboto", "comic sans";
 }
 #reservationName{
-  font-family:"Roboto","comics sans"
-  margin-bottom:2%;
+  font-family:"Roboto","comic sans";
+  margin-bottom:5%;
 }
-#changeReservation{}
+#reserveButton,
+#change
+{
+    color:#fff;
+   border:none;
+/*  font-size: 20px;*/
+  font-family:"Roboto", "comics sans";
+   background:#A4D65E;
+   width:12%;
+   height:20px;
+   font-size: 15px
+}
+#change{
+  width:20%;
+}

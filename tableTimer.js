@@ -81,7 +81,7 @@
     function stop(){
      clearInterval(countSec);
      clearTimeout(myStop);
-     hideTimerSections(["set1","set2","set3","stop","reservation","reservationName","change"]);
+     hideTimerSections(["set1","set2","set3","stop","reservation","reservationName","change","changeReserve"]);
      showTimerSections(["button1","button2","button3","para","select"])
      resetTimer();
       $("#button1").bind("click", startTenMinuteTimer);
@@ -172,6 +172,7 @@
     document.getElementById("reservationName").innerHTML = "Next Game Reserved By:" + r;
     clearInput();
     hideTimerSections(["reservation"])
+    showTimerSections(["changeReserve"])
   }
  function clearName(){
     document.getElementById("reservationName").innerHTML = "";
@@ -182,5 +183,6 @@
 function changeReservation(){
   clearInput();
   clearName();
-  showTimerSections(["reservation"])
+  hideTimerSections(["changeReserve"])
+    showTimerSections(["reservation"])
 }
