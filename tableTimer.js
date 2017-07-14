@@ -14,6 +14,21 @@
 	var myStop;
 	var database = firebase.database();
 	var timeref =database.ref('timerInfo/');
+	var leaveTime;
+	var returnTime;
+
+
+document.addEventListener("visibilitychange", function(){
+  if(document.hidden==true){
+	var leaveTime=new Date().getTime()/1000;
+	console.log(leaveTime)
+  }
+  else{
+  	var returnTime=new Date().getTime()/1000;
+console.log(returnTime);
+var totalTimeInSeconds= returnTime-leaveTime;
+  }
+});
 
 function startTimer(numGames){
 	totalTimeInSeconds = 600*numGames;
@@ -127,7 +142,7 @@ function stop(){
 		hideTimerSections(["button1", "button2","button3","para","select"]);
 		showTimerSections(["stop","set3","thirdTimer","reservation","reservationName","change"]);
 		var time = getCurrentTime();
-		addtodatabase(time.hours,time.minutes, 0);
+		addtodatabase(time.hours,time.minutes, 30);
 		myStop = setTimeout(function(){
 			hideTimerSections(["stop", "set3","reservation","reservationName","change"]);
 			showTimerSections(["button1","button2","button3","para","select"]);
@@ -181,4 +196,7 @@ function changeReservation(){
 	clearName();
 	hideTimerSections(["changeReserve"])
 	showTimerSections(["reservation"])
+}
+function visibilityChange(){
+
 }
