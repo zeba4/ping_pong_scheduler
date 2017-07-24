@@ -164,6 +164,8 @@ function createTournament() {
     detailsRef.once('value').then(function(snapshot) {
       // The Promise was "fulfilled" (it succeeded)
         displayTournamentBracket(snapshot.val(),key);
+        console.log(snapshot.val());
+
     });
   }
 
@@ -174,7 +176,8 @@ function createTournament() {
   }
 
   function displayTournamentBracket(data, objKey){
-      document.getElementById("tNameBracket").innerHTML = "Tournament Name: " + data.tournament[objKey].name;
+      document.getElementById("tNameBracket").innerHTML = "Tournament Name: " + data.name;
+      console.log(data);
   }
   function updateList(name){
 
@@ -264,10 +267,10 @@ function createTournament() {
   }
 
 
-  function viewWin(){
-    screenState = "winner";
-    transition(screenState);
-  }
+  // function viewWin(){
+  //   screenState = "winner";
+  //   transition(screenState);
+  // }
 
   function viewBracket(key){
     if(isConnected == true){
@@ -464,15 +467,15 @@ function updateOpenTour(name,date,key){
     click: function() {
       viewTour(this.id)
     }
-  }); 
+  });
   $button.appendTo('#listOpen');
   $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
-function addWinnerNameToHtml(teamName,winningTeamName, date) {
-    var str ='<tr><td>' + teamName + '</td><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
-    $("#winnerRow").append(str);
-}
+// function addWinnerNameToHtml(teamName,winningTeamName, date) {
+//     var str ='<tr><td>' + teamName + '</td><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
+//     $("#winnerRow").append(str);
+// }
 
 function updateClosedTour(name,key, finished){
   var $button = $('<button/>', {
@@ -510,9 +513,9 @@ function getTodayDate() {
   var yyyy = today.getFullYear();
   if(dd<10) {
       dd = '0'+dd;
-  } 
+  }
   if(mm<10) {
       mm = '0'+mm;
-  } 
+  }
   return mm + '/' + dd + '/' + yyyy;
 }

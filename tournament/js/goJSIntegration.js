@@ -127,7 +127,7 @@ var dataT = {
 }
 
 var createArrayWithEmptyAndNodes = function(list) {
-    numPlayer = list.length;//Length of people 
+    numPlayer = list.length;//Length of people
     var exponent = -1;//Exponent
     var m = (2 * (numPlayer - Math.pow(2, exponent))) - numPlayer; // # of nodes
     var nodeList = [];

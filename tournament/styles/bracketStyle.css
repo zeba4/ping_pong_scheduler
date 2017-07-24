@@ -17,7 +17,7 @@ body{
 .listdiv {
 
     width:70%;
-    margin-left:30%;
+    margin-left:10%;
     font-size:25px;
 }
 #listOpen li,
@@ -28,6 +28,9 @@ body{
     vertical-align: top;
     margin-top:20px;
     overflow-x: auto;
+}
+#left-side{
+  margin-left:30%;
 }
 .h2List {
     margin-bottom: 0px;
@@ -347,5 +350,8 @@ button {
 }
 .openTourney{
     margin-left:-15%;
+}
+#openSide{
+  margin-left:15%;
 }
 }

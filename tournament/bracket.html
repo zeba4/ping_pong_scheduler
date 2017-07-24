@@ -1,69 +1,68 @@
 <!DOCTYPE HTML>
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <head>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <meta charset="utf-8">
-        <title>Challenger Home</title>
-    </head>
-    <body>
-        <header>
-            <nav>
-            </nav>
-        </header>
-        <section id="homeScreen" class="visible">
-            <h1 class="home" >
-            <img src="ping.gif"  height="60" width="60" />
-            Hoffman Ping Pong
-            </h1>
-            <div id ="createNewTournament">
-                <div class="main-section">
-                    <h2>Create New Tournament</h2>
-                    <div class="twoCols">
-                        <p id = "tournamentName">Tournament Name: <input type="text" id="tourName" placeholder="Tourney Name"></p>
-                        <div id ="maxPlayers">
-                            <!--<label for="runMax">Begin When Max Players Hit?</label>
-                            <input type="checkbox" id="runMax" name="runMax">
-                            </div>-->
-                            <!--<div id = "playerAmount">-->
-                            <!--<label for="numPlayers"> Number of Players needed to start:</label>
-                            <select id="numPlayers" name="numPlayers">
-                                <option value="">Select</option>
-                                <option value="4">4</option>
-                                <option value="8">8</option>
-                                <option value="16">16</option>
-                                <option value="32">32</option>
-                            </select>-->
-                            <div class ="tourneyStartDate">
-                                <label for="datepicker">Tourney Start Date:</label>
-                                <input type="text" id="datepicker" name="datepicker">
-                            </div>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Challenger Home</title>
+</head>
+
+<body>
+
+<section id="homeScreen" class="visible">
+    <input type="button" class="winnerButton" id="winnerButton" onClick="viewWin(this.id)" value="View Winners!">
+    <h1 class="home" >
+    <img src="ping.gif"  height="60" width="60" />
+       Hoffman Ping Pong
+    </h1>
+    <div id ="createNewTournament">
+            <div class="main-section">
+                <h2>Create New Tournament</h2>
+                <div class="twoCols">
+                      <p id = "tournamentName">Tournament Name: <input type="text" id="tourName" placeholder="Tourney Name"></p>
+                      <div id ="maxPlayers">
+                          <!--<label for="runMax">Begin When Max Players Hit?</label>
+                          <input type="checkbox" id="runMax" name="runMax">
+                         </div>-->
+                        <!--<div id = "playerAmount">-->
+                          <!--<label for="numPlayers"> Number of Players needed to start:</label>
+                          <select id="numPlayers" name="numPlayers">
+                              <option value="">Select</option>
+                              <option value="4">4</option>
+                              <option value="8">8</option>
+                              <option value="16">16</option>
+                              <option value="32">32</option>
+                          </select>-->
+                        <div class ="tourneyStartDate">
+                            <label for="datepicker">Tourney Start Date:</label>
+                            <input type="text" id="datepicker" name="datepicker">
                         </div>
-                    </div><!-- end left column -->
-                    <div class="twoCols">
-                        <div id = "generateButton">
-                            <input type="button" onClick="createTournament()" value="Generate it!" id="generate">
-                        </div>
-                    </div><!-- end right column -->
-                </div><!-- end tournament main section -->
-                <div class="twoCols" id = "backgroundWhite" >
-                    <h2 id="nameOpen">Open Tournaments</h2>
-                    <div class="openTourney">
-                        <div class="listdiv">
-                            <ul id="listOpen" style = "list-style: none" >
-                            </ul>
-                        </div>
-                    </div>
+                   </div>
+               </div><!-- end left column -->
+               <div class="twoCols">
+                  <div id = "generateButton">
+                  <input type="button" onClick="createTournament()" value="Generate it!" id="generate">
+               </div>
+            </div><!-- end right column -->
+        </div><!-- end tournament main section -->
+        <div class="twoCols" id = "backgroundWhite" >
+              <h2 id="nameOpen">Open Tournaments</h2>
+               <div class="openTourney" id="openSide">
+                  <div class="listdiv">
+                      <ul id="listOpen" style = "list-style: none" ></ul>
+                   </div>
                 </div>
-                <div class="twoCols" id = "backgroundWhite" >
-                    <h2 id ="nameProgress">In Progress Tournaments</h2>
-                    <div class="listdiv">
-                        <ul id="listClosed" style = "list-style: none" class:"inlineButton">
-                        </ul>
-                    </div>
-                </div>
-        </section>
-        <section id="joinTournamentScreen" class="hidden">
+          </div>
+          <div class="twoCols" id = "backgroundWhite" >
+                <h2 id ="nameProgress">In Progress Tournaments</h2>
+                  <div class="listdiv" id="left-side">
+                      <ul id="listClosed" style = "list-style: none" class:"inlineButton"></ul>
+                  </div>
+         </div>
+</section>
+
+<section id="joinTournamentScreen" class="hidden">
             <h1 class="home2" >
             <a  onClick="homePage()">
             <img src="ping.gif"  height="60" width="60" />Return To Homepage</a>
@@ -116,6 +115,7 @@
         </table>
     </div>
 </section>
+
         <footer>
         </footer>
         <link rel="stylesheet" type="text/css" href="styles/bracketStyle.css">
@@ -127,5 +127,8 @@
         <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
         <script src="js/goJSIntegration.js"></script>
         <script src="js/manageTournaments.js"></script>
+        <script src="js/winnerPage.js"></script>
+
     </body>
+
 </html>
