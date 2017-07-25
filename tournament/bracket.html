@@ -35,7 +35,7 @@
                               <option value="32">32</option>
                           </select>-->
                         <div class ="tourneyStartDate">
-                            <label for="datepicker">Tourney Start Date:</label>
+                            <label for="datepicker" id = "titleStartDate">Tourney Start Date:</label>
                             <input type="text" id="datepicker" name="datepicker">
                         </div>
                    </div>
@@ -48,15 +48,15 @@
         </div><!-- end tournament main section -->
         <div class="twoCols" id = "backgroundWhite" >
               <h2 id="nameOpen">Open Tournaments</h2>
-               <div class="openTourney">
-                  <div class="listdiv">
+               <div class="openTourney" >
+                  <div class="listdiv" id="openSide">
                       <ul id="listOpen" style = "list-style: none" ></ul>
                    </div>
                 </div>
           </div>
           <div class="twoCols" id = "backgroundWhite" >
                 <h2 id ="nameProgress">In Progress Tournaments</h2>
-                  <div class="listdiv">
+                  <div class="listdiv" id="left-side">
                       <ul id="listClosed" style = "list-style: none" class:"inlineButton"></ul>
                   </div>
          </div>
@@ -67,6 +67,7 @@
             <a  onClick="homePage()">
             <img src="ping.gif"  height="60" width="60" />Return To Homepage</a>
             </h1>
+            <p id="joinInstructions">For a doubles tournament, you must add the name of you and your partner before you hit join. Adding only your name will not automatically add a partner for you.</p>
             <div id="joinScreen">
                   <div id="tNamePlace"></div>
             </div>
@@ -78,10 +79,12 @@
               <div class="twoCols" id="left2">
                     <div id= "enterButton">
                           <input type="text" placeholder="Enter Name Here" id="playerName">
-                          <input type="button" id="enter" value=Join onClick="joinTournament()"> <img src="table.png"  height="60" width="60">
+                          <input type="button" id="enter" value=Join onClick="joinTournament()"> <img id = "image"src="table.png"  height="60" width="60">
                     </div>
+                    <div id="bottom">
                     <div id="startTime"></div>
                     <input type="button" class="doneButton"  onClick="homePage()" value="Done!">
+              </div>
               </div>
             </div>
 </section>
@@ -91,6 +94,7 @@
             <a   onClick="homePage()">
             <img src="ping.gif"  height="60" width="60" />Return To Homepage</a>
             </h1>
+            <p id="bracketInstructions">When marking a winner of a match, add the number of games won in the text field next to the player/team in the bracket.</p>
             <div id="tNameBracket">  </div>
             <div id="bracketDiv" class="bracketFrame"></div>
             </div>
@@ -127,6 +131,7 @@
         <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
         <script src="js/goJSIntegration.js"></script>
         <script src="js/manageTournaments.js"></script>
+        <script src="js/winnerPage.js"></script>
 
     </body>
 

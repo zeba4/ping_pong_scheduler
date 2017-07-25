@@ -1,85 +1,81 @@
-  /*
-  index.js
-  */
-  "use strict";
+/*
+index.js
+*/
+"use strict";
 
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBy-CYW3EOzYUZLoBR0kYwE9bOFt1pWeEU",
-      authDomain: "ping-pong-tournament-a18d7.firebaseapp.com",
-      databaseURL: "https://ping-pong-tournament-a18d7.firebaseio.com",
-      projectId: "ping-pong-tournament-a18d7",
-      storageBucket: "ping-pong-tournament-a18d7.appspot.com",
-      messagingSenderId: "685269907531"
-    };
-    firebase.initializeApp(config);
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBy-CYW3EOzYUZLoBR0kYwE9bOFt1pWeEU",
+  authDomain: "ping-pong-tournament-a18d7.firebaseapp.com",
+  databaseURL: "https://ping-pong-tournament-a18d7.firebaseio.com",
+  projectId: "ping-pong-tournament-a18d7",
+  storageBucket: "ping-pong-tournament-a18d7.appspot.com",
+  messagingSenderId: "685269907531"
+};
+firebase.initializeApp(config);
 
-  const database = firebase.database();
-  const details_firebase_route = "details/";
-  const tournament_firebase_route = "tournament/";
-  const players_firebase_route = "players/";
-  const tournament_string = "tourString";
-  const detailsRef = database.ref(details_firebase_route);
-  const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
-  const loadQuery = tournamentRef.orderByChild('date');
-  const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
-  const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen","winnerScreen"]
-  const connectedRef = database.ref(".info/connected");
+const database = firebase.database();
+const details_firebase_route = "details/";
+const tournament_firebase_route = "tournament/";
+const players_firebase_route = "players/";
+const tournament_string = "tourString";
+const detailsRef = database.ref(details_firebase_route);
+const tournamentRef = database.ref(details_firebase_route + tournament_firebase_route);
+const loadQuery = tournamentRef.orderByChild('date');
+const updateTournamentRef = database.ref(details_firebase_route+tournament_firebase_route).limitToLast(1);
+const screenSections = ["homeScreen","joinTournamentScreen","tournamentBracketScreen","winnerScreen"]
+const connectedRef = database.ref(".info/connected");
+const winners_route = "/winners/"
 
-  var updatePlayersRef;
-  var updateBracketRef;
-  var screenState = "home";
-  var countDownDate;
-  var currentJoinKey;
-  var currentBracketKey;
-  var timerVariable;
-  var tournamentExists;
-  var isConnected;
-  var isTourOver;
+var updatePlayersRef;
+var updateBracketRef;
+var screenState = "home";
+var countDownDate;
+var currentJoinKey;
+var currentBracketKey;
+var timerVariable;
+var tournamentExists;
+var isConnected;
+var isTourOver;
+var currentBracketName;
 
-  connectedRef.on("value", function(snap) {
-    if (snap.val() === true) {
-      isConnected = true;
-    } else {
-      isConnected = false;
-    }
-  });
+connectedRef.on("value", function(snap) {
+  isConnected = snap.val();
+});
 
-  //TODO:
-  // Timeout finish tournaments
-  // Create a Winner Screen once bracket is over?
-  //Add number of people in tournament next to dynamic list tags
-  //Add Start on max players
-  //Ask for full name of 1st-3rd place winners at end for storage purposes
-  //Shuffle player list
+//TODO:
+//Add number of people in tournament next to dynamic list tags
+//Add Start on max players
+//Ask for full name of 1st-3rd place winners at end for storage purposes
+//Shuffle player list
 
-  //Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event.
+//Once both scores are entered for the final column, then update that tournament with a termination date 1 day after the event.
 
-  // Homepage Load Code
+// Homepage Load Code
 
-  loadQuery.once('value', function(snapshot){
-    if(snapshot.val() != null){
-      snapshot.forEach(function(data){
-        if(data.val().tourOver)
+loadQuery.once('value', function(snapshot){
+  if(snapshot.val() != null){
+    snapshot.forEach(function(data){
+      if(data.val().tourOver)
+      {
+        if(deleteTournament(data.val().date, data.key))
         {
-          if(deleteTournament(data.val().date, data.key))
-          {
-            updateClosedTour(data.val().name, data.key, "Finished: ");
-          }
+          updateClosedTour(data.val().name, data.key, "Finished: ");
+        }
       }else{
-          if(hasStarted(data.val(),data.key) == false)
-          {
-            updateOpenTour(data.val().name, data.val().date, data.key);
-          }else{
-            updateClosedTour(data.val().name, data.key, "");
-          }
+        if(hasStarted(data.val(),data.key) == false)
+        {
+          updateOpenTour(data.val().name, data.val().date, data.key);
+        }else{
+          updateClosedTour(data.val().name, data.key, "");
+        }
       }
-      });
-      listenForNewTournaments();
-    }else{
-      tournamentExists = false;
-    }
-  });
+    });
+    listenForNewTournaments();
+  }else{
+    tournamentExists = false;
+  }
+});
 
   function deleteTournament(date,key){
     if(checkPastStartDate(date))
@@ -127,23 +123,49 @@
     });
   }
 
-  //Open Tournament Code
+function loadTournament(key){
+  detailsRef.once('value').then(function(snapshot) {
+    // The Promise was "fulfilled" (it succeeded)
+      displayTournament(snapshot.val(),key);
+  }, function(error) {
+    // The Promise was rejected.
+    console.error(error);
+    console.log("Failed to load tournament data")
+  });
+}
 
-  function loadTournament(key){
-    detailsRef.once('value').then(function(snapshot) {
-      // The Promise was "fulfilled" (it succeeded)
-        displayTournament(snapshot.val(),key);
-    }, function(error) {
-      // The Promise was rejected.
-      console.error(error);
-      console.log("Failed to load tournament data")
-    });
+function createTournament() {
+  if(isConnected){
+    listenForNewTournaments();
+    var tourValues = getDivValue(['tourName','datepicker']);//,'numPlayers'//,'runMax']);
+    if(tourValues[0]&& tourValues[1] !== "" || undefined)
+    {
+      var newPostRef = tournamentRef.push();
+      newPostRef.set({
+        name: tourValues[0],
+        date: tourValues[1],
+        //maxPlayers: tourValues[2],
+        //startOnMax: tourValues[3],
+        tourString: "",
+        tourOver: false
+      });
+      clearDocument(["tourName","datepicker"]);
+      console.log("success");
+    } else {
+      console.log("failure");
+      alert("fill in all the values");
+    }
+  } else {
+    alert("Failed, you are not connected to the internet");
   }
+}
 
   function loadTournamentBracket(key){
     detailsRef.once('value').then(function(snapshot) {
       // The Promise was "fulfilled" (it succeeded)
         displayTournamentBracket(snapshot.val(),key);
+        console.log(snapshot.val());
+
     });
   }
 
@@ -154,37 +176,12 @@
   }
 
   function displayTournamentBracket(data, objKey){
-      document.getElementById("tNameBracket").innerHTML = "Tournament Name: " + data.tournament[objKey].name;
+      document.getElementById("tNameBracket").innerHTML = "Tournament Name: " + data.name;
+      console.log(data);
   }
   function updateList(name){
 
     document.getElementById("signedUp").innerHTML +=  "<li>" + name + "</li>";
-  }
-
-  function createTournament(){
-    if(isConnected == true){
-      listenForNewTournaments();
-      var tourValues = getDivValue(['tourName','datepicker']);//,'numPlayers'//,'runMax']);
-      if(tourValues[0] && tourValues[1] && tourValues[2] != "" || null || undefined )
-      {
-        var newPostRef = tournamentRef.push();
-        newPostRef.set({
-          name: tourValues[0],
-          date: tourValues[1],
-          //maxPlayers: tourValues[2],
-          //startOnMax: tourValues[3],
-          tourString: "",
-          tourOver: false
-        });
-        clearDocument(["tourName","datepicker"]);
-        console.log("success");
-      }else {
-        console.log("failure");
-        alert("fill in all the values");
-      }
-    }else{
-      alert("Failed, you are not connected to the internet");
-    }
   }
 
   function getDivValue(ids){
@@ -194,7 +191,7 @@
       listOfValues.push(document.getElementById(ids[i]).value);
     }
     return listOfValues;
-  }
+    }
 
   function joinTournament(){
     try{
@@ -215,6 +212,7 @@
     }
   }
 
+
   // Transition Code
   function transition(screen){
     // home is home page, join is join screen, bracket is the Bracket screen
@@ -229,6 +227,7 @@
       changeClassName(screenSections,["hidden","hidden","hidden","visible"])
     }
   }
+
 
   function changeClassName(ids,state){
     for(var i = 0; i<state.length;i++){
@@ -267,19 +266,11 @@
     updatePlayersRef.off();
   }
 
-  function viewTour(key){
-    screenState = "join";
-    currentJoinKey = key;
-    transition(screenState);
-    loadTournament(key);
 
-    listenForNewPlayers(key);
-  }
-
-  function viewWin(){
-    screenState = "winner";
-    transition(screenState);
-  }
+  // function viewWin(){
+  //   screenState = "winner";
+  //   transition(screenState);
+  // }
 
   function viewBracket(key){
     if(isConnected == true){
@@ -292,13 +283,6 @@
     }
      loadTournamentBracket(key);
   }
-
-  // Time/DOM Code
-
-  $(function() {
-
-    $( "#datepicker" ).datepicker({ minDate: 1});
-  });
 
   function startTimer(){
       timerVariable = setInterval(function() {
@@ -321,27 +305,67 @@
     clearTimeout(timerVariable);
   }
 
-  function checkPastStartDate(data){
-    var selectedDate = new Date(data);
-    var now = new Date();
-    now.setHours(0,0,0,0);
-    if (selectedDate <= now) {
-      // selected date is in the past
-      return true;
-    }else{
-      return false;
-    }
-  };
+function viewTour(key){
+  screenState = "join";
+  currentJoinKey = key;
+  transition(screenState);
+  loadTournament(key);
+  listenForNewPlayers(key);
+}
 
-  // Saving the State of the tournament
-
-  function saveTournamentState(){
-      var dataT = myDiagram.model.toJSON();
-      var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route+ currentBracketKey);
-      var updates = {};
-      updates['/tourString'] = dataT;
-      updateStartRef.update(updates);
+function viewBracket(key, name){
+  if(isConnected)
+  {
+    currentBracketName = name;
+    currentBracketKey = key;
+    screenState = "bracket";
+    transition(screenState);
+    loadBracket(key);
   }
+  else
+  {
+    alert("You are not connected to the internet.")
+  }
+}
+
+// Time/DOM Code
+
+$(function() {
+  $( "#datepicker" ).datepicker({ minDate: 1});
+});
+
+function startTimer(){
+    timerVariable = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("startTime").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      if (distance < 0) {
+        clearInterval(timerVariable);
+        generateBracket(currentJoinKey);
+      }
+    }, 1000);
+}
+
+function checkPastStartDate(data){
+  var selectedDate = new Date(data);
+  var now = new Date();
+  now.setHours(0,0,0,0);
+  return selectedDate <= now;
+};
+
+// Saving the State of the tournament
+
+function saveTournamentState(){
+    var dataT = myDiagram.model.toJSON();
+    var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route+ currentBracketKey);
+    var updates = {};
+    updates['/tourString'] = dataT;
+    updateStartRef.update(updates);
+}
 
   function finishTournament(){
       killListenForCurrentBracketUpdates();
@@ -360,36 +384,18 @@
       }
   }
 
-  // Tournament has started code
-
-  function hasStarted(data, key){
-      if(checkPastStartDate(data.date))
+// Tournament has started code
+function hasStarted(data, key){
+    if(checkPastStartDate(data.date))
+    {
+      if(data.tourString === "")
       {
-        if(data.tourString == "")
-        {
-          generateBracket(key);
-        }
-        return true;
+        generateBracket(key);
       }
-      return false;
-  }
-
-  function generateBracket(key){
-    currentBracketKey = key;
-    var playerArray = [];
-    var tempRef = database.ref(details_firebase_route + tournament_firebase_route + key + "/" + players_firebase_route)
-    tempRef.once('value').then(function(snapshot) {
-      snapshot.forEach(function(data1){
-          playerArray.push(data1.val().name);
-      });
-        makeModel(playerArray);
-        startTournament(myDiagram.model.toJSON(),key);
-        }, function(error) {
-      // The Promise was rejected.
-      console.error(error);
-      console.log("Failed to load list of players")
-    });
-  }
+      return true;
+    }
+    return false;
+}
 
   function startTournament(tString, key){
         var updateStartRef = database.ref(details_firebase_route+tournament_firebase_route + key);
@@ -398,21 +404,39 @@
         updateStartRef.update(updates);
   }
 
-  function loadBracket(key){
-    tournamentRef.once('value').then(function(snapshot) {
-      snapshot.forEach(function(data){
-        if(data.key == key)
-        {
-          isTourOver = data.val().tourOver;
-          displayBracket(data.val().tourString,key);
-        }
-      })
+function loadBracket(key){
+  tournamentRef.once('value').then(function(snapshot) {
+    snapshot.forEach(function(data){
+      if(data.key == key)
+      {
+        isTourOver = data.val().tourOver;
+        displayBracket(data.val().tourString,key);
+      }
+    })
+  }, function(error) {
+    // The Promise was rejected.
+    console.error(error);
+    console.log("Tournament failed to initialize")
+  });
+}
+
+function generateBracket(key){
+  currentBracketKey = key; // This might be the issue
+  var playerArray = [];
+  var tempRef = database.ref(details_firebase_route + tournament_firebase_route + key + "/" + players_firebase_route)
+  tempRef.once('value').then(function(snapshot) {
+    snapshot.forEach(function(data1){
+        playerArray.push(data1.val().name);
+    });
+      createArrayWithEmptyAndNodes(playerArray);
+      startTournament(myDiagram.model.toJSON(),key);
       }, function(error) {
-      // The Promise was rejected.
-      console.error(error);
-      console.log("Tournament failed to initialize")
-      });
-  }
+    // The Promise was rejected.
+    console.error(error);
+    console.log("Failed to load list of players")
+  });
+}
+
 
   function displayBracket(dataString,key){
       var bracketString = JSON.parse(dataString);
@@ -420,23 +444,8 @@
       listenForCurrentBracketUpdates(key)
   }
 
-  function updateOpenTour(name,date,key){
-      var $button = $('<button/>', {
-      type: 'button',
-      id: key,
-      text: 'Join',
-      class: 'inlineButton',
-      click: function() {
-      viewTour(this.id)
-      }
-      });
-      $button.appendTo('#listOpen');
-      $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
-  }
-
   var dbRef = firebase.database().ref("winners");
-      database.ref('/').on('value', function(snapshot){
-      console.log(snapshot.val());
+  database.ref('/').on('value', function(snapshot){
   });
 
   dbRef.on('value', function(snapshot){
@@ -444,33 +453,69 @@
       var tournamentList = Object.keys(displayWinner);
       $("#winnerRow").html("");
       tournamentList.forEach(function(tournamentName){
-      console.log(tournamentName);
       var tournamentInfo = displayWinner[tournamentName];
-      console.log(tournamentInfo.date + " " + tournamentInfo.winner + " " + tournamentName);
       addWinnerNameToHtml(tournamentName, tournamentInfo.winner, tournamentInfo.date);
-  })
+    });
   });
 
-  function addWinnerNameToHtml(teamName,winningTeamName, date){
-      var str ='<tr><td>' + teamName + '</td><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
-      $("#winnerRow").append(str);
-  }
-
-  function updateClosedTour(name,key, finished){
-    var $button = $('<button/>', {
-      type: 'button',
-      id: key,
-      text: 'View',
-      click: function() {
-      viewBracket(this.id)}
-      });
-      $button.appendTo('#listClosed');
-      $("#listClosed").append('<li>' + name + '</li><br>')
-  }
-  document.getElementById("playerName")
-      .addEventListener("keyup", function(event) {
-      event.preventDefault();
-      if (event.keyCode == 13) {
-          document.getElementById("enter").click();
-      }
+function updateOpenTour(name,date,key){
+  var $button = $('<button/>', {
+    type: 'button',
+    id: key,
+    text: 'Join',
+    class: 'inlineButton',
+    click: function() {
+      viewTour(this.id)
+    }
   });
+  $button.appendTo('#listOpen');
+  $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
+}
+
+// function addWinnerNameToHtml(teamName,winningTeamName, date) {
+//     var str ='<tr><td>' + teamName + '</td><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
+//     $("#winnerRow").append(str);
+// }
+
+function updateClosedTour(name,key, finished){
+  var $button = $('<button/>', {
+    type: 'button',
+    id: key,
+    text: 'View',
+    click: function() {
+      viewBracket(this.id)
+    }
+  });
+  $button.appendTo('#listClosed');
+  $("#listClosed").append('<li>' + name + '</li><br>')
+}
+document.getElementById("playerName")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode == 13) {
+        document.getElementById("enter").click();
+    }
+});
+
+function addWinner(name) {
+  var winnersRef = database.ref(winners_route + currentBracketName);
+  var updates = {};
+  winnersRef.set({
+    winner: name,
+    date: getTodayDate()
+  });
+}
+
+function getTodayDate() {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1;
+  var yyyy = today.getFullYear();
+  if(dd<10) {
+      dd = '0'+dd;
+  }
+  if(mm<10) {
+      mm = '0'+mm;
+  }
+  return mm + '/' + dd + '/' + yyyy;
+}
