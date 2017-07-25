@@ -62,7 +62,10 @@ h1,h2{
     font-size:35px;
 }
 
-.home2 img{
+.home2 img ,
+.home img,
+#homeForWin img,
+.homeWin img{
   width: 60px;
   height: 60px;
 }
@@ -430,8 +433,13 @@ button {
     position: relative;
 }
 #left2 {
-    position:absolute;
-    margin-left: 35%;
+    width:100%;
+    margin-right:0;
+}
+#startTime,
+.doneButton{
+  margin-left: 0;
+  width:50%;
 }
 .titleWin{
   font-size:35px;
@@ -443,10 +451,6 @@ button {
 h1,h2{
   font-size:25px;
 }
-/*#image{
-  height:1px;
-  width:1px;
-}*/
 #tournamentName,
 #titleStartDate
 {
@@ -473,6 +477,11 @@ button{
   height:40px;
   width:60px;
 }
+.home img,
+.home2 img{
+  height:40px;
+  width:40px;
+}
 .openTourneyName, li{
   font-size:25px;
 }
@@ -492,13 +501,21 @@ button{
 #right2{
   width:100%;
 }
-#startTime{
-  float:none
 }
-#bottom{
-  margin-top:60%;
-  margin-left:-80%;
-}
+@media screen and (max-width: 414px){
+  #tournamentName{
+    margin-left:5%;
+  }
+  .tourneyStartDate{
+    margin-left:26%;
+    margin-top:-10%;
+  }
+  #datepicker{
+    margin-left:-8%;
+  }
+  #generate{
+    margin-left:30%;
+  }
 }
 @media screen and (max-width: 375px){
 #tournamentName{
