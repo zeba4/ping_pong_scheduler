@@ -176,7 +176,7 @@ function createTournament() {
   }
 
   function displayTournamentBracket(data, objKey){
-      document.getElementById("tNameBracket").innerHTML = "Tournament Name: " + data.name;
+      document.getElementById("tNameBracket").innerHTML = "Tournament Name: " + data.tournament[objKey].name;
       console.log(data);
   }
   function updateList(name){
