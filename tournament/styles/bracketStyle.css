@@ -31,7 +31,6 @@ body{
     width: calc(100% - 3% - 75px);
     vertical-align: top;
     margin-top:20px;
-    overflow-x: auto;
 }
 #left-side{
   margin-left:30%;
@@ -66,16 +65,10 @@ h1,h2{
 .home img,
 #homeForWin img,
 .homeWin img{
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
 }
 
-.ui-datepicker.ui-widget{
-  left: 0px !important;
-  top: 20px;
-  right: 0px;
-  width: 96%;
-}
 /*ui-widget-content ui-helper-clearfix ui-corner-all*/
 
 #tNamePlace{
@@ -108,13 +101,17 @@ h1,h2{
 }
 #generate{
     margin-left:40%;
-    width:  30%;
+    width:  250px;
     height:150px;
     font-size:30px;
     text-align:  center;
     background-color:white;
     color:#A4D65E;
     font-weight:bold;
+    margin-top:2%;
+}
+.tourneyStartDate{
+  margin-top:-20px;
 }
 #participants{
 
@@ -139,6 +136,7 @@ h1,h2{
 }
 #tourName{
     font-size: 17px;
+    margin-bottom:0;
 }
 #playerName{
    float:left;
@@ -158,6 +156,7 @@ h1,h2{
     height: 2.5em;
     font-size: 17px;
     margin-bottom: 3%;
+    margin-top:0;
 }
 #runMax{
     height:1.5em;
@@ -230,7 +229,7 @@ button{
     text-align: center;
     width:100%;
     margin-left:-15%;
-    margin-top:5%;
+    margin-top:7%;
 }
 .titleWin{
     color:#A4D65E;
@@ -311,14 +310,13 @@ td:nth-child(2){
 
 
 @media screen and (max-width: 1155px){
-  .twoCols{
-    width:  100%;
-}
 .center{
     width: 90%;
 }
 #generate{
-    margin-left:35%;
+    margin-left:33%;
+    width:250px;
+    margin-top:10%;
 }
 #homeForWin{
     margin-left:38.5%;
@@ -331,21 +329,16 @@ td:nth-child(2){
     margin-left: 13%;
 }
 #nameProgress{
-    margin-left:0;
-}
-#listOpen li{
-    overflow:auto;
+    margin-left:5%;
 }
 #listClosed{
     margin-left:1%;
 }
 #nameOpen{
-    margin-left:0%;
-    overflow-x: auto;
+    margin-left:-15%%;
 }
 #listOpen{
     margin-left:15%;
-    width:100%;
 }
 #listdiv{
     overflow-x: auto;
@@ -364,7 +357,7 @@ button {
     margin-left:25%;
 }
 #playerName{
-    width:15em;
+    width:20em;
     float:left;
 }
 #right2{
@@ -388,6 +381,26 @@ button {
 #maxPlayers{
     margin-left: 20%;
 }
+#openSide{
+  margin-left:0%;
+  width:80%;
+}
+#left-side{
+  margin-left:10%;
+  width:80%;
+}
+.twoCols{
+  width:50%;
+}
+#participants{
+  width:95%;
+}
+#startTime{
+  margin-top:3%;
+}
+#signedUp{
+  width:50%;
+}
 }
 @media screen and (max-width: 835px){
 #maxPlayers{
@@ -405,28 +418,41 @@ button {
 }
 #participants {
     font-size: 25px;
+    width:95%;
 }
 #startTime {
     font-size: 30px;
 }
 #tNamePlace {
-    font-size: 35px;
+    font-size: 30px;
+}
+#nameOpen{
+  margin-left:-5%;
+  font-size:25px;
+}
+#nameProgress{
+    font-size:25px;
 }
 }
-@media screen and (max-width: 630px){
+@media screen and (max-width: 780px){
 #generate{
-    margin-left:35%;
+    margin-left:33%;
     font-size:23px;
     width:200px;
+    margin-top:2.5%;
+    margin-bottom:3%;
+}
+.twoCols{
+  width:100%;
 }
 #openSide{
-  margin-left:25%;
+  margin-left:20%;
 }
 #left-side{
   margin-left:20%;
 }
 #playerName{
-  width:
+  width:250px;
 }
 #right2 {
     margin-left: 2%;
@@ -439,23 +465,44 @@ button {
 #startTime,
 .doneButton{
   margin-left: 0;
-  width:50%;
+  width:100%;
 }
 .titleWin{
-  font-size:35px;
+  font-size:30px;
 }
 .name{
-  font-size:20px;
+  font-size:30px;
+}
+td{
+  font-size: 25px;
+}
+
+#enterButton img{
+  display: none;
+}
+
+table{
+  width:60%;
+}
+#right2{
+  margin-left:35%;
+}
+#enterButton{
+  margin-left:17%;
+}
 }
 @media screen and (max-width: 470px){
 h1,h2{
+  font-size:25px;
+}
+a{
   font-size:25px;
 }
 #tournamentName,
 #titleStartDate
 {
   font-size:20px;
-  margin-top:-1%;
+  margin-top:-5%;
   margin-left:-10%;
 }
 #tournamentName{
@@ -477,10 +524,12 @@ button{
   height:40px;
   width:60px;
 }
+.home2 img ,
 .home img,
-.home2 img{
-  height:40px;
-  width:40px;
+#homeForWin img,
+.homeWin img{
+  width: 40px;
+  height: 40px;
 }
 .openTourneyName, li{
   font-size:25px;
@@ -490,16 +539,25 @@ button{
 }
 #openSide{
   margin-left:15%;
+  width:85%;
 }
 #left-side{
   margin-left:10%;
-
+  width:90%;
 }
 #playerName{
-  width:100px;
+  width:250px;
+  margin-left:-7%;
 }
 #right2{
   width:100%;
+  margin-left:30%;
+}
+.name{
+  font-size:23px;
+}
+td{
+  font-size: 25px;
 }
 }
 @media screen and (max-width: 414px){
@@ -516,6 +574,24 @@ button{
   #generate{
     margin-left:30%;
   }
+  .ui-datepicker.ui-widget{
+    left: 0px !important;
+    top: 20px;
+    right: 0px;
+    width: 96%;
+  }
+#playerName{
+  width:200px;
+}
+#right2{
+  margin-left:30%;
+}
+.name{
+  font-size:20px;
+}
+td{
+  font-size: 20px;
+}
 }
 @media screen and (max-width: 375px){
 #tournamentName{
