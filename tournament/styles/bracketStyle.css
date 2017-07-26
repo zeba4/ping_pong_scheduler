@@ -31,7 +31,6 @@ body{
     width: calc(100% - 3% - 75px);
     vertical-align: top;
     margin-top:20px;
-    overflow-x: auto;
 }
 #left-side{
   margin-left:30%;
@@ -44,7 +43,8 @@ body{
     background: #53565A;
     width: 700px;
     height: 600px;
-    margin-left:32.5%;
+    margin-left:auto;
+    margin-right:auto;
     margin-top:30px;
 }
 a {
@@ -60,6 +60,14 @@ h1{
 h1,h2{
     text-align:  center;
     font-size:35px;
+}
+
+.home2 img ,
+.home img,
+#homeForWin img,
+.homeWin img{
+  width: 50px;
+  height: 50px;
 }
 #tNamePlace{
      font-weight:bold;
@@ -91,16 +99,19 @@ h1,h2{
 }
 #generate{
     margin-left:40%;
-    width:  30%;
+    width:  250px;
     height:150px;
     font-size:30px;
     text-align:  center;
     background-color:white;
     color:#A4D65E;
     font-weight:bold;
+    margin-top:2%;
+}
+.tourneyStartDate{
+  margin-top:-20px;
 }
 #participants{
-
     margin-top: 0;
     margin-left:calc(100%-50%-60px);
     background-color: white;
@@ -122,6 +133,7 @@ h1,h2{
 }
 #tourName{
     font-size: 17px;
+    margin-bottom:0;
 }
 #playerName{
    float:left;
@@ -141,6 +153,7 @@ h1,h2{
     height: 2.5em;
     font-size: 17px;
     margin-bottom: 3%;
+    margin-top:0;
 }
 #runMax{
     height:1.5em;
@@ -177,7 +190,6 @@ h1,h2{
     height:30%;
     margin:0;
     font-size: 25px;
-    overflow-x:auto;
 }
 .main-section{
     overflow:  auto;
@@ -214,7 +226,7 @@ button{
     text-align: center;
     width:100%;
     margin-left:-15%;
-    margin-top:5%;
+    margin-top:7%;
 }
 .titleWin{
     color:#A4D65E;
@@ -246,7 +258,8 @@ button{
 #tNameBracket{
     color:#A4D65E;
     font-size:50px;
-    margin-left:35%;
+    margin-left:auto;
+    margin-right:auto;
     font-weight:bold;
     margin-top:1.5%;
 }
@@ -292,42 +305,38 @@ td:nth-child(2){
   font-size:15px;
 }
 
+
+
 @media screen and (max-width: 1155px){
-  .twoCols{
-    width:  100%;
-    overflow-x: hidden;
-}
 .center{
     width: 90%;
 }
 #generate{
-    margin-left:35%;
+    margin-left:33%;
+    width:250px;
+    margin-top:10%;
 }
 #homeForWin{
     margin-left:38.5%;
 }
 #tournamentName{
-    margin-left: 25%;
+    margin-left: 20%;
+    padding-left: 10%;
 }
 .tourneyStartDate{
     margin-left: 13%;
 }
 #nameProgress{
-    margin-left:0;
-}
-#listOpen li{
-    overflow:auto;
+    margin-left:5%;
 }
 #listClosed{
     margin-left:1%;
 }
 #nameOpen{
-    margin-left:0%;
-    overflow-x: auto;
+    margin-left:-15%%;
 }
 #listOpen{
     margin-left:15%;
-    width:100%;
 }
 #listdiv{
     overflow-x: auto;
@@ -340,13 +349,14 @@ button {
     margin-left:0%;
 }
 .bracketFrame {
-    margin-left:20%;
+    margin-left:auto;
+    margin-right:auto;
 }
 #tNameBracket{
     margin-left:25%;
 }
 #playerName{
-    width:15em;
+    width:20em;
     float:left;
 }
 #right2{
@@ -361,6 +371,259 @@ button {
     margin-left:-15%;
 }
 #openSide{
+  margin-left:32%;
+}
+.winnerButton{
+    position: static;
+    margin-top: 20px;
+}
+#maxPlayers{
+    margin-left: 20%;
+}
+#openSide{
+  margin-left:0%;
+  width:80%;
+}
+#left-side{
+  margin-left:10%;
+  width:80%;
+}
+.twoCols{
+  width:50%;
+}
+#participants{
+  width:95%;
+}
+#startTime{
+  margin-top:3%;
+}
+#signedUp{
+  width:50%;
+}
+}
+
+@media screen and (max-width: 835px){
+#maxPlayers{
+   margin-left: 10%;
+}
+#tournamentName{
+    margin-left: 10%;
+    padding-left: 12%;
+}
+.bracketFrame {
+    width: 500px;
+    height: 400px;
+    margin-left:auto;
+    margin-right:auto;
+}
+#participants {
+    font-size: 25px;
+    width:95%;
+}
+#startTime {
+    font-size: 30px;
+}
+#tNamePlace {
+    font-size: 30px;
+}
+#nameOpen{
+  margin-left:-5%;
+  font-size:25px;
+}
+#nameProgress{
+    font-size:25px;
+}
+}
+@media screen and (max-width: 780px){
+#generate{
+    margin-left:33%;
+    font-size:23px;
+    width:200px;
+    margin-top:2.5%;
+    margin-bottom:3%;
+}
+.twoCols{
+  width:100%;
+}
+#openSide{
+  margin-left:20%;
+}
+#left-side{
+  margin-left:20%;
+}
+#playerName{
+  width:250px;
+}
+#right2 {
+    margin-left: 2%;
+    position: relative;
+}
+#left2 {
+    width:100%;
+    margin-right:0;
+}
+#startTime,
+.doneButton{
+  margin-left: 0;
+  width:100%;
+}
+.titleWin{
+  font-size:30px;
+}
+.name{
+  font-size:30px;
+}
+td{
+  font-size: 25px;
+}
+
+#enterButton img{
+  display: none;
+}
+
+table{
+  width:60%;
+}
+#right2{
+  margin-left:35%;
+}
+#enterButton{
+  margin-left:17%;
+}
+}
+@media screen and (max-width: 470px){
+h1,h2{
+  font-size:25px;
+}
+a{
+  font-size:25px;
+}
+#tournamentName,
+#titleStartDate
+{
+  font-size:20px;
+  margin-top:-5%;
+  margin-left:-10%;
+}
+#tournamentName{
+  padding-left:23%;
+}
+#tourName,
+#datepicker{
+  width:10em;
+  height:1.5em;
+}
+#generate{
+  height:4em;
+  width:7em;
+}
+#nameOpen,#nameProgress{
+  font-size:25px;
+}
+button{
+  height:40px;
+  width:60px;
+}
+.home2 img ,
+.home img,
+#homeForWin img,
+.homeWin img{
+  width: 40px;
+  height: 40px;
+}
+.openTourneyName, li{
+  font-size:25px;
+}
+.startDateLabel, .startDate{
+  font-size:20px;
+}
+#openSide{
   margin-left:15%;
+  width:85%;
+}
+#left-side{
+  margin-left:10%;
+  width:90%;
+}
+#playerName{
+  width:250px;
+  margin-left:-7%;
+}
+#right2{
+  width:100%;
+  margin-left:30%;
+}
+.name{
+  font-size:23px;
+}
+td{
+  font-size: 25px;
+}
+}
+@media screen and (max-width: 414px){
+  #tournamentName{
+    margin-left:5%;
+  }
+  .tourneyStartDate{
+    margin-left:26%;
+    margin-top:-10%;
+  }
+  #datepicker{
+    margin-left:-8%;
+  }
+  #generate{
+    margin-left:30%;
+  }
+  .ui-datepicker.ui-widget{
+    left: 0px !important;
+    top: 20px;
+    right: 0px;
+    width: 96%;
+  }
+#playerName{
+  width:200px;
+}
+#right2{
+  margin-left:30%;
+}
+.name{
+  font-size:20px;
+}
+td{
+  font-size: 20px;
+}
+}
+@media screen and (max-width: 375px){
+#tournamentName{
+  margin-left:5%;
+}
+.tourneyStartDate{
+  margin-left:26%;
+  margin-top:-10%;
+}
+#datepicker{
+  margin-left:-8%;
+}
+#generate{
+  margin-left:30%;
+}
+#nameOpen{
+  margin-left:-25%;
+}
+#nameProgress{
+  margin-left:-10%;
+
+}
+#openSide{
+  margin-left:2%;
+}
+#left-side{
+  margin-left:0%;
+}
+.bracketFrame {
+    width: 350px;
+    height: 400px;
+    margin-left:auto;
+    margin-right:auto;
 }
 }
