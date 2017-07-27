@@ -138,7 +138,7 @@ function createTournament() {
   if(isConnected){
     listenForNewTournaments();
     var tourValues = getDivValue(['tourName','datepicker']);//,'numPlayers'//,'runMax']);
-    if(tourValues[0]&& tourValues[1] !== "" || undefined)
+    if(tourValues[0]&& tourValues[1] !== "")// || tourValues == [])
     {
       var newPostRef = tournamentRef.push();
       newPostRef.set({
@@ -238,14 +238,12 @@ function createTournament() {
   }
 
   function homePage(){
-    if(screenState == "join")
-    {
-      killCheckForNewPlayers();
-    }
     if(screenState == "bracket")
     {
       saveTournamentState();
       killListenForCurrentBracketUpdates()
+    }else{
+       killCheckForNewPlayers();
     }
     killTimer();
     currentBracketName = ""
@@ -308,21 +306,6 @@ $(function() {
   $( "#datepicker" ).datepicker({ minDate: 1});
 });
 
-function startTimer(){
-    timerVariable = setInterval(function() {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      document.getElementById("startTime").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-      if (distance < 0) {
-        clearInterval(timerVariable);
-        generateBracket(currentJoinKey);
-      }
-    }, 1000);
-}
 
 function checkPastStartDate(data){
   var selectedDate = new Date(data);
@@ -389,8 +372,7 @@ function loadBracket(key){
     })
   }, function(error) {
     // The Promise was rejected.
-    console.error(error);
-    console.log("Tournament failed to initialize")
+    console.error(error.toString() + " Tournament failed to initialize");
   });
 }
 
@@ -406,8 +388,7 @@ function generateBracket(key){
       startTournament(myDiagram.model.toJSON(),key);
       }, function(error) {
     // The Promise was rejected.
-    console.error(error);
-    console.log("Failed to load list of players")
+    console.error(error.toString() + " Failed to load list of players");
   });
 }
 
