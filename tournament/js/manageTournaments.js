@@ -160,15 +160,6 @@ function createTournament() {
   }
 }
 
-  function loadTournamentBracket(key){
-    detailsRef.once('value').then(function(snapshot) {
-      // The Promise was "fulfilled" (it succeeded)
-        displayTournamentBracket(snapshot.val(),key);
-        console.log(snapshot.val());
-
-    });
-  }
-
   function displayTournament(data, objKey){
       countDownDate = new Date(data.tournament[objKey].date).getTime();
       startTimer();
