@@ -248,6 +248,7 @@ function createTournament() {
       killListenForCurrentBracketUpdates()
     }
     killTimer();
+    currentBracketName = ""
     isTourOver = ""
     screenState = "home";
     transition(screenState);
@@ -255,24 +256,6 @@ function createTournament() {
 
   function killCheckForNewPlayers(){
     updatePlayersRef.off();
-  }
-
-
-  // function viewWin(){
-  //   screenState = "winner";
-  //   transition(screenState);
-  // }
-
-  function viewBracket(key){
-    if(isConnected == true){
-      currentBracketKey = key;
-      screenState = "bracket";
-      transition(screenState);
-      loadBracket(key);
-    }else{
-      alert("You are not connected to the internet.")
-    }
-     loadTournamentBracket(key);
   }
 
   function startTimer(){
@@ -307,7 +290,7 @@ function viewTour(key){
 function viewBracket(key, name){
   if(isConnected)
   {
-    currentBracketName = name;
+    currentBracketName = name
     currentBracketKey = key;
     screenState = "bracket";
     transition(screenState);
@@ -463,18 +446,13 @@ function updateOpenTour(name,date,key){
   $("#listOpen").append('<li><span class="openTourneyName">' + name + "</span><br><span class='startDateLabel'>Start Date: </span> <span class='startDate'> " + date+ '</span></li><br>')
 }
 
-// function addWinnerNameToHtml(teamName,winningTeamName, date) {
-//     var str ='<tr><td>' + teamName + '</td><td>' + winningTeamName + '</td><td>' + date + '</td></tr>';
-//     $("#winnerRow").append(str);
-// }
-
 function updateClosedTour(name,key, finished){
   var $button = $('<button/>', {
     type: 'button',
     id: key,
     text: 'View',
     click: function() {
-      viewBracket(this.id)
+      viewBracket(this.id,name)
     }
   });
   $button.appendTo('#listClosed');
