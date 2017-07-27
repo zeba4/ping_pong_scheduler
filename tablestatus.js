@@ -51,11 +51,12 @@ else
       var newTime =hour+":0"+minutes
       console.log("Hi")
       updateDivTagContent("endTime",newTime);
-      document.getElementById("endTime").style.display="";
+      document.getElementById("table").style.display="";
     }else{
       var newTime= hour+":"+minutes;
+      console.log(newTime)
       updateDivTagContent("endTime",newTime);
-       document.getElementById("table").style.display="";
+      document.getElementById("table").style.display="";
     }
 }
 
