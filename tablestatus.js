@@ -34,7 +34,7 @@ if(minutes >= 60)
   console.log(data.time);
 }
 else if(time==0){
-    updateDivTagContent("table", "Table Is Open");
+    updateDivTagContent("endTime", "Table Is Open");
     document.getElementById("table").style.display="none";
 
   }
@@ -51,11 +51,11 @@ else
       var newTime =hour+":0"+minutes
       console.log("Hi")
       updateDivTagContent("endTime",newTime);
-      document.getElementById("table").style.display="";
+      document.getElementById("endTime").style.display="";
     }else{
       var newTime= hour+":"+minutes;
       updateDivTagContent("endTime",newTime);
-      document.getElementById("table").style.display="";
+       document.getElementById("table").style.display="";
     }
 }
 
