@@ -238,11 +238,11 @@ function createTournament() {
   }
 
   function homePage(){
-    if(screenState == "bracket")
-    {
+    if(screenState == "bracket") {
       saveTournamentState();
       killListenForCurrentBracketUpdates()
-    }else{
+    }
+    if(screenState == "join") {
        killCheckForNewPlayers();
     }
     killTimer();
