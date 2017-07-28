@@ -9,8 +9,6 @@
 
 1. Login to Gmail
     ```
-    Username: comicsanscdk@gmail.com
-	Password: CDK Global
     ```
 2. Go to your Firebase console
 3. Add a new project
